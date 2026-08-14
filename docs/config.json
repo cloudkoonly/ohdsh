@@ -23,7 +23,7 @@
   },
   "theme": {
     "primary_color": "#4d6bfe",
-    "dark_mode": true
+    "dark_mode": false
   },
   "seo": {
     "canonical_base": "https://ohdsh.com",
