@@ -1,6 +1,6 @@
 ---
 title: Quick Start
-description: Get started with DeepSeek Harness plugins in under two minutes — find, install, and run your first plugin with oh! dsh.
+description: Get started with DeepSeek Harness plugins in under two minutes — find, install, and run your first plugin with Oh! dsh.
 order: 1
 ---
 

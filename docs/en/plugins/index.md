@@ -1,12 +1,12 @@
 ---
 title: Plugin Catalog
-description: The curated oh! dsh catalog of DeepSeek Harness plugins, organized by capability with clear descriptions of what each plugin does and when to use it.
+description: The curated Oh! dsh catalog of DeepSeek Harness plugins, organized by capability with clear descriptions of what each plugin does and when to use it.
 order: 1
 ---
 
 # Plugin Catalog
 
-The oh! dsh plugin catalog is a curated list of DeepSeek Harness plugins, organized by what they do — not by who wrote them.
+The Oh! dsh plugin catalog is a curated list of DeepSeek Harness plugins, organized by what they do — not by who wrote them.
 
 ## How the catalog works
 
@@ -23,9 +23,11 @@ The oh! dsh plugin catalog is a curated list of DeepSeek Harness plugins, organi
 | UI / Slots | Extending the harness web interface |
 | Workflows | Orchestrating multi-step agent work |
 
-## Submitting a plugin
+## Catalog principles
 
-The catalog is community-maintained. Have a plugin worth listing? Open an issue or pull request on the [oh! dsh GitHub repository](https://github.com/cloudkoonly/ohdsh).
+- Every entry is hand-picked and reviewed before listing
+- Plugins are grouped by capability, not by author
+- Descriptions state what a plugin does, its requirements, and when to use it
 
 ## Next Steps
 

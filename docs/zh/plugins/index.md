@@ -1,12 +1,12 @@
 ---
 title: 插件目录
-description: oh! dsh 精选 DeepSeek Harness 插件目录，按能力分类，清晰说明每个插件的作用与适用场景。
+description: Oh! dsh 精选 DeepSeek Harness 插件目录，按能力分类，清晰说明每个插件的作用与适用场景。
 order: 1
 ---
 
 # 插件目录
 
-oh! dsh 插件目录是一份精选的 DeepSeek Harness 插件列表，按功能组织 —— 而不是按作者组织。
+Oh! dsh 插件目录是一份精选的 DeepSeek Harness 插件列表，按功能组织 —— 而不是按作者组织。
 
 ## 目录运作方式
 
@@ -23,9 +23,11 @@ oh! dsh 插件目录是一份精选的 DeepSeek Harness 插件列表，按功能
 | UI / 插槽 | 扩展 harness 的网页界面 |
 | 工作流 | 编排多步骤智能体任务 |
 
-## 提交插件
+## 目录原则
 
-目录由社区共同维护。有值得收录的插件？欢迎在 [oh! dsh GitHub 仓库](https://github.com/cloudkoonly/ohdsh)提交 issue 或 pull request。
+- 每个条目都经过人工挑选与审核后才收录
+- 插件按能力分组，而不是按作者分组
+- 描述说明插件的作用、依赖与适用场景
 
 ## 下一步
 

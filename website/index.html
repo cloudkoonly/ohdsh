@@ -3,36 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>oh! dsh — DeepSeek Harness Plugins, Docs &amp; Best Practices</title>
-    <meta name="description" content="oh! dsh is the community ecosystem for DeepSeek Harness (DSH): a curated catalog of the best plugins, battle-tested best practices, and bilingual documentation to help you build smarter agents.">
+    <title>Oh! dsh — The DeepSeek Harness Ecosystem</title>
+    <meta name="description" content="Oh! dsh is the community hub for DeepSeek Harness: a curated plugin catalog, battle-tested best practices, and bilingual documentation for harness builders.">
     <meta name="keywords" content="DeepSeek Harness, DSH, DSH plugins, DeepSeek Harness plugins, best practices, documentation, AI agent, Cordis, plugin catalog">
     <link rel="canonical" href="https://ohdsh.com/">
     <meta name="robots" content="index, follow">
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="oh! dsh">
-    <meta property="og:title" content="oh! dsh — DeepSeek Harness Plugins, Docs &amp; Best Practices">
-    <meta property="og:description" content="The community ecosystem for DeepSeek Harness: the best plugin list, battle-tested best practices, and bilingual documentation.">
+    <meta property="og:site_name" content="Oh! dsh">
+    <meta property="og:title" content="Oh! dsh — The DeepSeek Harness Ecosystem">
+    <meta property="og:description" content="Curated DeepSeek Harness plugins, battle-tested best practices, and bilingual documentation.">
     <meta property="og:url" content="https://ohdsh.com/">
     <!-- Twitter -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="oh! dsh — DeepSeek Harness Plugins, Docs &amp; Best Practices">
-    <meta name="twitter:description" content="The community ecosystem for DeepSeek Harness: the best plugin list, battle-tested best practices, and bilingual documentation.">
+    <meta name="twitter:title" content="Oh! dsh — The DeepSeek Harness Ecosystem">
+    <meta name="twitter:description" content="Curated DeepSeek Harness plugins, battle-tested best practices, and bilingual documentation.">
     <!-- Structured data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "oh! dsh",
+      "name": "Oh! dsh",
       "url": "https://ohdsh.com/",
-      "description": "Community ecosystem for DeepSeek Harness: curated plugins, best practices, and bilingual documentation."
+      "description": "Community hub for DeepSeek Harness: curated plugins, best practices, and bilingual documentation."
     }
     </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "oh! dsh",
+      "name": "Oh! dsh",
       "url": "https://ohdsh.com/"
     }
     </script>
@@ -46,39 +46,31 @@
           "name": "What is DeepSeek Harness?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "DeepSeek Harness (DSH) is a Cordis-based agent runtime where every capability — tools, models, sandboxes, persistence — is composed as a plugin. It lets you build modular AI agents from reusable pieces."
+            "text": "DeepSeek Harness (DSH) is a Cordis-based agent runtime where every capability — models, tools, sandboxes, UI — is a swappable plugin."
           }
         },
         {
           "@type": "Question",
-          "name": "What is oh! dsh?",
+          "name": "What is Oh! dsh?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "oh! dsh is a third-party, community-maintained ecosystem site for DeepSeek Harness. It provides a curated plugin catalog, best-practice documentation, and a changelog for the ecosystem."
+            "text": "Oh! dsh is a community hub curating the best DSH plugins, best practices, and bilingual documentation."
           }
         },
         {
           "@type": "Question",
-          "name": "How do I find the best DeepSeek Harness plugins?",
+          "name": "How do I find the best plugins?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Start with the oh! dsh plugin catalog at /docs/en/plugins/, where plugins are organized by capability with clear descriptions, then follow the quick start guide to install one."
+            "text": "Start with the plugin catalog, organized by capability with clear descriptions of what each plugin does."
           }
         },
         {
           "@type": "Question",
-          "name": "Where can I learn DeepSeek Harness best practices?",
+          "name": "Is documentation available in Chinese?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The best practices guide at /docs/en/guide/best-practices covers composition patterns, security hygiene, and publishing workflows distilled from real-world DSH projects."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is the oh! dsh documentation available in Chinese?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. Documentation is fully bilingual: English at /docs/en/ and Simplified Chinese at /docs/zh/."
+            "text": "Yes — full documentation in English at /docs/en/ and Simplified Chinese at /docs/zh/."
           }
         }
       ]
@@ -87,36 +79,41 @@
     <script src="/js/3.4.17.js"></script><!-- Tailwind -->
     <style>
         /* Shared CSS classes available to all child pages */
-        .btn-primary { display: inline-block; background-color: #4f46e5; color: #ffffff; font-weight: 600; padding: 0.75rem 1.5rem; border-radius: 0.5rem; transition: background-color .2s ease, transform .2s ease; }
-        .btn-primary:hover { background-color: #4338ca; transform: translateY(-1px); }
-        .btn-secondary { display: inline-block; background-color: #ffffff; color: #374151; font-weight: 600; padding: 0.75rem 1.5rem; border-radius: 0.5rem; border: 1px solid #e5e7eb; transition: border-color .2s ease, color .2s ease; }
-        .btn-secondary:hover { border-color: #4f46e5; color: #4f46e5; }
-        .card { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 0.75rem; padding: 1.5rem; transition: box-shadow .2s ease, transform .2s ease; }
-        .card:hover { box-shadow: 0 10px 25px -5px rgba(0,0,0,.08); transform: translateY(-2px); }
-        .section-badge { display: inline-block; font-size: .75rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: #4f46e5; background: #eef2ff; padding: .25rem .75rem; border-radius: 9999px; }
-        .fade-in { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
+        .btn-primary { display: inline-block; background: #ffffff; color: #0a0a0a; font-weight: 600; font-size: .875rem; padding: .625rem 1.25rem; border-radius: .5rem; transition: opacity .2s ease; }
+        .btn-primary:hover { opacity: .85; }
+        .btn-secondary { display: inline-block; background: rgba(255,255,255,.06); color: #ffffff; font-weight: 600; font-size: .875rem; padding: .625rem 1.25rem; border-radius: .5rem; border: 1px solid rgba(255,255,255,.15); transition: background .2s ease, border-color .2s ease; }
+        .btn-secondary:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.4); }
+        .btn-ghost { display: inline-block; color: rgba(255,255,255,.7); font-weight: 600; font-size: .875rem; padding: .625rem 1.25rem; border-radius: .5rem; transition: color .2s ease; }
+        .btn-ghost:hover { color: #ffffff; }
+        .card { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: .75rem; padding: 1.25rem; }
+        .section-badge { display: inline-flex; align-items: center; gap: .5rem; font-size: .75rem; font-weight: 500; letter-spacing: .04em; color: rgba(255,255,255,.6); background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); padding: .3rem .8rem; border-radius: 9999px; }
+        .section-badge .dot { width: .4rem; height: .4rem; border-radius: 9999px; background: #6799fe; }
+        .hero-glow { background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(103,153,254,.14), transparent 70%); }
+        .fade-in { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
-<body>
+<body class="bg-[#0a0a0a] text-white antialiased">
     <header>
-        <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100">
+        <nav class="fixed top-0 w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-sm border-b border-white/10">
             <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-                <a href="/" class="font-bold text-xl" aria-label="oh! dsh home">oh! dsh</a>
-                <div class="hidden md:flex items-center gap-6">
-                    <a href="/docs/en/" class="text-gray-600 hover:text-gray-900">Docs</a>
-                    <a href="/blog" class="text-gray-600 hover:text-gray-900">Blog</a>
-                    <a href="/changelog" class="text-gray-600 hover:text-gray-900">Changelog</a>
+                <a href="/" class="font-bold text-lg tracking-tight" aria-label="Oh! dsh home">Oh! dsh</a>
+                <div class="hidden md:flex items-center gap-6 text-sm text-white/60">
+                    <a href="/docs/en/" class="hover:text-white transition-colors">Docs</a>
+                    <a href="/docs/en/plugins/" class="hover:text-white transition-colors">Plugins</a>
+                    <a href="/blog" class="hover:text-white transition-colors">Blog</a>
+                    <a href="/changelog" class="hover:text-white transition-colors">Changelog</a>
                     <a href="/docs/en/guide/quick-start" class="btn-primary">Get Started</a>
                 </div>
-                <button id="menuBtn" class="md:hidden p-2" aria-label="Open menu">☰</button>
+                <button id="menuBtn" class="md:hidden p-2 text-white/70" aria-label="Open menu">☰</button>
             </div>
         </nav>
-        <div id="mobileOverlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
-        <div id="mobileDrawer" class="fixed top-0 right-0 w-72 h-full bg-white hidden z-50 p-6">
-            <button id="closeMenuBtn" class="absolute top-4 right-4" aria-label="Close menu">✕</button>
-            <nav class="mt-12 flex flex-col gap-4">
+        <div id="mobileOverlay" class="fixed inset-0 bg-black/60 hidden z-40"></div>
+        <div id="mobileDrawer" class="fixed top-0 right-0 w-72 h-full bg-[#111113] hidden z-50 p-6">
+            <button id="closeMenuBtn" class="absolute top-4 right-4 text-white/60" aria-label="Close menu">✕</button>
+            <nav class="mt-12 flex flex-col gap-4 text-white/70">
                 <a href="/docs/en/">Docs</a>
+                <a href="/docs/en/plugins/">Plugins</a>
                 <a href="/blog">Blog</a>
                 <a href="/changelog">Changelog</a>
                 <a href="/docs/en/guide/quick-start" class="btn-primary text-center">Get Started</a>
@@ -126,79 +123,106 @@
 
     <main>
         <!-- Hero -->
-        <section class="pt-32 pb-20 px-6 text-center">
-            <span class="section-badge">DeepSeek Harness Ecosystem</span>
-            <h1 class="mt-6 text-4xl md:text-5xl font-bold tracking-tight">The Best Plugins &amp; Practices for DeepSeek Harness</h1>
-            <p class="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-                oh! dsh is the community home for DeepSeek Harness: a curated plugin catalog,
-                battle-tested best practices, and bilingual documentation — everything you need
-                to build smarter agents.
-            </p>
-            <div class="mt-8 flex flex-wrap justify-center gap-4">
-                <a href="/docs/en/plugins/" class="btn-primary">Browse the Plugin Catalog</a>
-                <a href="/docs/en/guide/quick-start" class="btn-secondary">Read the Quick Start</a>
+        <section class="relative pt-36 pb-24 px-6 text-center overflow-hidden">
+            <div class="absolute inset-0 hero-glow pointer-events-none"></div>
+            <div class="relative max-w-3xl mx-auto">
+                <span class="section-badge"><span class="dot"></span>DeepSeek Harness · Community Ecosystem</span>
+                <h1 class="mt-8 text-4xl md:text-6xl font-bold tracking-tight leading-[1.1]">The community hub for <span class="text-[#6799fe]">DeepSeek Harness</span></h1>
+                <p class="mt-6 text-base md:text-lg text-white/50 max-w-xl mx-auto">Curated plugins, proven best practices, and bilingual docs — everything you need to build with DSH.</p>
+                <div class="mt-8 flex flex-wrap justify-center gap-3">
+                    <a href="/docs/en/plugins/" class="btn-primary">Browse the catalog</a>
+                    <a href="/docs/en/guide/quick-start" class="btn-secondary">Quick start</a>
+                    <a href="/docs/zh/" class="btn-ghost">中文文档</a>
+                </div>
+                <div class="mt-14 max-w-lg mx-auto text-left rounded-lg border border-white/10 bg-white/[0.03] overflow-hidden">
+                    <div class="flex items-center gap-2 px-4 py-2.5 border-b border-white/10 text-xs text-white/40">
+                        <span class="w-2.5 h-2.5 rounded-full bg-white/15"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-white/15"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-white/15"></span>
+                        <span class="ml-2">cordis.yml</span>
+                    </div>
+                    <pre class="p-4 text-sm leading-relaxed text-white/70"><code># 1. Browse the catalog and pick a plugin
+# 2. Add it to your composition
+- plugin: &lt;from-the-catalog&gt;
+
+# 3. Restart the harness and build</code></pre>
+                </div>
             </div>
         </section>
 
-        <!-- Value proposition -->
-        <section class="pb-20 px-6 fade-in">
+        <!-- Pillars -->
+        <section class="py-24 px-6 border-t border-white/10 fade-in">
             <div class="max-w-6xl mx-auto">
-                <h2 class="text-2xl md:text-3xl font-bold text-center">Everything you need in one place</h2>
-                <p class="mt-4 text-gray-600 text-center max-w-2xl mx-auto">Stop searching scattered repos and threads. oh! dsh curates the ecosystem so you can focus on building.</p>
-                <div class="mt-12 grid md:grid-cols-3 gap-8">
+                <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-center">Everything you need. Nothing you don't.</h2>
+                <div class="mt-12 grid md:grid-cols-3 gap-4">
                     <article class="card">
-                        <h3 class="font-bold text-lg">Curated Plugin Catalog</h3>
-                        <p class="mt-3 text-gray-600 text-sm">Hand-picked DeepSeek Harness plugins organized by capability, with clear descriptions of what each one does and when to use it.</p>
-                        <a href="/docs/en/plugins/" class="mt-4 inline-block text-indigo-600 text-sm font-semibold">Explore plugins →</a>
+                        <h3 class="font-semibold text-lg">Curated catalog</h3>
+                        <p class="mt-2 text-sm text-white/50 leading-relaxed">Hand-picked DSH plugins, organized by capability with clear descriptions — no more guesswork.</p>
                     </article>
                     <article class="card">
-                        <h3 class="font-bold text-lg">Battle-Tested Best Practices</h3>
-                        <p class="mt-3 text-gray-600 text-sm">Composition patterns, security hygiene, and publishing workflows distilled from real-world DSH projects — not guesswork.</p>
-                        <a href="/docs/en/guide/best-practices" class="mt-4 inline-block text-indigo-600 text-sm font-semibold">Read best practices →</a>
+                        <h3 class="font-semibold text-lg">Proven practices</h3>
+                        <p class="mt-2 text-sm text-white/50 leading-relaxed">Composition, security, and publishing patterns distilled from real-world harness projects.</p>
                     </article>
                     <article class="card">
-                        <h3 class="font-bold text-lg">Bilingual Documentation</h3>
-                        <p class="mt-3 text-gray-600 text-sm">Full documentation in English and Simplified Chinese, from your first plugin install to advanced agent composition.</p>
-                        <a href="/docs/zh/" class="mt-4 inline-block text-indigo-600 text-sm font-semibold">浏览中文文档 →</a>
+                        <h3 class="font-semibold text-lg">Bilingual docs</h3>
+                        <p class="mt-2 text-sm text-white/50 leading-relaxed">English and 中文 guides, from your first plugin to advanced agent composition.</p>
                     </article>
                 </div>
             </div>
         </section>
 
+        <!-- Quality band -->
+        <section class="py-24 px-6 border-t border-white/10 fade-in">
+            <div class="max-w-3xl mx-auto text-center">
+                <span class="section-badge"><span class="dot"></span>How we keep quality high</span>
+                <h2 class="mt-6 text-2xl md:text-3xl font-bold tracking-tight">Curated. Verified. Maintained.</h2>
+                <div class="mt-12 grid md:grid-cols-3 gap-8 text-left">
+                    <div>
+                        <h3 class="font-semibold">Curated</h3>
+                        <p class="mt-2 text-sm text-white/50 leading-relaxed">Every catalog entry is hand-picked and reviewed before listing.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">Verified</h3>
+                        <p class="mt-2 text-sm text-white/50 leading-relaxed">Practices are distilled from real projects, not invented theory.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">Maintained</h3>
+                        <p class="mt-2 text-sm text-white/50 leading-relaxed">The catalog and docs evolve with the ecosystem — tracked in the changelog.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- FAQ (GEO-friendly structured answers) -->
-        <section class="pb-20 px-6 bg-gray-50 py-20 fade-in">
-            <div class="max-w-3xl mx-auto">
-                <h2 class="text-2xl md:text-3xl font-bold text-center">Frequently Asked Questions</h2>
-                <div class="mt-10 space-y-6">
+        <section class="py-24 px-6 border-t border-white/10 fade-in">
+            <div class="max-w-2xl mx-auto">
+                <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-center">FAQ</h2>
+                <div class="mt-10 space-y-3">
                     <div class="card">
-                        <h3 class="font-semibold">What is DeepSeek Harness?</h3>
-                        <p class="mt-2 text-gray-600 text-sm">DeepSeek Harness (DSH) is a Cordis-based agent runtime where every capability — tools, models, sandboxes, persistence — is composed as a plugin. It lets you build modular AI agents from reusable pieces.</p>
+                        <h3 class="font-semibold text-sm">What is DeepSeek Harness?</h3>
+                        <p class="mt-2 text-sm text-white/50">A Cordis-based agent runtime where every capability — models, tools, sandboxes, UI — is a swappable plugin.</p>
                     </div>
                     <div class="card">
-                        <h3 class="font-semibold">What is oh! dsh?</h3>
-                        <p class="mt-2 text-gray-600 text-sm">oh! dsh is a third-party, community-maintained ecosystem site for DeepSeek Harness. It provides a curated plugin catalog, best-practice documentation, and a changelog for the ecosystem.</p>
+                        <h3 class="font-semibold text-sm">What is Oh! dsh?</h3>
+                        <p class="mt-2 text-sm text-white/50">A community hub curating the best DSH plugins, best practices, and bilingual documentation.</p>
                     </div>
                     <div class="card">
-                        <h3 class="font-semibold">How do I find the best DeepSeek Harness plugins?</h3>
-                        <p class="mt-2 text-gray-600 text-sm">Start with the <a href="/docs/en/plugins/" class="text-indigo-600">plugin catalog</a>, where plugins are organized by capability with clear descriptions, then follow the <a href="/docs/en/guide/quick-start" class="text-indigo-600">quick start guide</a> to install one.</p>
+                        <h3 class="font-semibold text-sm">How do I find the best plugins?</h3>
+                        <p class="mt-2 text-sm text-white/50">Start with the <a href="/docs/en/plugins/" class="text-[#6799fe] hover:underline underline-offset-4">plugin catalog</a>, organized by capability with clear descriptions.</p>
                     </div>
                     <div class="card">
-                        <h3 class="font-semibold">Where can I learn DeepSeek Harness best practices?</h3>
-                        <p class="mt-2 text-gray-600 text-sm">The <a href="/docs/en/guide/best-practices" class="text-indigo-600">best practices guide</a> covers composition patterns, security hygiene, and publishing workflows distilled from real-world DSH projects.</p>
-                    </div>
-                    <div class="card">
-                        <h3 class="font-semibold">Is the oh! dsh documentation available in Chinese?</h3>
-                        <p class="mt-2 text-gray-600 text-sm">Yes. Documentation is fully bilingual: English at <a href="/docs/en/" class="text-indigo-600">/docs/en/</a> and Simplified Chinese at <a href="/docs/zh/" class="text-indigo-600">/docs/zh/</a>.</p>
+                        <h3 class="font-semibold text-sm">Is documentation available in Chinese?</h3>
+                        <p class="mt-2 text-sm text-white/50">Yes — full docs in English (<a href="/docs/en/" class="text-[#6799fe] hover:underline underline-offset-4">/docs/en/</a>) and Simplified Chinese (<a href="/docs/zh/" class="text-[#6799fe] hover:underline underline-offset-4">/docs/zh/</a>).</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- CTA -->
-        <section class="py-20 px-6 text-center fade-in">
-            <h2 class="text-2xl md:text-3xl font-bold">Ready to build with DSH?</h2>
-            <p class="mt-4 text-gray-600 max-w-xl mx-auto">Install your first plugin in under two minutes with our quick start guide.</p>
-            <a href="/docs/en/guide/quick-start" class="btn-primary mt-8">Start Building</a>
+        <section class="py-24 px-6 text-center border-t border-white/10 fade-in">
+            <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Ready to build?</h2>
+            <p class="mt-3 text-white/50">Install your first plugin in under two minutes.</p>
+            <a href="/docs/en/guide/quick-start" class="btn-primary mt-8">Start building</a>
         </section>
 
         <script>
@@ -216,35 +240,35 @@
         </script>
     </main>
 
-    <footer class="bg-gray-900 text-white py-16 px-6">
+    <footer class="border-t border-white/10 py-16 px-6">
         <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-8">
             <div>
-                <h3 class="font-bold mb-4">oh! dsh</h3>
-                <p class="text-gray-400 text-sm">The community ecosystem for DeepSeek Harness: curated plugins, best practices, and bilingual docs.</p>
+                <a href="/" class="font-bold">Oh! dsh</a>
+                <p class="mt-3 text-sm text-white/40 leading-relaxed">The community hub for DeepSeek Harness.</p>
             </div>
             <div>
-                <h4 class="font-semibold mb-3">Learn</h4>
-                <a href="/docs/en/" class="block text-gray-400 hover:text-white text-sm mb-2">Documentation</a>
-                <a href="/docs/en/guide/quick-start" class="block text-gray-400 hover:text-white text-sm mb-2">Quick Start</a>
-                <a href="/docs/en/guide/best-practices" class="block text-gray-400 hover:text-white text-sm mb-2">Best Practices</a>
-                <a href="/docs/zh/" class="block text-gray-400 hover:text-white text-sm mb-2">中文文档</a>
+                <h4 class="text-sm font-semibold mb-3 text-white/80">Learn</h4>
+                <a href="/docs/en/" class="block text-sm text-white/40 hover:text-white mb-2">Documentation</a>
+                <a href="/docs/en/guide/quick-start" class="block text-sm text-white/40 hover:text-white mb-2">Quick Start</a>
+                <a href="/docs/en/guide/best-practices" class="block text-sm text-white/40 hover:text-white mb-2">Best Practices</a>
             </div>
             <div>
-                <h4 class="font-semibold mb-3">Ecosystem</h4>
-                <a href="/docs/en/plugins/" class="block text-gray-400 hover:text-white text-sm mb-2">Plugin Catalog</a>
-                <a href="/blog" class="block text-gray-400 hover:text-white text-sm mb-2">Blog</a>
-                <a href="/changelog" class="block text-gray-400 hover:text-white text-sm mb-2">Changelog</a>
+                <h4 class="text-sm font-semibold mb-3 text-white/80">Ecosystem</h4>
+                <a href="/docs/en/plugins/" class="block text-sm text-white/40 hover:text-white mb-2">Plugin Catalog</a>
+                <a href="/blog" class="block text-sm text-white/40 hover:text-white mb-2">Blog</a>
+                <a href="/changelog" class="block text-sm text-white/40 hover:text-white mb-2">Changelog</a>
             </div>
             <div>
-                <h4 class="font-semibold mb-3">Community</h4>
-                <a href="https://github.com/cloudkoonly/ohdsh" class="block text-gray-400 hover:text-white text-sm mb-2">GitHub</a>
+                <h4 class="text-sm font-semibold mb-3 text-white/80">Language</h4>
+                <a href="/docs/en/" class="block text-sm text-white/40 hover:text-white mb-2">English</a>
+                <a href="/docs/zh/" class="block text-sm text-white/40 hover:text-white mb-2">简体中文</a>
             </div>
         </div>
-        <div class="mt-12 text-center text-gray-500 text-sm">© 2026 oh! dsh. All rights reserved.</div>
+        <div class="mt-12 text-center text-xs text-white/30">© 2026 Oh! dsh</div>
     </footer>
 
     <!-- Everything below </footer> → footer.phtml -->
-    <button id="toTopBtn" class="fixed bottom-6 right-6 w-10 h-10 rounded-full bg-gray-800 text-white hidden items-center justify-center shadow-lg" aria-label="Back to top">↑</button>
+    <button id="toTopBtn" class="fixed bottom-6 right-6 w-10 h-10 rounded-full bg-white/10 text-white hidden items-center justify-center shadow-lg hover:bg-white/20 transition-colors" aria-label="Back to top">↑</button>
     <script>
         // Shared JS: mobile drawer toggle
         const menuBtn = document.getElementById('menuBtn');

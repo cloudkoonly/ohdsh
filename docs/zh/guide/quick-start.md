@@ -1,6 +1,6 @@
 ---
 title: 快速开始
-description: 两分钟内上手 DeepSeek Harness 插件 —— 用 oh! dsh 查找、安装并运行你的第一个插件。
+description: 两分钟内上手 DeepSeek Harness 插件 —— 用 Oh! dsh 查找、安装并运行你的第一个插件。
 order: 1
 ---
 

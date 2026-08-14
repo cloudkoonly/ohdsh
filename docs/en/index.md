@@ -1,12 +1,14 @@
 ---
-title: oh! dsh Documentation
-description: Official documentation for the oh! dsh ecosystem — discover the best DeepSeek Harness plugins and follow battle-tested best practices.
+title: Oh! dsh Docs
+description: Official documentation for the Oh! dsh ecosystem — discover the best DeepSeek Harness plugins and follow battle-tested best practices.
 order: 1
 ---
 
-# oh! dsh Documentation
+# Oh! dsh Docs
 
-Welcome to the oh! dsh documentation hub — the community knowledge base for DeepSeek Harness (DSH).
+The official guide to the best DeepSeek Harness plugins and battle-tested best practices.
+
+Welcome to the Oh! dsh documentation hub — the community knowledge base for DeepSeek Harness (DSH).
 
 ## What is DeepSeek Harness?
 

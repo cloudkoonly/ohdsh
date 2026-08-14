@@ -1,12 +1,14 @@
 ---
-title: oh! dsh 文档
-description: oh! dsh 生态官方文档 —— 发现最佳 DeepSeek Harness 插件，学习经过实战验证的最佳实践。
+title: Oh! dsh 文档
+description: Oh! dsh 生态官方文档 —— 发现最佳 DeepSeek Harness 插件，学习经过实战验证的最佳实践。
 order: 1
 ---
 
-# oh! dsh 文档
+# Oh! dsh 文档
 
-欢迎来到 oh! dsh 文档中心 —— DeepSeek Harness（DSH）的社区知识库。
+官方指南：精选 DeepSeek Harness 插件与实战验证的最佳实践。
+
+欢迎来到 Oh! dsh 文档中心 —— DeepSeek Harness（DSH）的社区知识库。
 
 ## 什么是 DeepSeek Harness？
 
