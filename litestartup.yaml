@@ -1,0 +1,15 @@
+version: 1
+binding_id: 1903
+domain: ohdsh.com
+domain_slug: do-68b4795443afff195fc0ba3d
+endpoint: https://api.litestartup.com
+repo_url: https://github.com/cloudkoonly/ohdsh.git
+sync:
+  blog:
+    path: "blog/**/*.md"
+  website:
+    path: "website/**/*.html"
+  docs:
+    path: "docs/**/*.md"
+  changelog:
+    path: "changelog/**/*.md"

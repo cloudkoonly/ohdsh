@@ -1,0 +1,46 @@
+{
+  "site": {
+    "name": "oh! dsh",
+    "title": "oh! dsh Docs — DeepSeek Harness Plugins & Best Practices",
+    "description": "Official documentation for the oh! dsh ecosystem: discover the best DeepSeek Harness plugins, follow battle-tested best practices, and get started in minutes.",
+    "keywords": [
+      "deepseek-harness",
+      "dsh",
+      "dsh-plugins",
+      "plugins",
+      "best-practices",
+      "documentation"
+    ],
+    "logo": "",
+    "favicon": ""
+  },
+  "locales": {
+    "default": "en",
+    "available": [
+      "en",
+      "zh"
+    ]
+  },
+  "theme": {
+    "primary_color": "#4f46e5",
+    "dark_mode": true
+  },
+  "seo": {
+    "canonical_base": "https://ohdsh.com",
+    "og_image": "",
+    "twitter_site": ""
+  },
+  "links": {
+    "github": "https://github.com/cloudkoonly/ohdsh",
+    "twitter": "",
+    "discord": "",
+    "website": "https://ohdsh.com"
+  },
+  "analytics": {
+    "google_analytics_id": "",
+    "google_tag_manager_id": ""
+  },
+  "footer": {
+    "copyright": "© 2026 oh! dsh"
+  }
+}

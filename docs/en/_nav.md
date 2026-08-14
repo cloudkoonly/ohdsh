@@ -1,0 +1,2 @@
+- [Guide](index.md)
+- [Plugins](plugins/index.md)
