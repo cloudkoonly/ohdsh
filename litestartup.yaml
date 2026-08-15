@@ -11,5 +11,7 @@ sync:
     path: "website/**/*.html"
   docs:
     path: "docs/**/*.md"
+  data:
+    path: "data/**/*.json"
   changelog:
     path: "changelog/**/*.md"
