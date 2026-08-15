@@ -95,6 +95,22 @@ const out = {
   plugins,
 };
 
+// Merge hand-maintained first-party plugins (data/own-plugins.json) so that
+// upstream refreshes never drop them from the snapshot.
+const OWN_PATH = path.join(REPO_DIR, 'data', 'own-plugins.json');
+if (fs.existsSync(OWN_PATH)) {
+  const own = JSON.parse(fs.readFileSync(OWN_PATH, 'utf8'));
+  let added = 0;
+  for (const p of own) {
+    if (!plugins.some((x) => x.slug === p.slug)) {
+      plugins.push(p);
+      added++;
+    }
+  }
+  out.count = plugins.length;
+  if (added) console.log('merged ' + added + ' own plugin(s) from data/own-plugins.json');
+}
+
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
 fs.writeFileSync(OUT, JSON.stringify(out, null, 2));
 console.log('parsed ' + plugins.length + ' plugins in ' + categories.length + ' categories');

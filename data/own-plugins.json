@@ -1,0 +1,9 @@
+[
+  {
+    "slug": "litestartup-com-dsh-api-gateway-dsh-api-gateway",
+    "name": "litestartup-com/dsh-api-gateway",
+    "url": "https://github.com/litestartup-com/dsh-api-gateway",
+    "description": "OpenAPI-first API Gateway plugin for DeepSeek Harness: expose your agents to any HTTP client over REST + SSE — power Feishu, DingTalk, WeCom, or your own services.",
+    "category": "notifications-integrations"
+  }
+]

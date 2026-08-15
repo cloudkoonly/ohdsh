@@ -1,8 +1,8 @@
 {
   "generated_at": "2026-08-15",
   "source": "https://github.com/awesome-dsh-plugin/awesome-dsh-plugin",
-  "count": 502,
-  "featured_count": 12,
+  "count": 503,
+  "featured_count": 13,
   "page_size": 24,
   "categories": [
     {
@@ -48,7 +48,7 @@
     {
       "name": "Notifications & Integrations",
       "slug": "notifications-integrations",
-      "count": 33
+      "count": 34
     },
     {
       "name": "Models & Providers",
@@ -186,6 +186,16 @@
       "category_name": "UI Enhancements",
       "featured": true,
       "grad": 2
+    },
+    {
+      "slug": "litestartup-com-dsh-api-gateway-dsh-api-gateway",
+      "name": "litestartup-com/dsh-api-gateway",
+      "url": "https://github.com/litestartup-com/dsh-api-gateway",
+      "description": "OpenAPI-first API Gateway plugin for DeepSeek Harness: expose your agents to any HTTP client over REST + SSE — power Feishu, DingTalk, WeCom, or your own services.",
+      "category": "notifications-integrations",
+      "category_name": "Notifications & Integrations",
+      "featured": true,
+      "grad": 1
     }
   ],
   "plugins": [
@@ -5208,6 +5218,16 @@
       "category_name": "Just for Fun",
       "featured": false,
       "grad": 5
+    },
+    {
+      "slug": "litestartup-com-dsh-api-gateway-dsh-api-gateway",
+      "name": "litestartup-com/dsh-api-gateway",
+      "url": "https://github.com/litestartup-com/dsh-api-gateway",
+      "description": "OpenAPI-first API Gateway plugin for DeepSeek Harness: expose your agents to any HTTP client over REST + SSE — power Feishu, DingTalk, WeCom, or your own services.",
+      "category": "notifications-integrations",
+      "category_name": "Notifications & Integrations",
+      "featured": true,
+      "grad": 1
     }
   ]
 }
