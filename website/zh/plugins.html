@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSH Plugins | Oh! dsh</title>
+    <title>DSH 插件目录 | Oh! dsh</title>
 </head>
 <body>
     <header><!-- header placeholder --></header>
 
     <main>
         <!--data:plugins.json-->
-        <!--seo:{"title":"DSH Plugins — DeepSeek Harness Plugin Directory | Oh! dsh","description":"Browse reviewed DeepSeek Harness (DSH) community plugins. Filter by category, search by capability, copy install commands, and jump straight to each plugin's public source.","keywords":"DSH plugins, DeepSeek Harness plugins, DSH plugin list, DeepSeek Harness plugin directory","canonical":"https://ohdsh.com/plugins","og_title":"DSH Plugins — DeepSeek Harness Plugin Directory","og_description":"Search reviewed DeepSeek Harness community plugins, copy install commands, and jump straight to public source.","og_url":"https://ohdsh.com/plugins","og_site_name":"Oh! dsh","html_lang":"en","hreflang":{"en":"https://ohdsh.com/plugins","zh-CN":"https://ohdsh.com/zh/plugins","x-default":"https://ohdsh.com/plugins"}}-->
+        <!--seo:{"title":"DSH 插件目录 — DeepSeek Harness 插件大全 | Oh! dsh","description":"浏览已收录的 DeepSeek Harness（DSH）社区插件：按分类筛选、按能力搜索、复制安装命令，一键跳转到插件源码仓库。","keywords":"DSH 插件, DeepSeek Harness 插件, DSH 插件列表, DSH 插件目录, DSH 插件推荐","canonical":"https://ohdsh.com/zh/plugins","og_title":"DSH 插件目录 — DeepSeek Harness 插件大全","og_description":"按分类筛选、按能力搜索 DeepSeek Harness 社区插件，复制安装命令，直达源码。","og_url":"https://ohdsh.com/zh/plugins","og_site_name":"Oh! dsh","html_lang":"zh-CN","hreflang":{"en":"https://ohdsh.com/plugins","zh-CN":"https://ohdsh.com/zh/plugins","x-default":"https://ohdsh.com/plugins"}}-->
 
         {% set gradients = [
             'linear-gradient(135deg,#4d6bfe,#3a65c2)',
@@ -23,57 +23,57 @@
             'linear-gradient(135deg,#6366f1,#4338ca)'
         ] %}
 
-        <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"DSH Plugin Directory","url":"https://ohdsh.com/plugins","description":"Independent directory of DeepSeek Harness community plugins: filter by category, search by capability, copy install commands, and jump straight to public source repositories.","mainEntity":{"@type":"ItemList","numberOfItems":{{ count }}}}</script>
-        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://ohdsh.com/"},{"@type":"ListItem","position":2,"name":"Plugins","item":"https://ohdsh.com/plugins"}]}</script>
-        <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"DSH Plugin Directory","numberOfItems":{{ pagination.total_items }},"itemListElement":[{% for p in plugins %}{"@type":"ListItem","position":{{ pagination.from + loop.index0 }},"name":"{{ p.name|escape('js') }}","url":"{{ p.url|escape('js') }}"}{% if not loop.last %},{% endif %}{% endfor %}]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"DSH 插件目录","url":"https://ohdsh.com/zh/plugins","inLanguage":"zh-CN","description":"DeepSeek Harness 社区插件的独立目录：按分类筛选、按能力搜索、复制安装命令，直达源码仓库。","mainEntity":{"@type":"ItemList","numberOfItems":{{ count }}}}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://ohdsh.com/zh"},{"@type":"ListItem","position":2,"name":"插件目录","item":"https://ohdsh.com/zh/plugins"}]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"DSH 插件目录","numberOfItems":{{ pagination.total_items }},"itemListElement":[{% for p in plugins %}{"@type":"ListItem","position":{{ pagination.from + loop.index0 }},"name":"{{ p.name|escape('js') }}","url":"{{ p.url|escape('js') }}"}{% if not loop.last %},{% endif %}{% endfor %}]}</script>
 
         <!-- Hero -->
-        <section class="pt-32 pb-12 px-6 text-center">
-            <span class="section-badge"><span class="dot"></span>Independent directory for the DSH ecosystem</span>
-            <h1 class="mt-6 text-4xl md:text-6xl font-bold tracking-tight leading-[1.1]">Find the right DSH plugin<br class="hidden md:block"> for your next workflow</h1>
-            <p class="mt-5 text-base md:text-lg text-neutral-500 max-w-2xl mx-auto">Reviewed DeepSeek Harness extensions — filter by category, search by capability, and jump straight to each plugin's public source.</p>
+        <section class="pt-32 pb-12 px-4 sm:px-6 text-center">
+            <span class="section-badge"><span class="dot"></span>DSH 生态独立插件目录</span>
+            <h1 class="mt-6 text-4xl md:text-6xl font-bold tracking-tight leading-[1.15]">为下一个工作流<br class="hidden md:block">找到对的 DSH 插件</h1>
+            <p class="mt-5 text-base md:text-lg text-neutral-500 max-w-2xl mx-auto">已收录的 DeepSeek Harness 扩展 —— 按分类筛选、按能力搜索，直达每个插件的源码仓库。</p>
             <div class="mt-8 flex flex-wrap justify-center gap-2 text-xs">
-                <span class="px-3 py-1 rounded-full border border-neutral-200 bg-white text-neutral-600 font-medium">{{ count }} plugins</span>
-                <span class="px-3 py-1 rounded-full border border-neutral-200 bg-white text-neutral-600 font-medium">{{ categories|length }} categories</span>
-                <span class="px-3 py-1 rounded-full border border-neutral-200 bg-white text-neutral-600 font-medium">{{ featured_count }} editor's picks</span>
-                <span class="px-3 py-1 rounded-full border border-neutral-200 bg-white text-neutral-600 font-medium">Updated {{ generated_at }}</span>
+                <span class="px-3 py-1 rounded-full border border-neutral-200 bg-white text-neutral-600 font-medium">{{ count }} 个插件</span>
+                <span class="px-3 py-1 rounded-full border border-neutral-200 bg-white text-neutral-600 font-medium">{{ categories|length }} 个分类</span>
+                <span class="px-3 py-1 rounded-full border border-neutral-200 bg-white text-neutral-600 font-medium">{{ featured_count }} 个编辑精选</span>
+                <span class="px-3 py-1 rounded-full border border-neutral-200 bg-white text-neutral-600 font-medium">更新于 {{ generated_at }}</span>
             </div>
         </section>
 
         <!-- Toolbar -->
-        <section class="sticky top-16 z-30 bg-[#f9f8f8]/90 backdrop-blur border-y border-neutral-200 py-3.5 px-6">
+        <section class="sticky top-16 z-30 bg-[#f9f8f8]/90 backdrop-blur border-y border-neutral-200 py-3.5 px-4 sm:px-6">
             <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center gap-3">
-                <form method="get" action="/plugins" class="relative w-full sm:w-96" role="search">
+                <form method="get" action="/zh/plugins" class="relative w-full sm:w-96" role="search">
                     {% if current_category %}<input type="hidden" name="category" value="{{ current_category }}">{% endif %}
                     <span class="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 text-sm" aria-hidden="true">⌕</span>
-                    <input type="search" name="q" value="{{ current_query }}" placeholder="Search plugins by name or capability…" aria-label="Search plugins" class="w-full rounded-lg border border-neutral-200 bg-white pl-9 pr-20 py-2 text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#4d6bfe]/30 focus:border-[#4d6bfe]">
-                    <button type="submit" class="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-md bg-neutral-900 px-3 py-1 text-[11px] font-medium text-white hover:bg-neutral-700 transition-colors">Search</button>
+                    <input type="search" name="q" value="{{ current_query }}" placeholder="按名称或能力搜索插件…" aria-label="搜索插件" class="w-full rounded-lg border border-neutral-200 bg-white pl-9 pr-20 py-2 text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#4d6bfe]/30 focus:border-[#4d6bfe]">
+                    <button type="submit" class="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-md bg-neutral-900 px-3 py-1 text-[11px] font-medium text-white hover:bg-neutral-700 transition-colors">搜索</button>
                 </form>
                 <div class="flex items-center gap-3 sm:ml-auto text-xs text-neutral-500">
                     {% if pagination.is_empty %}
-                        <span>No plugins found</span>
+                        <span>没有匹配的插件</span>
                     {% else %}
-                        <span>Showing <span class="font-medium text-neutral-700">{{ pagination.from }}–{{ pagination.to }}</span> of {{ pagination.total_items }}</span>
+                        <span>显示第 <span class="font-medium text-neutral-700">{{ pagination.from }}–{{ pagination.to }}</span> 个，共 {{ pagination.total_items }} 个</span>
                     {% endif %}
                     {% if current_query or current_category %}
-                        <a href="/plugins" class="inline-flex items-center gap-1 rounded-md border border-neutral-200 bg-white px-2 py-1 font-medium text-neutral-500 hover:border-neutral-400 hover:text-neutral-800 transition-colors">Clear filters</a>
+                        <a href="/zh/plugins" class="inline-flex items-center gap-1 rounded-md border border-neutral-200 bg-white px-2 py-1 font-medium text-neutral-500 hover:border-neutral-400 hover:text-neutral-800 transition-colors">清除筛选</a>
                     {% endif %}
                 </div>
             </div>
         </section>
 
         <!-- Directory -->
-        <section id="directory" class="py-10 px-6 scroll-mt-36">
+        <section id="directory" class="py-10 px-4 sm:px-6 scroll-mt-36">
             <div class="max-w-6xl mx-auto grid md:grid-cols-[13rem_1fr] gap-8">
 
                 <!-- Category rail -->
                 <aside class="md:sticky md:top-32 self-start">
-                    <p class="hidden md:block text-[11px] font-semibold uppercase tracking-wider text-neutral-400 px-3 mb-2">Categories</p>
-                    <nav class="flex md:flex-col gap-1 overflow-x-auto md:overflow-visible pb-2 md:pb-0 -mx-1 px-1" aria-label="Plugin categories">
-                        <a href="/plugins{% if current_query %}?q={{ current_query|url_encode }}{% endif %}"
+                    <p class="hidden md:block text-[11px] font-semibold uppercase tracking-wider text-neutral-400 px-3 mb-2">分类</p>
+                    <nav class="flex md:flex-col gap-1 overflow-x-auto md:overflow-visible pb-2 md:pb-0 -mx-1 px-1" aria-label="插件分类">
+                        <a href="/zh/plugins{% if current_query %}?q={{ current_query|url_encode }}{% endif %}"
                            {% if not current_category %}aria-current="page"{% endif %}
                            class="flex-none md:flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-xs font-medium whitespace-nowrap transition-colors {% if not current_category %}bg-neutral-900 text-white{% else %}text-neutral-600 hover:bg-white hover:text-neutral-900{% endif %}">
-                            <span>All plugins</span>
+                            <span>全部插件</span>
                             <span class="hidden md:inline text-[10px] {% if not current_category %}text-white/50{% else %}text-neutral-400{% endif %}">{{ count }}</span>
                         </a>
                         {% for c in categories %}
@@ -94,8 +94,8 @@
                     <!-- Editor's picks -->
                     <section class="mb-10">
                         <div class="flex items-baseline justify-between">
-                            <h2 class="text-sm font-semibold tracking-tight text-neutral-900">Editor's picks</h2>
-                            <span class="text-[11px] text-neutral-400">{{ featured_count }} hand-selected</span>
+                            <h2 class="text-sm font-semibold tracking-tight text-neutral-900">编辑精选</h2>
+                            <span class="text-[11px] text-neutral-400">{{ featured_count }} 个人工挑选</span>
                         </div>
                         <div class="mt-3 grid sm:grid-cols-2 gap-2">
                             {% for p in featured_plugins %}
@@ -105,7 +105,7 @@
                                     <span class="block text-xs font-semibold text-neutral-900 truncate group-hover:text-[#4d6bfe] transition-colors">{{ p.name }}</span>
                                     <span class="block text-[11px] text-neutral-400 truncate">{{ p.category_name }}</span>
                                 </span>
-                                <span class="flex-none text-amber-500 text-xs" aria-label="Editor's pick">★</span>
+                                <span class="flex-none text-amber-500 text-xs" aria-label="编辑精选">★</span>
                             </a>
                             {% endfor %}
                         </div>
@@ -115,19 +115,19 @@
                     <!-- Active filter heading -->
                     <div class="flex items-baseline justify-between mb-3">
                         <h2 class="text-sm font-semibold tracking-tight text-neutral-900">
-                            {% if current_category %}{% for c in categories %}{% if c.slug == current_category %}{{ c.name }}{% endif %}{% endfor %}{% else %}All plugins{% endif %}
+                            {% if current_category %}{% for c in categories %}{% if c.slug == current_category %}{{ c.name }}{% endif %}{% endfor %}{% else %}全部插件{% endif %}
                         </h2>
                         {% if current_query %}
-                        <span class="text-[11px] text-neutral-400">Matching “{{ current_query }}”</span>
+                        <span class="text-[11px] text-neutral-400">匹配「{{ current_query }}」</span>
                         {% endif %}
                     </div>
 
                     {% if pagination.is_empty %}
                     <!-- Empty state -->
                     <div class="rounded-xl border border-dashed border-neutral-300 bg-white/60 px-6 py-16 text-center">
-                        <p class="text-sm font-semibold text-neutral-800">No plugins match your filters</p>
-                        <p class="mt-1.5 text-xs text-neutral-500">Try a broader keyword, or browse every category.</p>
-                        <a href="/plugins" class="mt-5 inline-flex items-center rounded-lg bg-neutral-900 px-4 py-2 text-xs font-medium text-white hover:bg-neutral-700 transition-colors">Browse all plugins</a>
+                        <p class="text-sm font-semibold text-neutral-800">没有插件符合当前筛选条件</p>
+                        <p class="mt-1.5 text-xs text-neutral-500">换一个更宽泛的关键词，或者浏览全部分类。</p>
+                        <a href="/zh/plugins" class="mt-5 inline-flex items-center rounded-lg bg-neutral-900 px-4 py-2 text-xs font-medium text-white hover:bg-neutral-700 transition-colors">浏览全部插件</a>
                     </div>
                     {% else %}
 
@@ -140,13 +140,13 @@
                                 <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
                                     <a href="{{ p.url }}" target="_blank" rel="noopener noreferrer" class="font-semibold text-sm text-neutral-900 hover:text-[#4d6bfe] transition-colors truncate">{{ p.name }}</a>
                                     {% if p.featured %}
-                                    <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-600 bg-amber-50 border border-amber-200 rounded-full px-2 py-0.5">★ Editor's pick</span>
+                                    <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-600 bg-amber-50 border border-amber-200 rounded-full px-2 py-0.5">★ 编辑精选</span>
                                     {% endif %}
                                 </div>
                                 <p class="mt-1 text-sm text-neutral-500 leading-relaxed line-clamp-2">{{ p.description }}</p>
                                 <div class="mt-2.5 flex flex-wrap items-center gap-2">
                                     <code class="inline-flex items-center rounded-md bg-neutral-100 border border-neutral-200 px-2 py-1 text-[11px] font-mono text-neutral-600 select-all">dsh plugin add {{ p.name }}</code>
-                                    <button type="button" class="copy-btn inline-flex items-center rounded-md border border-neutral-200 bg-white px-2 py-1 text-[11px] font-medium text-neutral-500 hover:border-neutral-400 hover:text-neutral-800 transition-colors" data-cmd="dsh plugin add {{ p.name }}">Copy</button>
+                                    <button type="button" class="copy-btn inline-flex items-center rounded-md border border-neutral-200 bg-white px-2 py-1 text-[11px] font-medium text-neutral-500 hover:border-neutral-400 hover:text-neutral-800 transition-colors" data-cmd="dsh plugin add {{ p.name }}" data-copied="已复制 ✓">复制</button>
                                 </div>
                             </div>
                             <div class="hidden sm:flex flex-col items-end gap-2 flex-none">
@@ -159,11 +159,11 @@
 
                     {% if pagination.total_pages > 1 %}
                     <!-- Pager -->
-                    <nav class="mt-8 flex flex-wrap items-center justify-center gap-1.5" aria-label="Pagination">
+                    <nav class="mt-8 flex flex-wrap items-center justify-center gap-1.5" aria-label="分页">
                         {% if pagination.has_prev %}
-                        <a href="?{{ base_query }}page={{ pagination.prev_page }}" rel="prev" class="rounded-lg border border-neutral-200 bg-white px-3 py-1.5 text-xs font-medium text-neutral-600 hover:border-neutral-400 hover:text-neutral-900 transition-colors">← Prev</a>
+                        <a href="?{{ base_query }}page={{ pagination.prev_page }}" rel="prev" class="rounded-lg border border-neutral-200 bg-white px-3 py-1.5 text-xs font-medium text-neutral-600 hover:border-neutral-400 hover:text-neutral-900 transition-colors">← 上一页</a>
                         {% else %}
-                        <span class="rounded-lg border border-neutral-200 bg-white/50 px-3 py-1.5 text-xs font-medium text-neutral-300 select-none">← Prev</span>
+                        <span class="rounded-lg border border-neutral-200 bg-white/50 px-3 py-1.5 text-xs font-medium text-neutral-300 select-none">← 上一页</span>
                         {% endif %}
 
                         {% for n in range(1, pagination.total_pages) %}
@@ -179,12 +179,12 @@
                         {% endfor %}
 
                         {% if pagination.has_next %}
-                        <a href="?{{ base_query }}page={{ pagination.next_page }}" rel="next" class="rounded-lg border border-neutral-200 bg-white px-3 py-1.5 text-xs font-medium text-neutral-600 hover:border-neutral-400 hover:text-neutral-900 transition-colors">Next →</a>
+                        <a href="?{{ base_query }}page={{ pagination.next_page }}" rel="next" class="rounded-lg border border-neutral-200 bg-white px-3 py-1.5 text-xs font-medium text-neutral-600 hover:border-neutral-400 hover:text-neutral-900 transition-colors">下一页 →</a>
                         {% else %}
-                        <span class="rounded-lg border border-neutral-200 bg-white/50 px-3 py-1.5 text-xs font-medium text-neutral-300 select-none">Next →</span>
+                        <span class="rounded-lg border border-neutral-200 bg-white/50 px-3 py-1.5 text-xs font-medium text-neutral-300 select-none">下一页 →</span>
                         {% endif %}
                     </nav>
-                    <p class="mt-3 text-center text-[11px] text-neutral-400">Page {{ pagination.current_page }} of {{ pagination.total_pages }}</p>
+                    <p class="mt-3 text-center text-[11px] text-neutral-400">第 {{ pagination.current_page }} / {{ pagination.total_pages }} 页</p>
                     {% endif %}
 
                     {% endif %}
@@ -193,32 +193,32 @@
         </section>
 
         <!-- How it works -->
-        <section class="py-14 px-6 border-t border-neutral-200">
+        <section class="py-14 px-4 sm:px-6 border-t border-neutral-200">
             <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-xl font-bold tracking-tight text-neutral-900">How it works</h2>
+                <h2 class="text-xl font-bold tracking-tight text-neutral-900">怎么用这个目录</h2>
                 <div class="mt-8 grid md:grid-cols-3 gap-4 text-left">
                     <div class="card">
-                        <h3 class="text-sm font-semibold text-neutral-900">1. Search the directory</h3>
-                        <p class="mt-1.5 text-xs text-neutral-500 leading-relaxed">Filter by category or keyword — every listing is a public GitHub project.</p>
+                        <h3 class="text-sm font-semibold text-neutral-900">1. 先搜索筛选</h3>
+                        <p class="mt-1.5 text-xs text-neutral-500 leading-relaxed">按分类或关键词筛选 —— 每一条都指向公开的 GitHub 项目。</p>
                     </div>
                     <div class="card">
-                        <h3 class="text-sm font-semibold text-neutral-900">2. Copy the install command</h3>
-                        <p class="mt-1.5 text-xs text-neutral-500 leading-relaxed">Commands follow the upstream list; check each repo's README for exact package names.</p>
+                        <h3 class="text-sm font-semibold text-neutral-900">2. 复制安装命令</h3>
+                        <p class="mt-1.5 text-xs text-neutral-500 leading-relaxed">命令按上游列表生成，实际包名请以各仓库 README 为准。</p>
                     </div>
                     <div class="card">
-                        <h3 class="text-sm font-semibold text-neutral-900">3. Review before installing</h3>
-                        <p class="mt-1.5 text-xs text-neutral-500 leading-relaxed">Plugins run third-party code with your permissions — read the source first.</p>
+                        <h3 class="text-sm font-semibold text-neutral-900">3. 装之前先看代码</h3>
+                        <p class="mt-1.5 text-xs text-neutral-500 leading-relaxed">插件会以你的权限运行第三方代码 —— 先读源码再安装。</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Attribution / disclaimer -->
-        <section class="py-10 px-6 border-t border-neutral-200">
+        <section class="py-10 px-4 sm:px-6 border-t border-neutral-200">
             <div class="max-w-3xl mx-auto text-xs text-neutral-400 leading-relaxed">
-                <p>This directory is a snapshot of the community-maintained
+                <p>本目录是社区维护的
                 <a href="{{ source }}" class="text-[#4d6bfe] hover:underline underline-offset-4">awesome-dsh-plugin</a>
-                list (updated {{ generated_at }}). Listings link to the authors' repositories; inclusion is not an endorsement or a security review. Missing a plugin? Contribute to the upstream list.</p>
+                列表快照（更新于 {{ generated_at }}）。插件名称与简介保留上游英文原文以免翻译歧义；条目均链接到作者本人的仓库，收录不代表背书，也不等于安全审计。缺了某个插件？欢迎去上游列表提交。</p>
             </div>
         </section>
 
@@ -231,7 +231,7 @@
                     var cmd = btn.getAttribute('data-cmd');
                     var done = function () {
                         var old = btn.textContent;
-                        btn.textContent = 'Copied \u2713';
+                        btn.textContent = btn.getAttribute('data-copied') || 'Copied';
                         setTimeout(function () { btn.textContent = old; }, 1500);
                     };
                     if (navigator.clipboard && navigator.clipboard.writeText) {

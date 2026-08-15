@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek Harness 知识库与 RAG 指南 | Oh! dsh</title>
+</head>
+<body>
+    <header><!-- header placeholder --></header>
+
+    <main>
+        <!--seo:{"title":"DeepSeek Harness 知识库与 RAG 指南 | Oh! dsh","description":"让 DeepSeek Harness Agent 的回答锚定在你自己的文档上：精选检索与 RAG 插件、入库步骤与效果评估清单。","keywords":"DeepSeek Harness RAG, DSH 知识库, DSH 检索插件","canonical":"https://ohdsh.com/zh/guides/knowledge-base","og_title":"DeepSeek Harness 知识库与 RAG 指南","og_description":"精选检索与 RAG 插件、入库步骤与效果评估清单。","og_url":"https://ohdsh.com/zh/guides/knowledge-base","og_site_name":"Oh! dsh","html_lang":"zh-CN","hreflang":{"en":"https://ohdsh.com/guides/knowledge-base","zh-CN":"https://ohdsh.com/zh/guides/knowledge-base","x-default":"https://ohdsh.com/guides/knowledge-base"}}-->
+
+        <section class="pt-32 pb-16 px-4 sm:px-6 text-center">
+            <span class="section-badge"><span class="dot"></span><a href="/zh/guides" class="hover:text-gray-900 transition-colors">实战指南</a></span>
+            <h1 class="mt-6 text-4xl md:text-5xl font-bold tracking-tight">知识库 / RAG</h1>
+            <p class="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+                用精选的检索与 RAG 插件，把 Agent 的回答锚定在你自己的文档上。
+            </p>
+            <div class="mt-8 flex flex-wrap justify-center gap-3">
+                <a href="/zh/plugins?category=memory" class="btn-primary">浏览 RAG 类插件</a>
+                <a href="/docs/zh/guide/quick-start" class="btn-secondary">快速上手</a>
+            </div>
+        </section>
+
+        <section class="pb-20 px-4 sm:px-6">
+            <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-4">
+                <div class="card">
+                    <h2 class="font-semibold">入库</h2>
+                    <p class="mt-2 text-sm text-gray-500 leading-relaxed">解析、分块与索引插件 —— 按你团队实际在用的文档格式来筛选。</p>
+                </div>
+                <div class="card">
+                    <h2 class="font-semibold">检索</h2>
+                    <p class="mt-2 text-sm text-gray-500 leading-relaxed">向量、混合与元数据过滤检索插件，并诚实说明各自适用的边界。</p>
+                </div>
+                <div class="card">
+                    <h2 class="font-semibold">评估</h2>
+                    <p class="mt-2 text-sm text-gray-500 leading-relaxed">衡量回答质量的清单与方法 —— 这是大多数团队会跳过的一步。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="pb-20 px-4 sm:px-6">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-2xl font-bold tracking-tight text-center">落地步骤</h2>
+                <div class="mt-8 space-y-4">
+                    <div class="card">
+                        <h3 class="font-semibold">1. 先盘清数据源</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">列出 Agent 必须能回答的文档类型与系统 —— 这决定了你的入库插件选型。</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">2. 选定检索策略</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">语义搜索用向量；要求事实精确用混合检索；涉及权限用元数据过滤。</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">3. 先量化再扩量</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">在小样本上跑完评估清单，再把 Agent 接进生产环境。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pb-20 px-4 sm:px-6">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-2xl font-bold tracking-tight">更多指南</h2>
+                <div class="mt-6 flex flex-wrap justify-center gap-3">
+                    <a href="/zh/guides/integration" class="btn-secondary">多平台集成</a>
+                    <a href="/zh/guides/video-workflow" class="btn-secondary">视频工作流</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer><!-- footer placeholder --></footer>
+</body>
+</html>
