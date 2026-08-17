@@ -29,10 +29,11 @@
                 <p class="mt-5 text-base md:text-lg text-[var(--dark-muted)] max-w-xl mx-auto leading-relaxed">
                     A weekly, opinionated read on the DeepSeek Harness ecosystem — the launches, the pricing moves, and the plugins worth your time.
                 </p>
-                <div class="mt-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[.04] px-4 py-2 text-xs text-[var(--dark-muted)]">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 8v4l2.5 2.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    Email subscription coming soon
-                </div>
+                <form id="nlForm" class="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                    <input id="nlEmail" type="email" placeholder="you@example.com" class="flex-1 px-4 py-3 rounded-lg bg-white/[.06] border border-white/[.1] text-white placeholder-gray-500 text-sm focus:outline-none focus:border-[var(--brand)] transition-colors" required>
+                    <button id="nlBtn" type="submit" class="btn-primary whitespace-nowrap px-6 py-3">Subscribe</button>
+                </form>
+                <p id="nlMsg" class="mt-4 text-xs text-[var(--dark-muted)]">Free forever. Unsubscribe anytime.</p>
             </div>
         </section>
 
@@ -69,14 +70,75 @@
                     {% endfor %}
                 </div>
 
-                <div class="mt-12 rounded-2xl border border-dashed border-gray-200 bg-white px-6 py-8 text-center">
+                <div class="mt-12 rounded-2xl border border-gray-200 bg-white px-6 py-8 text-center">
                     <h3 class="font-semibold text-gray-900">Want DSH Weekly in your inbox?</h3>
-                    <p class="mt-2 text-sm text-gray-500 max-w-md mx-auto">Email subscription is on the way — we're wiring up the backend. For now, bookmark this page or email us at <a href="mailto:support@ohdsh.com" class="text-[var(--brand)] hover:underline">support@ohdsh.com</a>.</p>
+                    <p class="mt-2 text-sm text-gray-500 max-w-md mx-auto">Subscribe now and get every issue delivered straight to your email — free, no spam.</p>
+                    <form id="nlForm2" class="mt-5 flex flex-col sm:flex-row gap-3 max-w-sm mx-auto">
+                        <input id="nlEmail2" type="email" placeholder="you@example.com" class="flex-1 px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-[var(--brand)] transition-colors" required>
+                        <button id="nlBtn2" type="submit" class="btn-primary whitespace-nowrap px-5 py-2.5 text-sm">Subscribe</button>
+                    </form>
+                    <p id="nlMsg2" class="mt-3 text-xs text-gray-400"></p>
                 </div>
             </div>
         </section>
     </main>
 
     <footer><!-- footer placeholder --></footer>
+    <script>
+    (function(){
+        var API = 'https://app.litestartup.com/api/newsletters/subscribe';
+        var EDITION = 'ohdsh_en';
+
+        function bindForm(formId, emailId, btnId, msgId) {
+            var form = document.getElementById(formId);
+            if (!form) return;
+            var emailInput = document.getElementById(emailId);
+            var btn = document.getElementById(btnId);
+            var msg = document.getElementById(msgId);
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var email = (emailInput.value || '').trim();
+                if (!email) return;
+                btn.disabled = true;
+                btn.textContent = 'Sending...';
+                msg.textContent = '';
+                msg.style.color = '';
+
+                fetch(API, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, edition_key: EDITION })
+                })
+                .then(function(r) { return r.json(); })
+                .then(function(res) {
+                    var state = (res.data && res.data.state) || '';
+                    if (state === 'pending_created' || state === 'pending_resent') {
+                        msg.style.color = '#34d399';
+                        msg.textContent = 'Check your inbox! A confirmation link has been sent to ' + email;
+                        emailInput.value = '';
+                    } else if (state === 'already_confirmed') {
+                        msg.style.color = '#d97706';
+                        msg.textContent = 'You are already subscribed. See you next Friday!';
+                    } else {
+                        msg.style.color = '#ef4444';
+                        msg.textContent = res.message || 'Something went wrong. Please try again.';
+                    }
+                })
+                .catch(function() {
+                    msg.style.color = '#ef4444';
+                    msg.textContent = 'Network error. Please try again later.';
+                })
+                .finally(function() {
+                    btn.disabled = false;
+                    btn.textContent = 'Subscribe';
+                });
+            });
+        }
+
+        bindForm('nlForm', 'nlEmail', 'nlBtn', 'nlMsg');
+        bindForm('nlForm2', 'nlEmail2', 'nlBtn2', 'nlMsg2');
+    })();
+    </script>
 </body>
 </html>
