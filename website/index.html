@@ -466,11 +466,11 @@
                         <span class="font-mono text-sm font-medium text-[var(--brand)]">DSH Weekly</span>
                         <h2 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight text-white">Stay ahead of the DSH ecosystem</h2>
                         <p class="mt-3 text-[var(--dark-muted)] text-sm max-w-md mx-auto">Every Friday: top plugin picks, practical tips, and community highlights. Free, no spam.</p>
-                        <form class="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="return false;">
-                            <input type="email" placeholder="you@example.com" class="newsletter-input flex-1" required>
-                            <button type="submit" class="btn-primary whitespace-nowrap px-6">Subscribe</button>
+                        <form id="nlForm" class="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                            <input id="nlEmail" type="email" placeholder="you@example.com" class="newsletter-input flex-1" required>
+                            <button id="nlBtn" type="submit" class="btn-primary whitespace-nowrap px-6">Subscribe</button>
                         </form>
-                        <p class="mt-4 text-xs text-[var(--dark-muted)]">Join the DSH builder community — unsubscribe anytime.</p>
+                        <p id="nlMsg" class="mt-4 text-xs text-[var(--dark-muted)]">Join the DSH builder community — unsubscribe anytime.</p>
                     </div>
                 </div>
             </div>
@@ -586,8 +586,7 @@
             </div>
         </div>
         <div class="mt-12 pt-6 border-t border-black/[.04] text-center text-xs text-gray-400">
-            <p>© 2026 Oh! dsh · Built by DSH builders · Independent &amp; community-driven</p>
-            <p class="mt-2">
+            <p>
                 <span class="text-gray-500">English</span>
                 <span class="mx-1.5 text-gray-300">|</span>
                 <a href="/zh" hreflang="zh-CN" lang="zh-CN" class="hover:text-gray-900 transition-colors">中文</a>
@@ -597,6 +596,7 @@
                 <span class="mx-1.5 text-gray-300">·</span>
                 Website &amp; email powered by <a href="https://litestartup.com" target="_blank" rel="noopener" class="hover:text-gray-900 transition-colors">LiteStartup</a>
             </p>
+            <p class="mt-2">© 2026 Oh! dsh · Built by DSH builders · Independent &amp; community-driven</p>
         </div>
     </footer>
 
@@ -615,15 +615,55 @@
         window.addEventListener('scroll', () => { toTop.style.display = window.scrollY > 300 ? 'flex' : 'none'; });
         toTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     </script>
-    <!-- Analytics: replace with your IDs -->
-    <!-- Google Analytics 4 -->
-    <!--
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
-    -->
-    <!-- Plausible Analytics -->
-    <!--
-    <script defer data-domain="ohdsh.com" src="https://plausible.io/js/script.js"></script>
-    -->
+    <script>
+    (function(){
+        var form = document.getElementById('nlForm');
+        if (!form) return;
+        var emailInput = document.getElementById('nlEmail');
+        var btn = document.getElementById('nlBtn');
+        var msg = document.getElementById('nlMsg');
+        var API = 'https://app.litestartup.com/api/newsletters/subscribe';
+        var EDITION = 'ohdsh_en';
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var email = (emailInput.value || '').trim();
+            if (!email) return;
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+            msg.textContent = '';
+            msg.style.color = '';
+
+            fetch(API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email, edition_key: EDITION })
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(res) {
+                var state = (res.data && res.data.state) || '';
+                if (state === 'pending_created' || state === 'pending_resent') {
+                    msg.style.color = '#34d399';
+                    msg.textContent = 'Check your inbox! A confirmation link has been sent to ' + email;
+                    emailInput.value = '';
+                } else if (state === 'already_confirmed') {
+                    msg.style.color = '#fbbf24';
+                    msg.textContent = 'You are already subscribed. See you next Friday!';
+                } else {
+                    msg.style.color = '#f87171';
+                    msg.textContent = res.message || 'Something went wrong. Please try again.';
+                }
+            })
+            .catch(function() {
+                msg.style.color = '#f87171';
+                msg.textContent = 'Network error. Please try again later.';
+            })
+            .finally(function() {
+                btn.disabled = false;
+                btn.textContent = 'Subscribe';
+            });
+        });
+    })();
+    </script>
 </body>
 </html>
