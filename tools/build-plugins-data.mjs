@@ -34,6 +34,9 @@ if (!Array.isArray(data.categories) || !Array.isArray(data.plugins)) {
 }
 
 const categoryName = Object.fromEntries(data.categories.map((c) => [c.slug, c.name]));
+const categoryNameZh = Object.fromEntries(
+  data.categories.map((c) => [c.slug, c.name_zh || c.name])
+);
 
 // Deterministic gradient index so a plugin keeps the same colour across pages.
 function gradientIndex(name) {
@@ -47,8 +50,10 @@ const plugins = data.plugins.map((p) => ({
   name: p.name,
   url: p.url,
   description: p.description,
+  description_zh: p.description_zh || p.description,
   category: p.category,
   category_name: categoryName[p.category] || p.category,
+  category_name_zh: categoryNameZh[p.category] || categoryName[p.category] || p.category,
   featured: featuredSet.has(p.slug),
   grad: gradientIndex(p.name),
 }));
@@ -60,6 +65,7 @@ for (const p of plugins) counts[p.category] = (counts[p.category] || 0) + 1;
 
 const categories = data.categories.map((c) => ({
   name: c.name,
+  name_zh: c.name_zh || c.name,
   slug: c.slug,
   count: counts[c.slug] || 0,
 }));
@@ -75,6 +81,7 @@ const featuredPlugins = featured.filter((slug) => bySlug.has(slug)).map((slug) =
 const out = {
   generated_at: data.generated_at,
   source: data.source,
+  source_zh: data.source_zh || data.source,
   count: plugins.length,
   featured_count: featuredPlugins.length,
   page_size: PAGE_SIZE,

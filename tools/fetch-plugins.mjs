@@ -1,4 +1,11 @@
 // Oh! dsh tools — fetch the awesome-dsh-plugin community list and snapshot it to data/plugins.json
+//
+// Fetches BOTH the English (README.md) and Chinese (README.zh.md) upstream lists,
+// then merges them so each plugin carries an English and a Chinese description
+// (and each category an English and a Chinese name). The English list is the
+// canonical source of truth for the plugin set; the Chinese list is matched by
+// repo URL and provides description_zh / category name_zh where present.
+//
 // Usage: node tools/fetch-plugins.mjs
 import https from 'node:https';
 import fs from 'node:fs';
@@ -8,23 +15,31 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_DIR = path.resolve(__dirname, '..');
 const OUT = path.join(REPO_DIR, 'data', 'plugins.json');
-const RAW_URL = 'https://raw.githubusercontent.com/awesome-dsh-plugin/awesome-dsh-plugin/main/README.md';
 
-function fetchText(url) {
+const EN_URL = 'https://raw.githubusercontent.com/awesome-dsh-plugin/awesome-dsh-plugin/main/README.md';
+const ZH_URL = 'https://raw.githubusercontent.com/awesome-dsh-plugin/awesome-dsh-plugin/main/README.zh.md';
+
+function fetchText(url, timeoutMs = 30000) {
   return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'User-Agent': 'ohdsh-tools' } }, (res) => {
+    const req = https.get(url, { headers: { 'User-Agent': 'ohdsh-tools' } }, (res) => {
       if (res.statusCode !== 200) {
+        res.resume();
         reject(new Error('HTTP ' + res.statusCode + ' for ' + url));
         return;
       }
       let b = '';
       res.on('data', (c) => (b += c));
       res.on('end', () => resolve(b));
-    }).on('error', reject);
+      res.on('error', reject);
+    });
+    req.on('error', reject);
+    req.setTimeout(timeoutMs, () => {
+      req.destroy(new Error('timeout while fetching ' + url));
+    });
   });
 }
 
-async function fetchWithRetry(url, attempts = 3) {
+async function fetchWithRetry(url, attempts = 5) {
   let lastErr;
   for (let i = 0; i < attempts; i++) {
     try {
@@ -44,52 +59,100 @@ function slugify(s) {
     .replace(/^-+|-+$/g, '');
 }
 
-const md = await fetchWithRetry(RAW_URL);
-const lines = md.split(/\r?\n/);
-const categories = [];
-const plugins = [];
+// Strip a leading emoji / decoration from a category heading ("🎨 UI 增强" -> "UI 增强").
+function stripLeadingEmoji(s) {
+  return s.replace(/^\s*[^\u4e00-\u9fa5A-Za-z0-9]+\s*/, '').trim();
+}
+
+// Parse one README body into categories + plugin entries.
+//   pluginsHeading   — the `## ` heading that opens the plugin section
+//   stripCategoryEmoji — whether to strip the emoji prefix from `### ` headings
+function parseList(md, { pluginsHeading, stripCategoryEmoji }) {
+  const lines = md.split(/\r?\n/);
+  const categories = [];
+  const plugins = [];
+  let inPlugins = false;
+  let category = null;
+
+  for (const line of lines) {
+    const t = line.trim();
+    if (!inPlugins) {
+      if (new RegExp('^## ' + pluginsHeading + '\\s*$').test(t)) inPlugins = true;
+      continue;
+    }
+    if (/^## /.test(t)) break; // stop at Contributing / Badge / Disclaimer sections
+
+    const catMatch = t.match(/^### (.+)$/);
+    if (catMatch) {
+      let name = catMatch[1].trim();
+      if (stripCategoryEmoji) name = stripLeadingEmoji(name);
+      category = { name, slug: slugify(name) };
+      categories.push(category);
+      continue;
+    }
+
+    // Upstream uses "-" (EN) or "—" (ZH) between the link and the description.
+    const entry = t.match(/^-\s*\[([^\]]+)\]\(([^)]+)\)\s*[-—]\s*(.+)$/);
+    if (entry && category) {
+      plugins.push({
+        name: entry[1].trim(),
+        url: entry[2].trim(),
+        description: entry[3].trim(),
+        category: category.slug,
+      });
+    }
+  }
+
+  return { categories, plugins };
+}
+
+function pluginSlug(name, url) {
+  const repoPart = url.replace(/^https?:\/\/github\.com\//, '').split('/tree/')[0].split('/blob/')[0];
+  const ownerRepo = repoPart.split('/').slice(0, 2).join('/');
+  return slugify(ownerRepo.replace('/', '-')) + '-' + slugify(name.split(/[#/]/).pop());
+}
+
+const [enMd, zhMd] = await Promise.all([
+  fetchWithRetry(EN_URL),
+  fetchWithRetry(ZH_URL),
+]);
+
+const en = parseList(enMd, { pluginsHeading: 'Plugins', stripCategoryEmoji: false });
+const zh = parseList(zhMd, { pluginsHeading: '插件', stripCategoryEmoji: true });
+
+// Canonical categories come from the English list; attach the Chinese name by
+// position (both lists are kept in the same order by the upstream maintainers).
+const categories = en.categories.map((c, i) => ({
+  name: c.name,
+  name_zh: zh.categories[i] ? zh.categories[i].name : null,
+  slug: c.slug,
+}));
+
+// Match the Chinese list by repo URL to graft description_zh onto each plugin.
+const zhByUrl = new Map(zh.plugins.map((p) => [p.url, p]));
+
 const seenSlugs = new Set();
-let inPlugins = false;
-let category = null;
+const plugins = [];
+for (const p of en.plugins) {
+  let slug = pluginSlug(p.name, p.url);
+  while (seenSlugs.has(slug)) slug += '-2';
+  seenSlugs.add(slug);
 
-for (const line of lines) {
-  const t = line.trim();
-  if (!inPlugins) {
-    if (/^## Plugins\s*$/.test(t)) inPlugins = true;
-    continue;
-  }
-  if (/^## /.test(t)) break; // stop at Badge / Disclaimer sections
-
-  const catMatch = t.match(/^### (.+)$/);
-  if (catMatch) {
-    category = { name: catMatch[1].trim(), slug: slugify(catMatch[1]) };
-    categories.push(category);
-    continue;
-  }
-
-  const entry = t.match(/^-\s*\[([^\]]+)\]\(([^)]+)\)\s*-\s*(.+)$/);
-  if (entry && category) {
-    const name = entry[1].trim();
-    const url = entry[2].trim();
-    const description = entry[3].trim();
-    const repoPart = url.replace(/^https?:\/\/github\.com\//, '').split('/tree/')[0].split('/blob/')[0];
-    const ownerRepo = repoPart.split('/').slice(0, 2).join('/');
-    let slug = slugify(ownerRepo.replace('/', '-')) + '-' + slugify(name.split(/[#/]/).pop());
-    while (seenSlugs.has(slug)) slug += '-2';
-    seenSlugs.add(slug);
-    plugins.push({
-      slug,
-      name,
-      url,
-      description,
-      category: category.slug,
-    });
-  }
+  const zhEntry = zhByUrl.get(p.url);
+  plugins.push({
+    slug,
+    name: p.name,
+    url: p.url,
+    description: p.description,
+    description_zh: zhEntry ? zhEntry.description : undefined,
+    category: p.category,
+  });
 }
 
 const out = {
   generated_at: new Date().toISOString().slice(0, 10),
   source: 'https://github.com/awesome-dsh-plugin/awesome-dsh-plugin',
+  source_zh: 'https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/blob/main/README.zh.md',
   count: plugins.length,
   categories,
   plugins,
@@ -113,6 +176,9 @@ if (fs.existsSync(OWN_PATH)) {
 
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
 fs.writeFileSync(OUT, JSON.stringify(out, null, 2));
+
+const zhMatched = plugins.filter((p) => p.description_zh).length;
 console.log('parsed ' + plugins.length + ' plugins in ' + categories.length + ' categories');
+console.log('  chinese descriptions matched: ' + zhMatched + ' / ' + plugins.length);
 console.log('categories: ' + categories.map((c) => c.slug + '(' + plugins.filter((p) => p.category === c.slug).length + ')').join(', '));
 console.log('written -> ' + OUT);

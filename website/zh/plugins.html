@@ -80,7 +80,7 @@
                             <a href="?category={{ c.slug }}{% if current_query %}&q={{ current_query|url_encode }}{% endif %}"
                                {% if c.slug == current_category %}aria-current="page"{% endif %}
                                class="flex-none md:flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-xs font-medium whitespace-nowrap transition-colors {% if c.slug == current_category %}bg-neutral-900 text-white{% else %}text-neutral-600 hover:bg-white hover:text-neutral-900{% endif %}">
-                                <span>{{ c.name }}</span>
+                                <span>{{ c.name_zh }}</span>
                                 <span class="hidden md:inline text-[10px] {% if c.slug == current_category %}text-white/50{% else %}text-neutral-400{% endif %}">{{ c.count }}</span>
                             </a>
                         {% endfor %}
@@ -103,7 +103,7 @@
                                 <span class="flex-none w-7 h-7 rounded-md flex items-center justify-center text-white text-[11px] font-bold shadow-sm" style="background:{{ gradients[p.grad] }}" aria-hidden="true">{{ p.name|split('/')|last|first|upper }}</span>
                                 <span class="min-w-0 flex-1">
                                     <span class="block text-xs font-semibold text-neutral-900 truncate group-hover:text-[#4d6bfe] transition-colors">{{ p.name }}</span>
-                                    <span class="block text-[11px] text-neutral-400 truncate">{{ p.category_name }}</span>
+                                    <span class="block text-[11px] text-neutral-400 truncate">{{ p.category_name_zh }}</span>
                                 </span>
                                 <span class="flex-none text-amber-500 text-xs" aria-label="编辑精选">★</span>
                             </a>
@@ -115,7 +115,7 @@
                     <!-- Active filter heading -->
                     <div class="flex items-baseline justify-between mb-3">
                         <h2 class="text-sm font-semibold tracking-tight text-neutral-900">
-                            {% if current_category %}{% for c in categories %}{% if c.slug == current_category %}{{ c.name }}{% endif %}{% endfor %}{% else %}全部插件{% endif %}
+                            {% if current_category %}{% for c in categories %}{% if c.slug == current_category %}{{ c.name_zh }}{% endif %}{% endfor %}{% else %}全部插件{% endif %}
                         </h2>
                         {% if current_query %}
                         <span class="text-[11px] text-neutral-400">匹配「{{ current_query }}」</span>
@@ -143,14 +143,14 @@
                                     <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-600 bg-amber-50 border border-amber-200 rounded-full px-2 py-0.5">★ 编辑精选</span>
                                     {% endif %}
                                 </div>
-                                <p class="mt-1 text-sm text-neutral-500 leading-relaxed line-clamp-2">{{ p.description }}</p>
+                                <p class="mt-1 text-sm text-neutral-500 leading-relaxed line-clamp-2">{{ p.description_zh }}</p>
                                 <div class="mt-2.5 flex flex-wrap items-center gap-2">
                                     <code class="inline-flex items-center rounded-md bg-neutral-100 border border-neutral-200 px-2 py-1 text-[11px] font-mono text-neutral-600 select-all">dsh plugin add {{ p.name }}</code>
                                     <button type="button" class="copy-btn inline-flex items-center rounded-md border border-neutral-200 bg-white px-2 py-1 text-[11px] font-medium text-neutral-500 hover:border-neutral-400 hover:text-neutral-800 transition-colors" data-cmd="dsh plugin add {{ p.name }}" data-copied="已复制 ✓">复制</button>
                                 </div>
                             </div>
                             <div class="hidden sm:flex flex-col items-end gap-2 flex-none">
-                                <a href="?category={{ p.category }}" class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-0.5 text-[11px] font-medium text-neutral-500 hover:border-neutral-400 hover:text-neutral-800 transition-colors">{{ p.category_name }}</a>
+                                <a href="?category={{ p.category }}" class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-0.5 text-[11px] font-medium text-neutral-500 hover:border-neutral-400 hover:text-neutral-800 transition-colors">{{ p.category_name_zh }}</a>
                                 <a href="{{ p.url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] font-medium text-neutral-400 hover:text-[#4d6bfe] transition-colors">GitHub <span aria-hidden="true">↗</span></a>
                             </div>
                         </article>
@@ -218,7 +218,7 @@
             <div class="max-w-3xl mx-auto text-xs text-neutral-400 leading-relaxed">
                 <p>本目录是社区维护的
                 <a href="{{ source }}" class="text-[#4d6bfe] hover:underline underline-offset-4">awesome-dsh-plugin</a>
-                列表快照（更新于 {{ generated_at }}）。插件名称与简介保留上游英文原文以免翻译歧义；条目均链接到作者本人的仓库，收录不代表背书，也不等于安全审计。缺了某个插件？欢迎去上游列表提交。</p>
+                列表快照（更新于 {{ generated_at }}）。插件名称与简介取自上游中英文双语列表；条目均链接到作者本人的仓库，收录不代表背书，也不等于安全审计。缺了某个插件？欢迎去上游列表提交。</p>
             </div>
         </section>
 
