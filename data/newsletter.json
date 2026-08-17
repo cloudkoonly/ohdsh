@@ -1,0 +1,15 @@
+{
+  "issues": [
+    {
+      "slug": "dsh-weekly-001",
+      "date": "2026-08-17",
+      "title": "DeepSeek Harness goes open source — and V4 pricing goes time-of-day",
+      "title_zh": "DeepSeek Harness 开源了，V4 定价也改成了错峰计价",
+      "excerpt": "This week DeepSeek did two things: open-sourced its Harness agent runtime and switched V4 API billing to peak/off-peak tiers. Here's our read on both — what changed, what to read, and what it means for anyone building on DSH.",
+      "excerpt_zh": "这一周 DeepSeek 做了两件事：把 Harness agent 运行时开源，以及把 V4 API 改成错峰计价。本期是我们的解读——发生了什么、值得读什么，以及对每个在 DSH 上开发的人意味着什么。",
+      "tags": ["harness", "pricing", "open source"],
+      "tags_zh": ["harness", "定价", "开源"]
+    }
+  ],
+  "generated_at": "2026-08-17"
+}

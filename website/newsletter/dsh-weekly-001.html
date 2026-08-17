@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek Harness Open Source & V4 Pricing — DSH Weekly #001 | Oh! dsh</title>
+</head>
+<body>
+    <header><!-- header placeholder --></header>
+
+    <main>
+        <!--seo:{"title":"DeepSeek Harness Open Source & V4 Pricing — DSH Weekly #001 | Oh! dsh","description":"DSH Weekly #001: DeepSeek open-sourced its Harness agent runtime and switched V4 API billing to peak/off-peak tiers. Our read on both — what changed, what to read, and what it means for DSH builders.","keywords":"DeepSeek Harness, DeepSeek V4 pricing, DeepSeek Harness open source, DSH Weekly, DeepSeek Harness news","canonical":"https://ohdsh.com/newsletter/dsh-weekly-001","og_title":"DeepSeek Harness Open Source & V4 Pricing — DSH Weekly #001","og_description":"DeepSeek open-sourced Harness and switched V4 to peak/off-peak pricing. Our read on what changed and what it means for DSH builders.","og_url":"https://ohdsh.com/newsletter/dsh-weekly-001","og_site_name":"Oh! dsh","og_type":"article","html_lang":"en","hreflang":{"en":"https://ohdsh.com/newsletter/dsh-weekly-001","zh-CN":"https://ohdsh.com/zh/newsletter/dsh-weekly-001","x-default":"https://ohdsh.com/newsletter/dsh-weekly-001"}}-->
+
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"DeepSeek Harness goes open source — and V4 pricing goes time-of-day","description":"DeepSeek open-sourced its Harness agent runtime and switched V4 API billing to peak/off-peak tiers. Our read on what changed and what it means for DSH builders.","datePublished":"2026-08-17","dateModified":"2026-08-17","author":{"@type":"Organization","name":"Oh! dsh"},"publisher":{"@type":"Organization","name":"Oh! dsh","url":"https://ohdsh.com"},"mainEntityOfPage":"https://ohdsh.com/newsletter/dsh-weekly-001","inLanguage":"en","keywords":["DeepSeek Harness","DeepSeek V4","pricing","open source","DSH"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://ohdsh.com/"},{"@type":"ListItem","position":2,"name":"DSH Weekly","item":"https://ohdsh.com/newsletter"},{"@type":"ListItem","position":3,"name":"#001","item":"https://ohdsh.com/newsletter/dsh-weekly-001"}]}</script>
+
+        <!-- Article header -->
+        <section class="pt-32 pb-12 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex items-center gap-3 text-sm">
+                    <a href="/newsletter" class="inline-flex items-center gap-1.5 text-gray-400 hover:text-gray-700 transition-colors">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        DSH Weekly
+                    </a>
+                    <span class="text-gray-300">/</span>
+                    <span class="font-mono font-semibold text-[var(--brand)]">#001</span>
+                    <span class="text-gray-300">·</span>
+                    <time datetime="2026-08-17" class="text-gray-400">2026-08-17</time>
+                </div>
+                <h1 class="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-[1.12]">DeepSeek Harness goes open source — and V4 pricing goes time-of-day</h1>
+                <p class="mt-5 text-lg text-gray-500 leading-relaxed">Two moves, one week. We unpack what DeepSeek actually shipped, what the price change means in practice, and where we'd direct your reading time.</p>
+                <div class="mt-6 flex items-center gap-3 text-sm text-gray-400">
+                    <span>By the Oh! dsh editorial team</span>
+                    <span class="text-gray-300">·</span>
+                    <span>5 min read</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article body -->
+        <article class="pb-20 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    This week DeepSeek did two things at once: it open-sourced Harness, its first agent runtime, and it switched V4 API billing to peak and off-peak tiers. One hand gives, the other takes. If you're building on DSH — or just watching this space — both moves are worth understanding, because they tell you where DeepSeek is heading.
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">The big story: Harness is open source</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    Late on August 13, DeepSeek pushed <a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">Harness (dsh)</a> to GitHub under the MIT license, as a v0.1 developer preview. The whole pitch is a single sentence: <em>everything is a plugin</em>. Models, tools, the agent loop, memory, context — each one a swappable component.
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    It crossed 33,000 stars within hours and roughly 50,000 within twelve. People keep reaching for "the Android of agents"; we'd only half-agree. Android is an operating system — Harness goes a step further and makes the operating system itself a set of replaceable parts.
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    Underneath is <a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">Cordis</a>, a meta-framework built around three properties: observable, composable, rollback-able. That last one is the part we keep thinking about — an agent that can rewind is an agent you can actually let rewrite itself.
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">The week, in order</h2>
+                <div class="mt-5 space-y-4">
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-13</div>
+                        <p class="text-gray-700 leading-relaxed">The late-night triple drop: the V4 pricing announcement, the Harness open-source release, and the companion paper, all at once.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-14</div>
+                        <p class="text-gray-700 leading-relaxed">V4-Pro moves out of preview into commercial use. HPCwire, The Register, and VentureBeat all weigh in.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-15</div>
+                        <p class="text-gray-700 leading-relaxed">The paper deep-dives arrive — the headline framing: letting agents rewrite themselves at runtime.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-16</div>
+                        <p class="text-gray-700 leading-relaxed">The community starts moving: third-party projects like <a href="https://github.com/Electricitysheep/dsh-handbook" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">dsh-handbook</a> and <a href="https://github.com/ZK-Andy/dsh-continual-evolve" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">dsh-continual-evolve</a> appear.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-17</div>
+                        <p class="text-gray-700 leading-relaxed">The V4 peak/off-peak pricing takes effect. Peak windows (09:00–12:00 and 14:00–18:00) cost the most; off-peak runs at half price.</p>
+                    </div>
+                </div>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">The price change, because it actually matters</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    From the 17th, V4 drops flat pricing for time-of-day tiers: peak hours cost the most, off-peak runs at half. Some tiers land roughly 11x their original price, which is why "the end of cheap AI" has been floating around — for once, that's not just a headline.
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    For anyone who calls these APIs daily, this is the most concrete change of the week. Retiming workloads off-peak stops being a money-saving trick and becomes a scheduling necessity. If your jobs can tolerate a queue, move them.
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">Worth reading, in the order we'd open them</h2>
+                <div class="mt-5 space-y-3">
+                    <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">Official — V4-Pro GA announcement</span> (<a href="https://api-docs.deepseek.com/zh-cn/news/news260813/" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">api-docs</a>). The authoritative one for pricing and the hard specs: 384K context, tool calling, Responses API, FIM.</p>
+                    <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">HPCwire</span> — <a href="https://www.hpcwire.com/2026/08/14/deepseek-open-sources-the-missing-layer-between-ai-models-and-agents/" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">"DeepSeek Open-Sources the Missing Layer Between AI Models and Agents"</a>. The clearest framing of the week.</p>
+                    <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">The Register</span> — <a href="https://www.theregister.com/ai-and-ml/2026/08/14/deepseeks-innovative-harness-treats-everything-as-a-plug-in/5288095" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">"DeepSeek's innovative harness treats everything as a plug-in"</a>. The mainstream-tech read on the core design.</p>
+                    <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">VentureBeat</span> — <a href="https://venturebeat.com/technology/deepseek-harness-launches-as-open-source-rival-to-claude-code-alongside-v4-pro-on-api-with-higher-prices" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">Harness as an open-source Claude Code rival</a>. Bluntest on the commercial angle.</p>
+                    <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">机器之心 (Machine Intelligence)</span> — <a href="https://www.jiqizhixin.com/articles/2026-08-15" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">the companion paper, "letting agents rewrite themselves"</a>. Read this one for the self-evolution direction.</p>
+                    <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">澎湃 (The Paper)</span> — <a href="https://www.thepaper.cn/newsdetail_forward_33787836" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">"it works, but you have to watch it"</a>. A rare balanced take that doesn't hype.</p>
+                    <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">品玩 (PingWest)</span> — <a href="https://www.pingwest.com/a/316436" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">"taking down Claude Code the Minecraft way"</a>. The most entertaining metaphor of the week.</p>
+                </div>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">Key numbers</h2>
+                <div class="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    <div class="card">
+                        <div class="font-mono font-bold text-lg text-[var(--brand)]">MIT</div>
+                        <div class="mt-1 text-sm text-gray-500">license — fully open source</div>
+                    </div>
+                    <div class="card">
+                        <div class="font-mono font-bold text-lg text-[var(--brand)]">v0.1</div>
+                        <div class="mt-1 text-sm text-gray-500">developer preview</div>
+                    </div>
+                    <div class="card">
+                        <div class="font-mono font-bold text-lg text-[var(--brand)]">~50K</div>
+                        <div class="mt-1 text-sm text-gray-500">stars in ~12 hours</div>
+                    </div>
+                    <div class="card">
+                        <div class="font-mono font-bold text-lg text-[var(--brand)]">2× / ½</div>
+                        <div class="mt-1 text-sm text-gray-500">peak vs. off-peak pricing</div>
+                    </div>
+                    <div class="card">
+                        <div class="font-mono font-bold text-lg text-[var(--brand)]">~11×</div>
+                        <div class="mt-1 text-sm text-gray-500">max increase on some tiers</div>
+                    </div>
+                    <div class="card">
+                        <div class="font-mono font-bold text-lg text-[var(--brand)]">384K</div>
+                        <div class="mt-1 text-sm text-gray-500">V4 context window</div>
+                    </div>
+                </div>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">Our take</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    Reading the open-source move as pure PR — "free stuff right after a price hike" — misses the point. When models, tools, and the loop are all plugins, developers can swap models at will. DeepSeek is betting on ecosystem lock-in, not model lock-in.
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    That said, preview is preview. "It works, but you have to watch it" is the honest summary. Completion, stability, and documentation are all early. Our advice: play with it, internalize the plugin mindset, and don't ship it to production yet.
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    On pricing: time-of-day tiers will push compute into off-peak windows. If your workloads tolerate latency, retime your jobs — the savings are real, and this is a change you can act on today.
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">Sources</h2>
+                <ul class="mt-4 space-y-1.5 text-sm text-gray-500 list-disc list-inside">
+                    <li><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">github.com/deepseek-ai/deepseek-harness</a></li>
+                    <li><a href="https://api-docs.deepseek.com/zh-cn/news/news260813/" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">api-docs.deepseek.com — V4-Pro GA</a></li>
+                    <li><a href="https://www.hpcwire.com/2026/08/14/deepseek-open-sources-the-missing-layer-between-ai-models-and-agents/" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">HPCwire</a> · <a href="https://www.theregister.com/ai-and-ml/2026/08/14/deepseeks-innovative-harness-treats-everything-as-a-plug-in/5288095" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">The Register</a> · <a href="https://venturebeat.com/technology/deepseek-harness-launches-as-open-source-rival-to-claude-code-alongside-v4-pro-on-api-with-higher-prices" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">VentureBeat</a> · <a href="https://www.sitepoint.com/deepseek-harness-developer-preview/" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">SitePoint</a></li>
+                    <li><a href="https://www.infoq.cn/article/de9AljWc4ejW2KAyW8dD" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">InfoQ</a> · <a href="https://www.jiqizhixin.com/articles/2026-08-15" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">机器之心</a> · <a href="https://w.geekpark.net/news/368809" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">极客公园</a> · <a href="https://www.thepaper.cn/newsdetail_forward_33787836" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">澎湃新闻</a></li>
+                    <li><a href="https://www.pingwest.com/a/316436" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">品玩</a> · <a href="https://www.36kr.com/p/3939428221205635" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">36氪</a> · <a href="https://www.tmtpost.com/8103259.html" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">钛媒体</a> · <a href="https://www.donews.com/news/detail/1/6670515.html" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">DoNews</a></li>
+                </ul>
+
+                <div class="mt-14 pt-8 border-t border-gray-200">
+                    <a href="/newsletter" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--brand)] hover:underline">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Back to all issues
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer><!-- footer placeholder --></footer>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek Harness 开源与 V4 定价 — DSH Weekly #001 | Oh! dsh</title>
+</head>
+<body>
+    <header><!-- header placeholder --></header>
+
+    <main>
+        <!--seo:{"title":"DeepSeek Harness 开源与 V4 定价 — DSH Weekly #001 | Oh! dsh","description":"DSH Weekly #001：DeepSeek 把 Harness agent 运行时开源了，同时把 V4 API 改成错峰计价。本期是我们的解读——发生了什么、值得读什么，以及对 DSH 开发者的意义。","keywords":"DeepSeek Harness, DeepSeek V4 定价, DeepSeek Harness 开源, DSH Weekly, DeepSeek Harness 资讯","canonical":"https://ohdsh.com/zh/newsletter/dsh-weekly-001","og_title":"DeepSeek Harness 开源与 V4 定价 — DSH Weekly #001","og_description":"DeepSeek 开源了 Harness，又把 V4 改成错峰计价。本期解读：发生了什么、对 DSH 开发者意味着什么。","og_url":"https://ohdsh.com/zh/newsletter/dsh-weekly-001","og_site_name":"Oh! dsh","og_type":"article","html_lang":"zh-CN","hreflang":{"en":"https://ohdsh.com/newsletter/dsh-weekly-001","zh-CN":"https://ohdsh.com/zh/newsletter/dsh-weekly-001","x-default":"https://ohdsh.com/newsletter/dsh-weekly-001"}}-->
+
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"DeepSeek Harness 开源了，V4 定价也改成了错峰计价","description":"DeepSeek 开源了 Harness agent 运行时，并把 V4 API 改成错峰计价。我们的解读：发生了什么、对 DSH 开发者意味着什么。","datePublished":"2026-08-17","dateModified":"2026-08-17","author":{"@type":"Organization","name":"Oh! dsh"},"publisher":{"@type":"Organization","name":"Oh! dsh","url":"https://ohdsh.com"},"mainEntityOfPage":"https://ohdsh.com/zh/newsletter/dsh-weekly-001","inLanguage":"zh-CN","keywords":["DeepSeek Harness","DeepSeek V4","定价","开源","DSH"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://ohdsh.com/zh"},{"@type":"ListItem","position":2,"name":"DSH Weekly","item":"https://ohdsh.com/zh/newsletter"},{"@type":"ListItem","position":3,"name":"#001","item":"https://ohdsh.com/zh/newsletter/dsh-weekly-001"}]}</script>
+
+        <!-- Article header -->
+        <section class="pt-32 pb-12 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex items-center gap-3 text-sm">
+                    <a href="/zh/newsletter" class="inline-flex items-center gap-1.5 text-gray-400 hover:text-gray-700 transition-colors">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        DSH Weekly
+                    </a>
+                    <span class="text-gray-300">/</span>
+                    <span class="font-mono font-semibold text-[var(--brand)]">#001</span>
+                    <span class="text-gray-300">·</span>
+                    <time datetime="2026-08-17" class="text-gray-400">2026-08-17</time>
+                </div>
+                <h1 class="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-[1.15]">DeepSeek Harness 开源了，V4 定价也改成了错峰计价</h1>
+                <p class="mt-5 text-lg text-gray-500 leading-relaxed">一周两件大事。我们拆一下 DeepSeek 到底发布了什么、涨价在实操上意味着什么，以及哪些文章值得你花时间看。</p>
+                <div class="mt-6 flex items-center gap-3 text-sm text-gray-400">
+                    <span>Oh! dsh 编辑团队</span>
+                    <span class="text-gray-300">·</span>
+                    <span>约 5 分钟读完</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article body -->
+        <article class="pb-20 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    这一周 DeepSeek 一口气做了两件事：把第一个 agent 运行时 Harness 开源了，同时把 V4 API 改成错峰计价。一手放、一手收。只要你在 DSH 上开发——或者只是盯着这个方向——这两件事都值得看懂，因为它们说明了 DeepSeek 接下来往哪走。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">头条：Harness 开源了</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    8 月 13 日深夜，DeepSeek 把 <a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">Harness（dsh）</a> 放上了 GitHub，MIT 协议，v0.1 开发者预览版。整个理念就一句话：<em>一切皆插件</em>。模型、工具、Agent 主循环、记忆、上下文——每一个都是可替换的组件。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    上线几小时 Stars 破 3.3 万，12 小时左右过 5 万。大家都爱叫它「Agent 界的 Android」，我们觉得这个类比只对了一半：Android 是操作系统，而 Harness 更进一步，把「操作系统」本身也拆成了一堆可替换的零件。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    技术底座是 <a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">Cordis</a>，一个强调「可观察、可组合、可回滚」的元框架。可回滚这一点我们越想越有意思——一个能回退的 Agent，你才敢真的让它去改写自己。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">这一周，按时间捋</h2>
+                <div class="mt-5 space-y-4">
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-13</div>
+                        <p class="text-gray-700 leading-relaxed">深夜三连发：V4 定价公告 + Harness 开源 + 配套论文，一次全上。</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-14</div>
+                        <p class="text-gray-700 leading-relaxed">V4-Pro 结束预览、转正式商用。HPCwire、The Register、VentureBeat 集中报道。</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-15</div>
+                        <p class="text-gray-700 leading-relaxed">配套论文的深度解读密集出现，核心说法：让 Agent 在运行时改写自己。</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-16</div>
+                        <p class="text-gray-700 leading-relaxed">社区开始跟进，第三方项目冒出：<a href="https://github.com/Electricitysheep/dsh-handbook" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">dsh-handbook</a>、<a href="https://github.com/ZK-Andy/dsh-continual-evolve" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">dsh-continual-evolve</a>。</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-17</div>
+                        <p class="text-gray-700 leading-relaxed">V4 峰谷定价正式生效：高峰时段（09:00–12:00、14:00–18:00）价格最高，闲时半价。</p>
+                    </div>
+                </div>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">涨价这件事，值得单独说</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    17 号起，V4 不再统一计费，改成错峰分级：高峰时段最贵，闲时半价。部分档位较原价最高涨了约 11 倍，所以「AI 告别白菜价」这种说法这次不算夸张。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    对我们这种天天调 API 的人来说，这是本周最实际的一条。错峰调度从「省钱技巧」变成「硬需求」——如果你的任务能排队，就把它挪到闲时跑。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">值得读的，按我们打开的顺序</h2>
+                <div class="mt-5 space-y-3">
+                    <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">官方 — V4-Pro 正式版公告</span>（<a href="https://api-docs.deepseek.com/zh-cn/news/news260813/" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">api-docs</a>）。看定价和硬参数最权威的一篇：384K 上下文、工具调用、Responses API、FIM。</p>
+                    <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">HPCwire</span> — <a href="https://www.hpcwire.com/2026/08/14/deepseek-open-sources-the-missing-layer-between-ai-models-and-agents/" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">「模型与 Agent 之间缺失的一层」</a>。本周把定位讲得最清楚的一篇。</p>
+                    <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">The Register</span> — <a href="https://www.theregister.com/ai-and-ml/2026/08/14/deepseeks-innovative-harness-treats-everything-as-a-plug-in/5288095" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">「一切皆插件」</a>。主流科技媒体对核心设计的解读。</p>
+                    <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">VentureBeat</span> — <a href="https://venturebeat.com/technology/deepseek-harness-launches-as-open-source-rival-to-claude-code-alongside-v4-pro-on-api-with-higher-prices" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">把 Harness 当 Claude Code 的开源竞品</a>。商业定位最直白的一篇。</p>
+                    <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">机器之心</span> — <a href="https://www.jiqizhixin.com/articles/2026-08-15" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">配套论文，「让 Agent 在运行中改写自己」</a>。想搞懂自进化方向，看这篇。</p>
+                    <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">澎湃新闻</span> — <a href="https://www.thepaper.cn/newsdetail_forward_33787836" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">「能干活，但得盯着」</a>。少见的平衡视角，不吹。</p>
+                    <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">品玩</span> — <a href="https://www.pingwest.com/a/316436" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">「用《我的世界》的方式干掉 Claude Code」</a>。本周最好玩的比喻。</p>
+                </div>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">关键数字</h2>
+                <div class="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    <div class="card">
+                        <div class="font-mono font-bold text-lg text-[var(--brand)]">MIT</div>
+                        <div class="mt-1 text-sm text-gray-500">协议 — 完全开源</div>
+                    </div>
+                    <div class="card">
+                        <div class="font-mono font-bold text-lg text-[var(--brand)]">v0.1</div>
+                        <div class="mt-1 text-sm text-gray-500">开发者预览版</div>
+                    </div>
+                    <div class="card">
+                        <div class="font-mono font-bold text-lg text-[var(--brand)]">约 5 万</div>
+                        <div class="mt-1 text-sm text-gray-500">Stars，约 12 小时</div>
+                    </div>
+                    <div class="card">
+                        <div class="font-mono font-bold text-lg text-[var(--brand)]">2× / ½</div>
+                        <div class="mt-1 text-sm text-gray-500">高峰 vs 闲时价格</div>
+                    </div>
+                    <div class="card">
+                        <div class="font-mono font-bold text-lg text-[var(--brand)]">约 11×</div>
+                        <div class="mt-1 text-sm text-gray-500">部分档位最大涨幅</div>
+                    </div>
+                    <div class="card">
+                        <div class="font-mono font-bold text-lg text-[var(--brand)]">384K</div>
+                        <div class="mt-1 text-sm text-gray-500">V4 上下文窗口</div>
+                    </div>
+                </div>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">我们的看法</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    把开源单纯读成公关动作——「涨价之后火速免费」——就浅了。模型、工具、循环全是插件，意味着开发者可以随便换模型。DeepSeek 赌的是生态绑定，不是模型绑定。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    不过预览版就是预览版，澎湃那句「能干活，但得盯着」是实话。完成度、稳定性、文档都还在早期。我们的建议：先拿来玩、把插件化思路吃透，别急着上生产。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    至于涨价：错峰定价会把算力往闲时挤。如果你的工作流对延迟不敏感，把任务改到闲时跑——省钱是真的，而且这是今天就能动手做的事。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">来源</h2>
+                <ul class="mt-4 space-y-1.5 text-sm text-gray-500 list-disc list-inside">
+                    <li><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">github.com/deepseek-ai/deepseek-harness</a></li>
+                    <li><a href="https://api-docs.deepseek.com/zh-cn/news/news260813/" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">api-docs.deepseek.com — V4-Pro 正式版</a></li>
+                    <li><a href="https://www.hpcwire.com/2026/08/14/deepseek-open-sources-the-missing-layer-between-ai-models-and-agents/" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">HPCwire</a> · <a href="https://www.theregister.com/ai-and-ml/2026/08/14/deepseeks-innovative-harness-treats-everything-as-a-plug-in/5288095" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">The Register</a> · <a href="https://venturebeat.com/technology/deepseek-harness-launches-as-open-source-rival-to-claude-code-alongside-v4-pro-on-api-with-higher-prices" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">VentureBeat</a></li>
+                    <li><a href="https://www.infoq.cn/article/de9AljWc4ejW2KAyW8dD" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">InfoQ</a> · <a href="https://www.jiqizhixin.com/articles/2026-08-15" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">机器之心</a> · <a href="https://w.geekpark.net/news/368809" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">极客公园</a> · <a href="https://www.thepaper.cn/newsdetail_forward_33787836" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">澎湃新闻</a></li>
+                    <li><a href="https://www.pingwest.com/a/316436" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">品玩</a> · <a href="https://www.36kr.com/p/3939428221205635" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">36氪</a> · <a href="https://www.tmtpost.com/8103259.html" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">钛媒体</a> · <a href="https://www.donews.com/news/detail/1/6670515.html" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">DoNews</a></li>
+                </ul>
+
+                <div class="mt-14 pt-8 border-t border-gray-200">
+                    <a href="/zh/newsletter" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--brand)] hover:underline">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        返回全部期数
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer><!-- footer placeholder --></footer>
+</body>
+</html>
