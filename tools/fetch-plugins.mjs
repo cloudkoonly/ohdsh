@@ -16,12 +16,30 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_DIR = path.resolve(__dirname, '..');
 const OUT = path.join(REPO_DIR, 'data', 'plugins.json');
 
-const EN_URL = 'https://raw.githubusercontent.com/awesome-dsh-plugin/awesome-dsh-plugin/main/README.md';
-const ZH_URL = 'https://raw.githubusercontent.com/awesome-dsh-plugin/awesome-dsh-plugin/main/README.zh.md';
+const RAW_BASE = 'https://raw.githubusercontent.com/awesome-dsh-plugin/awesome-dsh-plugin/main';
+const API_BASE = 'https://api.github.com/repos/awesome-dsh-plugin/awesome-dsh-plugin/contents';
 
-function fetchText(url, timeoutMs = 30000) {
+// raw.githubusercontent.com can intermittently fail DNS on some networks; fall
+// back to the GitHub contents API, which returns the same raw bytes.
+async function fetchFile(file) {
+  const candidates = [
+    { url: `${RAW_BASE}/${file}`, headers: {} },
+    { url: `${API_BASE}/${file}`, headers: { Accept: 'application/vnd.github.raw+json' } },
+  ];
+  let lastErr;
+  for (const c of candidates) {
+    try {
+      return await fetchWithRetry(c.url, 3, c.headers);
+    } catch (e) {
+      lastErr = e;
+    }
+  }
+  throw lastErr;
+}
+
+function fetchText(url, headers = {}, timeoutMs = 30000) {
   return new Promise((resolve, reject) => {
-    const req = https.get(url, { headers: { 'User-Agent': 'ohdsh-tools' } }, (res) => {
+    const req = https.get(url, { headers: { 'User-Agent': 'ohdsh-tools', ...headers } }, (res) => {
       if (res.statusCode !== 200) {
         res.resume();
         reject(new Error('HTTP ' + res.statusCode + ' for ' + url));
@@ -39,11 +57,11 @@ function fetchText(url, timeoutMs = 30000) {
   });
 }
 
-async function fetchWithRetry(url, attempts = 5) {
+async function fetchWithRetry(url, attempts = 5, headers = {}) {
   let lastErr;
   for (let i = 0; i < attempts; i++) {
     try {
-      return await fetchText(url);
+      return await fetchText(url, headers);
     } catch (e) {
       lastErr = e;
       await new Promise((r) => setTimeout(r, 1000 * (i + 1)));
@@ -113,8 +131,8 @@ function pluginSlug(name, url) {
 }
 
 const [enMd, zhMd] = await Promise.all([
-  fetchWithRetry(EN_URL),
-  fetchWithRetry(ZH_URL),
+  fetchFile('README.md'),
+  fetchFile('README.zh.md'),
 ]);
 
 const en = parseList(enMd, { pluginsHeading: 'Plugins', stripCategoryEmoji: false });
