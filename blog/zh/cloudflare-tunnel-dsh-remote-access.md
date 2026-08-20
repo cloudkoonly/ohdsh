@@ -1,116 +1,80 @@
 ---
-title: "用 Cloudflare Tunnel 给 DSH 做内网穿透：真实域名 + HTTPS + Access 认证"
+title: "DSH 远程访问：为什么裸反向代理不行，该怎么做"
 date: 2026-08-17
 slug: "cloudflare-tunnel-dsh-remote-access"
-tags: ["cloudflare-tunnel", "cloudflared", "deepseek-harness", "内网穿透", "https", "cloudflare-access", "认证"]
+tags: ["deepseek-harness", "远程访问", "websocket", "反向代理", "dsh"]
 status: "published"
-excerpt: "用 Cloudflare Tunnel 把本地 DSH Web 界面挂到真实域名上，免费 HTTPS、不用开端口、不用公网 IP，再用 Cloudflare Access 挡在前面，只有你能进。"
+excerpt: "DSH Web GUI 依赖 WebSocket 通信，放在反向代理后面 WSS 会被中断。这里讲清楚原因，以及三种真正可行的远程访问方案。"
 ---
 
-DSH 的 Web 界面默认只绑 `http://127.0.0.1:3080`。这是对的默认值——只服务本机、什么都不暴露。但一旦你想在手机上用、想在一台 SSH 进去的 VPS 上用，或者只是想要个好记的网址，就得找一条「不用在路由器上开洞」的路。
+DSH 的 Web 界面默认绑在 `http://127.0.0.1:3080`，前后端通过 WebSocket 通信。一旦你试图用反向代理（Nginx、Cloudflare Tunnel、Caddy 等）把它暴露出去，就会撞墙：**WebSocket 连接被中断，请求异常，界面直接废掉。**
 
-Cloudflare Tunnel 是我目前试下来最干净的做法。这篇把整套流程走一遍：隧道、HTTPS 域名，以及最容易被跳过的——在入口前加认证。
+这篇讲清楚为什么，以及真正能用的做法。
 
-## 为什么不选端口转发
+## 为什么反向代理 DSH 会挂
 
-端口转发是在路由器上开个口、指向内网机器。能用，但等于给扫描器留了个门。其它方案各有各的坑：
+DSH 有一个**回环信任栅栏（loopback trust fence）**。后端会检查请求的 `Host` 和 `Origin` 头是否指向 `localhost`（或 `127.0.0.1`）。反向代理一介入，这些头要么被改写，要么浏览器会把真实域名作为 Origin 发出来。WebSocket 升级握手在信任检查这一步就被拒绝了。
 
-- **Tailscale** 是零配置的 mesh VPN，确实好用，但每个想连进来的设备都得装 Tailscale 客户端、加入你的网络。
-- **frp / ngrok** 也能用，但 frp 需要一台你控制的服务器，ngrok 免费版给的是随机域名和短时隧道。
-- **Cloudflare Tunnel（cloudflared）** 让你的机器向 Cloudflare 建一条**只出不进**的连接。不用开入站端口、不用公网 IP，自己的域名免费上 HTTPS，还能用 Cloudflare Access 在应用前面加一道认证门。
+你可能看到页面加载出来了（静态 HTTP 请求可能通过），但驱动交互会话的 WSS 连接建立不了——或者建立后很快断开。结果是：UI 壳子在那里，但什么都不能用。
 
-对 DSH 这种单服务场景，「认证直接做在边缘」这一点才是决定性优势。
+这不是 bug。这是刻意的安全边界：DSH 认为，不从回环接口来的流量，默认不应该被信任——除非你显式 opt-in。
 
-## 你需要什么
+## 三种能用的方案
 
-- 一个 DNS 托管在 Cloudflare 上的域名（免费套餐就行）。
-- 跑 DSH 的机器，装好 `cloudflared`。
-- 大约十分钟。
+### 1. 远程访问插件（个人使用推荐）
 
-## 第一步：装 cloudflared
+插件生态有多个专门的解决方案。它们在 DSH **内部**启动一个本地代理子进程，改写 Host/Origin 通过信任栅栏，同时正确处理 WebSocket 升级：
 
-直接下二进制，或者用包管理器：
+- **[dsh-full-remote](/zh/plugins?q=dsh-full-remote)** —— 令牌门控反向代理，完整保留服务端 API 访问（`settings.*`、`credentials.*`、`host.listDirectory`），按设备会话，可选 CIDR/审批/TLS，WebSocket/SSE 透传。关键差异：其他插件经代理后会丢失敏感 API，这个不会。
+- **[dsh-mobile-gate](/zh/plugins?q=mobile-gate)** —— 面向局域网的网关：首次访问审批 + 设备令牌绑定 + 限流 + 手机端排版注入。
+- **[dsh-Remote](/zh/plugins?q=dsh-Remote)** —— 移动端全套：Android App + Bearer 令牌网关 + 局域网/Tailscale 自愈 + 文件传输 + 多服务器测速自动切换。
+- **[dsh-mobile](/zh/plugins?q=dsh-mobile)** —— 面向 iPhone/iPad：显式 Host/Origin 改写通过信任栅栏 + WebSocket 升级 + iOS PWA 外壳 + 触屏 CSS。
+- **[dsh-auth-tunnel](/zh/plugins?q=dsh-auth-tunnel)** —— 正确做法的 Cloudflare Tunnel 集成：密码保护的公网访问，代理 HTTP/WebSocket 流量。
 
-```bash
-# macOS
-brew install cloudflared
+这些插件之所以能用，是因为它们跑在**和 DSH 同一台机器上**，通过 `localhost` 代理流量满足信任栅栏，再对外暴露第二个端口或隧道端点。
 
-# Debian / Ubuntu
-curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -o cloudflared.deb
-sudo dpkg -i cloudflared.deb
-```
+### 2. dsh-api-gateway（程序化 / 无头访问）
 
-Windows 有安装包，用 Chocolatey 的话 `choco install cloudflared` 也行。
+如果你的目标不是远程用 Web GUI，而是把 DSH 的能力接入其他工具或工作流，**dsh-api-gateway** 插件暴露一层 REST API。这完全绕过了 WebSocket 问题——HTTP 请求/响应在任何反向代理或隧道后面都能正常工作。
 
-## 第二步：创建隧道
+适合的场景：
+- CI/CD 流水线触发 DSH 任务
+- 自定义前端通过 API 与 DSH 交互
+- 不需要完整 Web GUI 的移动端应用
 
-```bash
-cloudflared tunnel login          # 打开浏览器，授权你的账号
-cloudflared tunnel create dsh     # 打印隧道 ID，并写入凭证文件
-```
+### 3. VPN / mesh 网络（透明，但更重）
 
-create 这一步会返回一个隧道 ID（一个 UUID），并把凭证写到 `~/.cloudflared/<id>.json`。两个都留好。
+**Tailscale**、WireGuard、ZeroTier 给远程设备分配一个和 DSH 同网段的虚拟 IP。对 DSH 来说，连接仍然到达 `localhost:3080` 的本地接口（通过 Tailscale 的 `100.x.x.x:3080` 访问时，信任栅栏看到的是直连——不经过代理改写）。
 
-## 第三步：把流量引过来
+代价是：每个设备都得装 VPN 客户端并授权。
 
-建一个配置文件（Linux 上是 `/etc/cloudflared/config.yml`）：
+## 什么做法不行
 
-```yaml
-tunnel: <你的隧道 ID>
-credentials-file: /home/<你>/.cloudflared/<你的隧道 ID>.json
+| 方案 | 失败原因 |
+|------|----------|
+| Nginx 反向代理 | Host/Origin 改写导致 WSS 信任检查不通过 |
+| Cloudflare Tunnel（裸用） | 同上——CF 终结 TLS 后用自己的头转发 |
+| Caddy / Traefik / HAProxy | 同类问题——任何改动请求头的 L7 代理 |
+| 只绑 `0.0.0.0` | 信任栅栏仍然拒绝浏览器发出的非 localhost Origin |
 
-ingress:
-  - hostname: dsh.example.com
-    service: http://localhost:3080
-  - service: http_status:404
-```
+## 实操建议
 
-`ingress` 块把域名映射到本地 DSH 端口，末尾那条兜底规则对不匹配的请求一律返回 404，让乱撞的请求到不了你的应用。
+对大多数只想在手机或第二台机器上用 DSH 的人：
 
-再把 DNS 指到隧道：
+1. **装一个远程访问插件**（从 `dsh-full-remote` 或 `dsh-auth-tunnel` 开始）。
+2. 插件在内部处理信任栅栏。
+3. 如果要公网访问，把 Cloudflare Tunnel 指向**插件的代理端口**——而不是 DSH 原生的 3080。
+4. 认证由插件自带的令牌/审批机制覆盖。
 
-```bash
-cloudflared tunnel route dns dsh dsh.example.com
-```
+纯 API / 无头场景，用 `dsh-api-gateway`，随便怎么代理都行。
 
-它会帮你创建 CNAME。最后跑起来，并装成服务让它开机自启：
+## 更大的图景
 
-```bash
-cloudflared tunnel run dsh        # 前台跑，先做个冒烟测试
-cloudflared service install       # 再装成系统服务
-```
+这是 DSH 架构里一个有意识的取舍。信任栅栏存在的理由是：一个有 shell 权限的 AI 编码代理不是你想不小心暴露在公网上的东西。不能直接 `nginx proxy_pass` 的不便，换来的是一个安全的默认值。
 
-到这一步，`https://dsh.example.com` 就能通过 HTTPS 访问你的 DSH 界面了。但此刻它也对任何猜中域名的人开放。下一步把它关起来。
+插件生态已经把这个缺口补上了——远程访问能用，只是需要通过一个理解信任模型的插件来显式 opt-in。对这样一个强力工具来说，这是恰当的摩擦水平。
 
-## 第四步：用 Cloudflare Access 上锁
+## 链接
 
-Cloudflare Access 在 Zero Trust 控制台里（50 个用户以内免费）。原理很简单：请求在到达你的源站**之前**就被检查。
-
-1. 在 **Zero Trust → Access → Applications** 里，给 `dsh.example.com` 加一个自托管应用。
-2. 加一条策略。个人用先上 **Email OTP**——往你控制的邮箱发一次性验证码；想要登录按钮就选 Google / GitHub OAuth。
-3. 保存。现在未登录的访客看到的是 Cloudflare 的登录页，而不是你的 DSH 界面。
-
-个人场景 Email OTP 摩擦最小：不用配身份提供商，又是一道实打实的门。要团队共享，就换成正经 IdP（Google Workspace、GitHub 组织等），把策略限定到那个组。
-
-## DSH 内部再补一层
-
-Cloudflare Access 守的是边缘。DSH 内部再加一层也划算——纵深防御在这里成本很低。插件目录里有几个正好用得上：
-
-- [dsh-mobile-gate](/zh/plugins?q=mobile-gate) —— 反向代理 + 首次访问审批 + 设备令牌绑定 + 限流。
-- [dsh-Remote](/zh/plugins?q=dsh-Remote) —— 移动端远程控制套件，带 Bearer 令牌网关，局域网/Tailscale 下自愈。
-- [dsh-web-lan-access](/zh/plugins?q=web-lan-access) —— 注入 `crypto.randomUUID` polyfill，让前端在纯 HTTP、非 localhost 源下不崩。
-
-它们各管各的活，但背后的原则一致：别让隧道成为唯一的门。
-
-## 该知道的坑
-
-- **DSH 保持绑在 `127.0.0.1`。**要是改成 `0.0.0.0`，端口就在所有网卡上开放，等于把隧道本想避免的事又做了一遍。让隧道成为唯一入口。
-- **别不带 Access 就上线。**裸隧道 + 好猜的域名，就是一个公开的 Web 应用。认证这一步不是可选项。
-- **Cloudflare 在中间终结 TLS。**流量从浏览器到 Cloudflare 是加密的，隧道内到源站再加密一次。这很安全，但 Cloudflare 在边缘确实能看到明文——如果你的威胁模型包含「不让 CDN 看到流量」，得知道这一点。
-- **流式基本没问题。**DSH 的 SSE 和 WebSocket 流量走隧道都正常。要是有插件用长连接做点特殊操作、你看到怪现象，先往这里查。
-
-## 一句话版
-
-装 `cloudflared` → 建隧道 → 把 `dsh.example.com` 映射到 `localhost:3080` → 配 DNS → 装成服务 → 用 Cloudflare Access 加个 Email OTP 策略 → 再补一个应用内认证插件，齐活。
-
-要是 DSH 本身还是第一次搭，从[快速开始](/docs/zh/guide/quick-start)入手。上面那些认证和远程访问插件都在[插件目录](/zh/plugins)里；如果是跑在服务器上，还可以看看[通知与集成类插件](/zh/plugins?category=notifications-integrations)，把 DSH 接进团队已经在用的工具里。
+- [插件目录 — 远程与移动端](/zh/plugins?category=remote-mobile)
+- [快速开始](/docs/zh/guide/quick-start)

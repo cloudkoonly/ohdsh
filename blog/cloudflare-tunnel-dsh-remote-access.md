@@ -1,116 +1,82 @@
 ---
-title: "Expose DSH on a Real Domain: Cloudflare Tunnel + HTTPS + Access Auth"
+title: "Remote Access for DSH: Why a Bare Reverse Proxy Won't Work, and What Does"
 date: 2026-08-17
 slug: "cloudflare-tunnel-dsh-remote-access"
-tags: ["cloudflare-tunnel", "cloudflared", "deepseek-harness", "remote-access", "https", "cloudflare-access", "authentication"]
+tags: ["deepseek-harness", "remote-access", "websocket", "reverse-proxy", "dsh"]
 status: "published"
-excerpt: "Put your local DSH web GUI on a real domain with HTTPS using Cloudflare Tunnel — no open ports, no public IP — and gate it with Cloudflare Access so only you get in."
+excerpt: "DSH's web GUI relies on WebSocket connections that break behind a plain reverse proxy. Here's why, and the three approaches that actually work for remote access."
 ---
 
-DSH's web GUI binds to `http://127.0.0.1:3080` by default. That's the right default — localhost only, nothing exposed. But the moment you want it on your phone, on a VPS you SSH into, or just on a memorable URL, you need a way in that doesn't mean poking a hole in your router.
+DSH's web GUI binds to `http://127.0.0.1:3080` by default and communicates with the backend over WebSocket. The moment you try to expose it remotely through a reverse proxy — Nginx, Cloudflare Tunnel, Caddy, whatever — you hit a wall: **WebSocket connections get interrupted, requests fail, and the GUI becomes unusable.**
 
-Cloudflare Tunnel is the cleanest way I've found to do that. This post walks through the whole thing: the tunnel, the HTTPS domain, and — the part people skip — putting authentication in front of it.
+This post explains why, and what actually works.
 
-## Why a tunnel instead of port forwarding
+## Why reverse proxying DSH breaks
 
-Port forwarding means opening a port on your router and pointing it at the machine. It works, and it's also a standing invitation for scanners. The other options each have a catch:
+DSH enforces a **loopback trust fence**. The backend checks that incoming requests have `Host` and `Origin` headers pointing to `localhost` (or `127.0.0.1`). When a reverse proxy sits in front, it rewrites these headers — or the browser sends the real domain as the Origin. The WebSocket upgrade handshake fails because the trust check rejects the non-localhost origin.
 
-- **Tailscale** is a zero-config mesh VPN and genuinely great, but every device that wants in needs the Tailscale client and membership in your tailnet.
-- **frp / ngrok** work, but frp wants a server you control and ngrok's free tier gives you a random hostname and short tunnels.
-- **Cloudflare Tunnel (cloudflared)** makes an *outbound-only* connection from your machine to Cloudflare. No inbound port, no public IP, free HTTPS on your own domain, and Cloudflare Access available as an auth gate in front of the app.
+Even if you manage to get past the initial page load (since static HTTP requests may succeed), the WSS connection that powers the interactive session will not establish — or will drop shortly after. The result: you see the UI shell but nothing works.
 
-For a single service like DSH, that last part — auth built into the edge — is what tips it.
+This isn't a bug. It's a deliberate security boundary: DSH assumes that if traffic isn't coming from the loopback interface, it shouldn't be trusted without explicit opt-in.
 
-## What you need
+## What actually works
 
-- A domain whose DNS lives on Cloudflare (free plan is fine).
-- The machine that runs DSH, with `cloudflared` installed.
-- About ten minutes.
+There are three viable approaches, depending on your needs:
 
-## Step 1: install cloudflared
+### 1. Remote-access plugins (recommended for personal use)
 
-Grab the binary or use your package manager:
+The plugin ecosystem has several purpose-built solutions that run a local proxy child process *inside* DSH, rewriting Host/Origin to pass the trust fence while handling WebSocket upgrades correctly:
 
-```bash
-# macOS
-brew install cloudflared
+- **[dsh-full-remote](/plugins?q=dsh-full-remote)** — Token-gated reverse proxy with full server-side API access (`settings.*`, `credentials.*`, `host.listDirectory`), per-device sessions, optional CIDR/approval/TLS, WebSocket/SSE pass-through. The key differentiator: other plugins lose access to sensitive APIs after proxy, this one doesn't.
+- **[dsh-mobile-gate](/plugins?q=mobile-gate)** — LAN-focused gateway with first-visit approval, device token binding, rate limiting, and mobile layout injection.
+- **[dsh-Remote](/plugins?q=dsh-Remote)** — Full mobile suite with Android app, Bearer-token gateway, self-healing on LAN/Tailscale, file transfer, and multi-server auto-switch.
+- **[dsh-mobile](/plugins?q=dsh-mobile)** — iPhone/iPad focused: explicit Host/Origin rewrite through the loopback trust fence with WebSocket upgrades, plus iOS PWA shell and touch CSS.
+- **[dsh-auth-tunnel](/plugins?q=dsh-auth-tunnel)** — Cloudflare Tunnel integration done right: password-gated public access with correct HTTP/WebSocket proxying.
 
-# Debian / Ubuntu
-curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -o cloudflared.deb
-sudo dpkg -i cloudflared.deb
-```
+These plugins work because they run *on the same machine as DSH* and proxy traffic through `localhost`, satisfying the trust fence while exposing a second port or tunnel endpoint to the outside.
 
-Windows has an installer; `choco install cloudflared` also works if you use Chocolatey.
+### 2. dsh-api-gateway (for programmatic / headless access)
 
-## Step 2: create the tunnel
+If your goal isn't to use the web GUI remotely but to integrate DSH capabilities into other tools or workflows, the **dsh-api-gateway** plugin exposes a REST API layer. This sidesteps the WebSocket problem entirely — HTTP request/response works fine behind any reverse proxy or tunnel.
 
-```bash
-cloudflared tunnel login          # opens a browser, authorizes your account
-cloudflared tunnel create dsh     # prints a tunnel ID and writes a credentials file
-```
+This is the right choice for:
+- CI/CD pipelines that trigger DSH tasks
+- Custom frontends that talk to DSH programmatically
+- Mobile apps that don't need the full web GUI
 
-The create step returns a tunnel ID (a UUID) and a credentials file under `~/.cloudflared/<id>.json`. Hold on to both.
+### 3. VPN / mesh network (transparent, but heavier)
 
-## Step 3: route the traffic
+**Tailscale**, WireGuard, or ZeroTier give your remote device a virtual IP on the same network as the DSH machine. From DSH's perspective, the connection still arrives at `localhost:3080` via the local interface (if you access via `100.x.x.x:3080` on Tailscale, the trust fence still sees a direct connection — no proxy rewrite needed).
 
-Create a config file (on Linux, `/etc/cloudflared/config.yml`):
+The trade-off: every device needs the VPN client installed and authorized.
 
-```yaml
-tunnel: <your-tunnel-id>
-credentials-file: /home/<you>/.cloudflared/<your-tunnel-id>.json
+## What does NOT work
 
-ingress:
-  - hostname: dsh.example.com
-    service: http://localhost:3080
-  - service: http_status:404
-```
+| Approach | Why it fails |
+|----------|-------------|
+| Nginx reverse proxy | Host/Origin rewrite breaks WSS trust check |
+| Cloudflare Tunnel (bare) | Same — CF terminates TLS and forwards with its own headers |
+| Caddy / Traefik / HAProxy | Same class of problem — any L7 proxy that touches headers |
+| Binding to `0.0.0.0` alone | Trust fence still rejects non-localhost Origin from the browser |
 
-The `ingress` block maps the hostname to your local DSH port. The trailing catch-all returns 404 for anything that doesn't match, so random requests to your tunnel don't reach your app.
+## Practical recommendation
 
-Then point DNS at the tunnel:
+For most people who just want DSH on their phone or a second machine:
 
-```bash
-cloudflared tunnel route dns dsh dsh.example.com
-```
+1. **Install a remote-access plugin** (start with `dsh-full-remote` or `dsh-auth-tunnel`).
+2. The plugin handles the trust fence internally.
+3. If you want public access, combine the plugin with a Cloudflare Tunnel pointed at the plugin's proxy port — not at DSH's native 3080.
+4. Gate it with authentication (the plugins above all include token/approval mechanisms).
 
-That creates the CNAME for you. Finally, run it — and install it as a service so it survives reboots:
+For headless / API-only use cases, use `dsh-api-gateway` and proxy that freely.
 
-```bash
-cloudflared tunnel run dsh        # foreground, for a first smoke test
-cloudflared service install       # then run as a system service
-```
+## The bigger picture
 
-At this point `https://dsh.example.com` serves your DSH GUI over HTTPS. It's also, right now, open to anyone who guesses the domain. Fix that next.
+This is a conscious trade-off in DSH's architecture. The trust fence exists because an AI coding agent with shell access is not something you want accidentally exposed to the internet. The inconvenience of not being able to `nginx proxy_pass` it is the price for a safe default.
 
-## Step 4: gate it with Cloudflare Access
+The plugin ecosystem has closed the gap — remote access works, it just requires an explicit opt-in via a plugin that understands the trust model. That's the right level of friction for something this powerful.
 
-Cloudflare Access lives under the Zero Trust dashboard (free for up to 50 users). The idea is simple: requests are checked *before* they ever reach your origin.
+## Links
 
-1. In **Zero Trust → Access → Applications**, add a self-hosted application for `dsh.example.com`.
-2. Add a policy. Start with **Email OTP** — a one-time code to an address you control — or use Google / GitHub OAuth if you prefer a login button.
-3. Save. Now an unauthenticated visitor gets Cloudflare's login screen instead of your DSH UI.
-
-Email OTP is the least friction option for a personal setup: no identity provider to configure, and it's still a real gate. For anything shared with a team, switch to a proper IdP (Google Workspace, GitHub org, etc.) and scope the policy to that group.
-
-## The DSH-side layer
-
-Cloudflare Access protects the edge. It's also worth adding a second layer inside DSH itself, because defense in depth is cheap here. The plugin directory has a few that fit:
-
-- [dsh-mobile-gate](/plugins?q=mobile-gate) — a reverse proxy with first-visit approval, per-device token binding, and rate limiting.
-- [dsh-Remote](/plugins?q=dsh-Remote) — a mobile remote-control suite with a Bearer-token gateway and self-healing on LAN/Tailscale.
-- [dsh-web-lan-access](/plugins?q=web-lan-access) — a `crypto.randomUUID` polyfill so the frontend survives plain-HTTP and non-localhost origins.
-
-They're different tools for different jobs, but the shared principle is the same: don't let the tunnel be your only door.
-
-## Gotchas worth knowing
-
-- **Keep DSH bound to `127.0.0.1`.** If you switch it to `0.0.0.0`, the port is open on every interface, and you've re-created the thing the tunnel was supposed to avoid. Let the tunnel be the only entry point.
-- **Don't ship the tunnel without Access.** A bare tunnel + a guessable hostname is a public web app. The auth step is not optional.
-- **Cloudflare terminates TLS.** Traffic is encrypted from the browser to Cloudflare, then re-encrypted inside the tunnel to your origin. That's secure, but Cloudflare does see the traffic in plaintext at the edge — know that if your threat model includes "don't let a CDN see this."
-- **Streaming works, mostly.** DSH's SSE and WebSocket traffic flows through the tunnel fine. If a plugin does something exotic with long-lived connections and you see odd behavior, that's the first place to look.
-
-## Shorter version
-
-Install `cloudflared` → create a tunnel → map `dsh.example.com` to `localhost:3080` → route DNS → run as a service → put an Email OTP policy in front with Cloudflare Access → add an in-app auth plugin for good measure.
-
-If you're setting up DSH itself for the first time, start with the [quick start](/docs/en/guide/quick-start). The full [plugin directory](/plugins) is where the auth and remote-access plugins above live, and if you're running this on a server you also want to think about [integration plugins](/plugins?category=notifications-integrations) for wiring DSH into the tools your team already uses.
+- [Plugin directory — Remote & Mobile](/plugins?category=remote-mobile)
+- [Quick start](/docs/en/guide/quick-start)
