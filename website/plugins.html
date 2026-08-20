@@ -24,7 +24,7 @@
         ] %}
 
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"DSH Plugin Directory","url":"https://ohdsh.com/plugins","description":"Independent directory of DeepSeek Harness community plugins: filter by category, search by capability, copy install commands, and jump straight to public source repositories.","mainEntity":{"@type":"ItemList","numberOfItems":{{ count }}}}</script>
-        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://ohdsh.com/"},{"@type":"ListItem","position":2,"name":"Plugins","item":"https://ohdsh.com/plugins"}]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://ohdsh.com/"},{"@type":"ListItem","position":2,"name":"Plugins"}]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"DSH Plugin Directory","numberOfItems":{{ pagination.total_items }},"itemListElement":[{% for p in plugins %}{"@type":"ListItem","position":{{ pagination.from + loop.index0 }},"name":"{{ p.name|escape('js') }}","url":"{{ p.url|escape('js') }}"}{% if not loop.last %},{% endif %}{% endfor %}]}</script>
 
         <!-- Hero -->

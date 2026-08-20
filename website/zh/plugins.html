@@ -24,7 +24,7 @@
         ] %}
 
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"DSH 插件目录","url":"https://ohdsh.com/zh/plugins","inLanguage":"zh-CN","description":"DeepSeek Harness 社区插件的独立目录：按分类筛选、按能力搜索、复制安装命令，直达源码仓库。","mainEntity":{"@type":"ItemList","numberOfItems":{{ count }}}}</script>
-        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://ohdsh.com/zh"},{"@type":"ListItem","position":2,"name":"插件目录","item":"https://ohdsh.com/zh/plugins"}]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://ohdsh.com/zh"},{"@type":"ListItem","position":2,"name":"插件目录"}]}</script>
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"DSH 插件目录","numberOfItems":{{ pagination.total_items }},"itemListElement":[{% for p in plugins %}{"@type":"ListItem","position":{{ pagination.from + loop.index0 }},"name":"{{ p.name|escape('js') }}","url":"{{ p.url|escape('js') }}"}{% if not loop.last %},{% endif %}{% endfor %}]}</script>
 
         <!-- Hero -->
