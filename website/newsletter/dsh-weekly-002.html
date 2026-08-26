@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSH Weekly #002 — Harness hits its first security scare (RCE, CVSS 9.8) | Oh! dsh</title>
+</head>
+<body>
+    <header><!-- header placeholder --></header>
+
+    <main>
+        <!--seo:{"title":"DSH Weekly #002 — Harness hits its first security scare (RCE, CVSS 9.8) | Oh! dsh","description":"DSH Weekly #002: a critical unauthenticated RCE (CVSS 9.8) rocks DeepSeek Harness, alongside rc.8 multimodal, the Claude Code/Codex scheduling layer, and weekend off-peak pricing.","keywords":"DeepSeek Harness, DSH Weekly, DeepSeek Harness RCE, DeepSeek Harness vulnerability, DeepSeek Harness rc.8","canonical":"https://ohdsh.com/newsletter/dsh-weekly-002","og_title":"DSH Weekly #002 — Harness hits its first security scare","og_description":"A critical RCE (CVSS 9.8) rocks DeepSeek Harness, plus rc.8 multimodal, the scheduling layer, and weekend off-peak pricing.","og_url":"https://ohdsh.com/newsletter/dsh-weekly-002","og_site_name":"Oh! dsh","og_type":"article","html_lang":"en","hreflang":{"en":"https://ohdsh.com/newsletter/dsh-weekly-002","zh-CN":"https://ohdsh.com/zh/newsletter/dsh-weekly-002","x-default":"https://ohdsh.com/newsletter/dsh-weekly-002"}}-->
+
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"DSH Weekly #002: DeepSeek Harness hits its first security scare","description":"A critical unauthenticated RCE (CVSS 9.8) rocks DeepSeek Harness, alongside rc.8 multimodal, the Claude Code/Codex scheduling layer, and weekend off-peak pricing.","datePublished":"2026-08-24","dateModified":"2026-08-24","author":{"@type":"Organization","name":"Oh! dsh"},"publisher":{"@type":"Organization","name":"Oh! dsh","url":"https://ohdsh.com"},"mainEntityOfPage":"https://ohdsh.com/newsletter/dsh-weekly-002","inLanguage":"en","keywords":["DeepSeek Harness","RCE","vulnerability","rc.8","DSH"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://ohdsh.com/"},{"@type":"ListItem","position":2,"name":"DSH Weekly","item":"https://ohdsh.com/newsletter"},{"@type":"ListItem","position":3,"name":"#002","item":"https://ohdsh.com/newsletter/dsh-weekly-002"}]}</script>
+
+        <!-- Article header -->
+        <section class="pt-32 pb-12 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex items-center gap-3 text-sm">
+                    <a href="/newsletter" class="inline-flex items-center gap-1.5 text-gray-400 hover:text-gray-700 transition-colors">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        DSH Weekly
+                    </a>
+                    <span class="text-gray-300">/</span>
+                    <span class="font-mono font-semibold text-[var(--brand)]">#002</span>
+                    <span class="text-gray-300">·</span>
+                    <time datetime="2026-08-24" class="text-gray-400">2026-08-24</time>
+                </div>
+                <h1 class="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-[1.12]">Harness hits its first security scare</h1>
+                <p class="mt-5 text-lg text-gray-500 leading-relaxed">A critical RCE, a multimodal release, a scheduling-layer play, and cheaper weekends — the week Harness went from hype to growing pains.</p>
+                <div class="mt-6 flex items-center gap-3 text-sm text-gray-400">
+                    <span>By the Oh! dsh editorial team</span>
+                    <span class="text-gray-300">·</span>
+                    <span>5 min read</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article body -->
+        <article class="pb-20 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    One week in, DeepSeek Harness faced its first real test — not a competitor, but a critical security vulnerability. That's a backhanded good sign: it means enough people are running it that the researchers showed up. But it also means the honeymoon is over, and the conversation shifts from "how fast" to "how safe".
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">The big story: a critical RCE at CVSS 9.8</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    Around August 24, security researchers disclosed an <strong>unauthenticated remote code execution (RCE)</strong> vulnerability in DeepSeek Harness, rated <strong>CVSS 9.8</strong> — critical. Against the backdrop of "everyone installs it overnight," this is Harness's first genuine security crisis.
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    We won't walk through exploit details here. The practical takeaway is blunt: if you installed it to try it out, don't rush it to production. Wait for the official patch and pin a patched version. The "it works, but you have to watch it" line has now extended from features to security.
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">The week, in order</h2>
+                <div class="mt-5 space-y-4">
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-17</div>
+                        <p class="text-gray-700 leading-relaxed">rc.7 ships: plugin settings cards, PTC mode, and a `low` reasoning effort for DeepSeek models.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-19</div>
+                        <p class="text-gray-700 leading-relaxed">rc.8 lands: 14 changes, native image input — the "three updates a week" cadence takes shape.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-21</div>
+                        <p class="text-gray-700 leading-relaxed">V4-Flash-Vision-Exp launches: multimodal vision at Flash pricing, images capped at 384 tokens.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-23</div>
+                        <p class="text-gray-700 leading-relaxed">Peak/off-peak billing adjusts: weekends now charge entirely at the off-peak rate.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-24</div>
+                        <p class="text-gray-700 leading-relaxed">The critical RCE (CVSS 9.8) is disclosed; Codex Harness is open-sourced.</p>
+                    </div>
+                </div>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">Three threads worth following</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">Velocity.</span> rc.8's native image input is the headline feature — agents can finally <em>see</em> screenshots, diagrams, and documents. But the cadence is the deeper signal: three releases a week means real momentum, and a moving target for plugin authors (we covered the rc.7 keyed-slot migration here).</p>
+                <p class="mt-4 text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">Positioning.</span> Harness now runs Claude Code and Codex as sub-agents — explicitly aiming to be the scheduling layer above every agent, not a rival to any one of them.</p>
+                <p class="mt-4 text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">Ecosystem.</span> Star count passed 150K, enterprise data providers like Qichacha are adapting, and Codex Harness open-sourced — the "Android vs iOS" framing just got another data point.</p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">Our take</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    The RCE is a gate Harness had to pass through. Explosive growth means install base, and install base means security researchers — that's the sign of a maturing ecosystem, but you eat the security scare before you get the maturity. Our stance hasn't changed: play with it, internalize the plugin mindset, and hold production until the patch is in and your version is pinned.
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    On cadence: "three updates a week" is a double-edged sword. The momentum is real, but so is the churn — plugin authors shouldn't treat "it worked yesterday" as a deployment strategy.
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    One line: Harness has moved from a launch event to an operating system — and the question is no longer whether it's fast enough, but whether it's steady enough.
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">Sources</h2>
+                <ul class="mt-4 space-y-1.5 text-sm text-gray-500 list-disc list-inside">
+                    <li><a href="https://github.com/deepseek-ai/deepseek-harness/releases" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">github.com/deepseek-ai/deepseek-harness/releases</a></li>
+                    <li><a href="https://api-docs.deepseek.com/zh-cn/news/news260821/" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">api-docs.deepseek.com — V4-Flash-Vision-Exp</a></li>
+                    <li><a href="https://news.qq.com/rain/a/20260824A0CXFT00" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">腾讯新闻 — DeepSeek Harness 极危漏洞</a> · <a href="https://www.gm7.org/archives/151167" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">紧急安全预警 CVSS 9.8</a></li>
+                    <li><a href="https://eu.36kr.com/zh/p/3947852851664512" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">36氪 — Harness 一周三更：Claude Code 与 Codex 子代理</a></li>
+                </ul>
+
+                <div class="mt-14 pt-8 border-t border-gray-200">
+                    <a href="/newsletter" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--brand)] hover:underline">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Back to all issues
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer><!-- footer placeholder --></footer>
+</body>
+</html>

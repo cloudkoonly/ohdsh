@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSH Weekly #002 — Harness 迎来第一次安全危机（RCE，CVSS 9.8）| Oh! dsh</title>
+</head>
+<body>
+    <header><!-- header placeholder --></header>
+
+    <main>
+        <!--seo:{"title":"DSH Weekly #002 — Harness 迎来第一次安全危机（RCE，CVSS 9.8）| Oh! dsh","description":"DSH Weekly #002：极危未授权远程代码执行漏洞（CVSS 9.8）冲击 DeepSeek Harness，同时还有 rc.8 多模态、Claude Code/Codex 调度层、周末低谷定价。","keywords":"DeepSeek Harness, DSH Weekly, DeepSeek Harness RCE, DeepSeek Harness 漏洞, DeepSeek Harness rc.8","canonical":"https://ohdsh.com/zh/newsletter/dsh-weekly-002","og_title":"DSH Weekly #002 — Harness 迎来第一次安全危机","og_description":"极危 RCE（CVSS 9.8）冲击 DeepSeek Harness，加上 rc.8 多模态、调度层定位与周末低谷定价。","og_url":"https://ohdsh.com/zh/newsletter/dsh-weekly-002","og_site_name":"Oh! dsh","og_type":"article","html_lang":"zh-CN","hreflang":{"en":"https://ohdsh.com/newsletter/dsh-weekly-002","zh-CN":"https://ohdsh.com/zh/newsletter/dsh-weekly-002","x-default":"https://ohdsh.com/newsletter/dsh-weekly-002"}}-->
+
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"DSH Weekly #002：DeepSeek Harness 迎来第一次安全危机","description":"极危未授权远程代码执行漏洞（CVSS 9.8）冲击 DeepSeek Harness，同时还有 rc.8 多模态、Claude Code/Codex 调度层、周末低谷定价。","datePublished":"2026-08-24","dateModified":"2026-08-24","author":{"@type":"Organization","name":"Oh! dsh"},"publisher":{"@type":"Organization","name":"Oh! dsh","url":"https://ohdsh.com"},"mainEntityOfPage":"https://ohdsh.com/zh/newsletter/dsh-weekly-002","inLanguage":"zh-CN","keywords":["DeepSeek Harness","RCE","漏洞","rc.8","DSH"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://ohdsh.com/zh"},{"@type":"ListItem","position":2,"name":"DSH Weekly","item":"https://ohdsh.com/zh/newsletter"},{"@type":"ListItem","position":3,"name":"#002","item":"https://ohdsh.com/zh/newsletter/dsh-weekly-002"}]}</script>
+
+        <!-- Article header -->
+        <section class="pt-32 pb-12 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex items-center gap-3 text-sm">
+                    <a href="/zh/newsletter" class="inline-flex items-center gap-1.5 text-gray-400 hover:text-gray-700 transition-colors">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        DSH Weekly
+                    </a>
+                    <span class="text-gray-300">/</span>
+                    <span class="font-mono font-semibold text-[var(--brand)]">#002</span>
+                    <span class="text-gray-300">·</span>
+                    <time datetime="2026-08-24" class="text-gray-400">2026-08-24</time>
+                </div>
+                <h1 class="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-[1.15]">Harness 迎来第一次安全危机</h1>
+                <p class="mt-5 text-lg text-gray-500 leading-relaxed">一个极危 RCE、一个多模态版本、一次调度层布局、一个更便宜的周末——Harness 从「爆火」走进了「成长痛」的这一周。</p>
+                <div class="mt-6 flex items-center gap-3 text-sm text-gray-400">
+                    <span>Oh! dsh 编辑团队</span>
+                    <span class="text-gray-300">·</span>
+                    <span>约 5 分钟读完</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article body -->
+        <article class="pb-20 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    上线一周，DeepSeek Harness 迎来了第一次真正的考验——不是对手，而是一个极危安全漏洞。这其实是个「反向的好信号」：说明装它的人已经多到安全研究者都来了。但也意味着蜜月期结束了，讨论的重心从「有多快」转向「有多稳」。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">头条：极危 RCE，CVSS 9.8</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    8 月 24 日前后，安全研究者披露了 DeepSeek Harness 的一个<strong>未授权远程代码执行（RCE）</strong>漏洞，评分 <strong>CVSS 9.8</strong>（极危）。在「人人跟风一夜装机」的热度背景下，这是 Harness 第一次真正意义上的安全危机。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    利用细节这里不展开。实操结论很直接：如果你只是跟风装的，先别急着上生产；等官方补丁，并把版本钉在打过补丁的那个上。「能干活，但得盯着」这句话，已经从功能版延伸到了安全版。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">这一周，按时间捋</h2>
+                <div class="mt-5 space-y-4">
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-17</div>
+                        <p class="text-gray-700 leading-relaxed">rc.7 发布：插件设置卡片、PTC mode，以及 DeepSeek 模型的 `low` 推理强度。</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-19</div>
+                        <p class="text-gray-700 leading-relaxed">rc.8 落地：14 项更新、原生图片输入，「一周三更」节奏成型。</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-21</div>
+                        <p class="text-gray-700 leading-relaxed">V4-Flash-Vision-Exp 上线：Flash 价的多模态视觉，图片最多 384 tokens。</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-23</div>
+                        <p class="text-gray-700 leading-relaxed">峰谷计费调整：周末全天按低谷价计费。</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-24</div>
+                        <p class="text-gray-700 leading-relaxed">极危 RCE（CVSS 9.8）被披露；Codex Harness 正式开源。</p>
+                    </div>
+                </div>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">三条值得跟的线</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">速度。</span> rc.8 的原生图片输入是头条功能——agent 终于能「看」截图、图表、文档了。但更深的信号是节奏：一周三更意味着势头是真的，对插件作者也是移动靶（我们写过 rc.7 的 keyed 槽位迁移）。</p>
+                <p class="mt-4 text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">定位。</span> Harness 把 Claude Code 和 Codex 收编成子代理——明摆着要做所有 Agent 之上的「调度层」，而不是任何一个的对手。</p>
+                <p class="mt-4 text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">生态。</span> 星标冲过 15 万、企查查等企业数据方开始适配、Codex Harness 开源——「安卓 vs iOS」的对照又多了个注脚。</p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">我们的看法</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    RCE 是 Harness 必须过的一道门。爆火意味着装机量，装机量意味着安全研究者的关注——这是生态成熟的必经之路，但成熟之前先得把这一下挨过去。我们的态度没变：先拿来玩、吃透插件化思路，生产环境等补丁到位、版本钉死。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    节奏上，「一周三更」是双刃剑：势头是真的，变化也是真的。插件作者别把「昨天能跑」当部署策略。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    一句话：Harness 已经从「发布事件」进入了「运转阶段」——现在要问的不再是它够不够快，而是它够不够稳。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">来源</h2>
+                <ul class="mt-4 space-y-1.5 text-sm text-gray-500 list-disc list-inside">
+                    <li><a href="https://github.com/deepseek-ai/deepseek-harness/releases" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">github.com/deepseek-ai/deepseek-harness/releases</a></li>
+                    <li><a href="https://api-docs.deepseek.com/zh-cn/news/news260821/" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">api-docs.deepseek.com — V4-Flash-Vision-Exp</a></li>
+                    <li><a href="https://news.qq.com/rain/a/20260824A0CXFT00" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">腾讯新闻 — DeepSeek Harness 极危漏洞</a> · <a href="https://www.gm7.org/archives/151167" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">紧急安全预警 CVSS 9.8</a></li>
+                    <li><a href="https://eu.36kr.com/zh/p/3947852851664512" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">36氪 — Harness 一周三更：Claude Code 与 Codex 子代理</a></li>
+                </ul>
+
+                <div class="mt-14 pt-8 border-t border-gray-200">
+                    <a href="/zh/newsletter" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--brand)] hover:underline">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        返回全部期数
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer><!-- footer placeholder --></footer>
+</body>
+</html>

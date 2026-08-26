@@ -1,6 +1,18 @@
 {
   "issues": [
     {
+      "number": "002",
+      "slug": "dsh-weekly-002",
+      "date": "2026-08-24",
+      "title": "Harness hits its first security scare — RCE at CVSS 9.8",
+      "title_zh": "Harness 迎来第一次安全危机——极危 RCE 漏洞 CVSS 9.8",
+      "excerpt": "A critical unauthenticated RCE (CVSS 9.8) rocks DeepSeek Harness, alongside rc.8 multimodal, the Claude Code/Codex scheduling layer, and weekend off-peak pricing.",
+      "excerpt_zh": "极危未授权远程代码执行漏洞（CVSS 9.8）冲击 DeepSeek Harness，同时还有 rc.8 多模态、Claude Code/Codex 调度层与周末低谷定价。",
+      "tags": ["harness", "security", "release", "pricing"],
+      "tags_zh": ["harness", "安全", "更新", "定价"]
+    },
+    {
+      "number": "001",
       "slug": "dsh-weekly-001",
       "date": "2026-08-17",
       "title": "DeepSeek Harness goes open source — and V4 pricing goes time-of-day",
@@ -11,5 +23,5 @@
       "tags_zh": ["harness", "定价", "开源"]
     }
   ],
-  "generated_at": "2026-08-17"
+  "generated_at": "2026-08-24"
 }

@@ -53,7 +53,7 @@
                     <a href="/zh/newsletter/{{ issue.slug }}" class="block card !p-0 overflow-hidden group">
                         <div class="p-6 sm:p-7">
                             <div class="flex items-center gap-3 text-xs">
-                                <span class="font-mono font-semibold text-[var(--brand)] uppercase tracking-wide">#{{ loop.index }}</span>
+                                <span class="font-mono font-semibold text-[var(--brand)] uppercase tracking-wide">#{{ issue.number }}</span>
                                 <span class="text-gray-300">·</span>
                                 <time datetime="{{ issue.date }}" class="text-gray-400">{{ issue.date }}</time>
                                 {% for tag in issue.tags_zh %}
