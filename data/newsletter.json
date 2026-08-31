@@ -1,6 +1,17 @@
 {
   "issues": [
     {
+      "number": "003",
+      "slug": "dsh-weekly-003",
+      "date": "2026-08-31",
+      "title": "DeepSeek gets honest about security",
+      "title_zh": "DeepSeek 对安全说了实话",
+      "excerpt": "DeepSeek's safety note admits Harness isn't security-audited, while the v0.1.2-alpha line ships subagent model selection, exact token usage, and a Windows Python SDK.",
+      "excerpt_zh": "DeepSeek 在安全说明中承认 Harness 尚未接受安全审计，同时 v0.1.2-alpha 系列带来子代理模型选择、精确 token 统计与 Windows 版 Python SDK。",
+      "tags": ["harness", "security", "release", "sdk"],
+      "tags_zh": ["harness", "安全", "发布", "sdk"]
+    },
+    {
       "number": "002",
       "slug": "dsh-weekly-002",
       "date": "2026-08-24",
@@ -23,5 +34,5 @@
       "tags_zh": ["harness", "定价", "开源"]
     }
   ],
-  "generated_at": "2026-08-24"
+  "generated_at": "2026-08-31"
 }

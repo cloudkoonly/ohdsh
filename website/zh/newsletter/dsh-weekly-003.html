@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSH Weekly #003 — DeepSeek 对安全说了实话 | Oh! dsh</title>
+</head>
+<body>
+    <header><!-- header placeholder --></header>
+
+    <main>
+        <!--seo:{"title":"DSH Weekly #003 — DeepSeek 对安全说了实话 | Oh! dsh","description":"DSH Weekly #003：DeepSeek 在安全说明中承认 Harness 尚未接受安全审计，同时 v0.1.2-alpha 系列带来子代理模型选择、精确 token 统计与 Windows 版 Python SDK。","keywords":"DeepSeek Harness, DSH Weekly, DeepSeek Harness 安全, v0.1.2, DeepSeek Harness 发布","canonical":"https://ohdsh.com/zh/newsletter/dsh-weekly-003","og_title":"DSH Weekly #003 — DeepSeek 对安全说了实话","og_description":"一份坦诚的安全说明，加上 v0.1.2-alpha 系列：子代理模型选择、精确 token 统计与 Windows 版 Python SDK。","og_url":"https://ohdsh.com/zh/newsletter/dsh-weekly-003","og_site_name":"Oh! dsh","og_type":"article","html_lang":"zh-CN","hreflang":{"en":"https://ohdsh.com/newsletter/dsh-weekly-003","zh-CN":"https://ohdsh.com/zh/newsletter/dsh-weekly-003","x-default":"https://ohdsh.com/newsletter/dsh-weekly-003"}}-->
+
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"DSH Weekly #003：DeepSeek 对安全说了实话","description":"DeepSeek 在安全说明中承认 Harness 尚未接受安全审计，同时 v0.1.2-alpha 系列带来子代理模型选择、精确 token 统计与 Windows 版 Python SDK。","datePublished":"2026-08-31","dateModified":"2026-08-31","author":{"@type":"Organization","name":"Oh! dsh"},"publisher":{"@type":"Organization","name":"Oh! dsh","url":"https://ohdsh.com"},"mainEntityOfPage":"https://ohdsh.com/zh/newsletter/dsh-weekly-003","inLanguage":"zh-CN","keywords":["DeepSeek Harness","安全","v0.1.2","发布","DSH"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://ohdsh.com/zh"},{"@type":"ListItem","position":2,"name":"DSH Weekly","item":"https://ohdsh.com/zh/newsletter"},{"@type":"ListItem","position":3,"name":"#003","item":"https://ohdsh.com/zh/newsletter/dsh-weekly-003"}]}</script>
+
+        <!-- Article header -->
+        <section class="pt-32 pb-12 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex items-center gap-3 text-sm">
+                    <a href="/zh/newsletter" class="inline-flex items-center gap-1.5 text-gray-400 hover:text-gray-700 transition-colors">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        DSH Weekly
+                    </a>
+                    <span class="text-gray-300">/</span>
+                    <span class="font-mono font-semibold text-[var(--brand)]">#003</span>
+                    <span class="text-gray-300">·</span>
+                    <time datetime="2026-08-31" class="text-gray-400">2026-08-31</time>
+                </div>
+                <h1 class="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-[1.15]">DeepSeek 对安全说了实话</h1>
+                <p class="mt-5 text-lg text-gray-500 leading-relaxed">一份坦诚的安全说明、两个 0.1.2-alpha 版本，以及一个继续复利的生态。</p>
+                <div class="mt-6 flex items-center gap-3 text-sm text-gray-400">
+                    <span>Oh! dsh 编辑团队</span>
+                    <span class="text-gray-300">·</span>
+                    <span>约 5 分钟读完</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article body -->
+        <article class="pb-20 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    第三周。RCE 风波之后，很多项目会选择沉默，或者进入公关模式。DeepSeek 做了件更少见的事：在自己的安全说明里写下了那句实话，然后同一周又发了两个版本。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">头条：一份坦诚的安全说明</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    v0.1.2-alpha.1 的 changelog 里藏着一行比它看起来重要得多的话：更新后的安全说明明确写道——<strong>DeepSeek Harness 尚未接受安全审计，沙箱、审批与权限控制不能保证隔离</strong>。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    紧接着一次极危 RCE 披露之后，这句话读起来正是最对的做法：把边界说清楚，而不是暗示一个不存在的边界。它本身不会让产品更安全，但它告诉每个团队最该知道的那件事——把 Harness 当作未审计软件来用，而不是当作固若金汤的隔离层。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">两个新版本：0.1.2-alpha 系列</h2>
+                <div class="mt-5 space-y-4">
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-27</div>
+                        <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">v0.1.2-alpha.1</span> —— 一个大版本：子代理可在授权范围内自选提供方、模型和推理力度；每个回答后可展开精确 token 用量；Python SDK 发布 Windows x64；ACP 补齐会话、模型、MCP、权限全套能力；公网 WebFetch 默认开启（内置 SSRF 防护）。</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-30</div>
+                        <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">v0.1.2-alpha.2</span> —— 连接异常在界面显示、支持自动重试与立即重连；回答末尾显示 token 用量与耗时；修复 Node.js 24.0–24.11.1 上的启动与 HMR 问题。</p>
+                    </div>
+                </div>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">值得读的三个信号</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">ApiProxy 没了。</span> 旧接口已迁移到 `@Remote` 网关并移除——又一次悄悄藏在「其他变更」里的破坏性变更，提醒你在这种节奏下要读小字。</p>
+                <p class="mt-4 text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">「Code Mode」正式成为「PTC mode」。</span> 从 rc.7 开始的那次改名完成，历史会话记录仍可读取。</p>
+                <p class="mt-4 text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">WebFetch 默认开启。</span> 公网访问不再逐次审批，靠内置 SSRF 防护兜底——便利与暴露面的一笔交换，值得心里有数。</p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">这周的生态</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">社区继续成熟：第三方桌面封装发到 <strong>v4.0.0</strong>（重大轻量化）；媒体开始管 Harness 叫 <strong>「黑鲸」</strong>；也有文章把它和 Qwen3.8-Max 放在一起，当作「开源越过替代品叙事」的案例。首周回顾已经收敛成一个一致的判断：势头是真的，生产风险仍是问号。</p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">我们的看法</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    安全说明是这周最重要的事，因为它是这个项目学着「当一个操作系统、而不是一个 demo」的第一个信号。快速发货和对边界坦诚并不矛盾——最好的年轻基础设施两样都做。0.1.2-alpha 就是证明：子代理模型选择、精确 token 统计，都是「有人真的天天在用它」之后才会去做的功能。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    要盯住的规律是：功能已经跑在加固前面，而 DeepSeek 自己知道、也自己说了。对团队来说，实操那条线还是跟上周一样：随便玩，生产环境等审计落地，把每一行 release notes 都当 breaking-changes 读。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">来源</h2>
+                <ul class="mt-4 space-y-1.5 text-sm text-gray-500 list-disc list-inside">
+                    <li><a href="https://github.com/deepseek-ai/deepseek-harness/releases" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">github.com/deepseek-ai/deepseek-harness/releases</a></li>
+                    <li><a href="https://github.com/Links2008/DeepSeek-Harness-Desktop/releases/tag/v4.0.0" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">DeepSeek-Harness-Desktop v4.0.0</a></li>
+                    <li><a href="https://blog.hubianluanma.com/posts/open-source-ai-delivery-competition/" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">开源 AI 越过「替代品」叙事：Qwen3.8-Max 与 DeepSeek Harness</a></li>
+                </ul>
+
+                <div class="mt-14 pt-8 border-t border-gray-200">
+                    <a href="/zh/newsletter" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--brand)] hover:underline">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        返回全部期数
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer><!-- footer placeholder --></footer>
+</body>
+</html>

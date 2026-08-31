@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSH Weekly #003 — DeepSeek gets honest about security | Oh! dsh</title>
+</head>
+<body>
+    <header><!-- header placeholder --></header>
+
+    <main>
+        <!--seo:{"title":"DSH Weekly #003 — DeepSeek gets honest about security | Oh! dsh","description":"DSH Weekly #003: DeepSeek's safety note admits Harness isn't security-audited, while the v0.1.2-alpha line ships subagent model selection, exact token usage, and a Windows Python SDK.","keywords":"DeepSeek Harness, DSH Weekly, DeepSeek Harness security, v0.1.2, DeepSeek Harness release","canonical":"https://ohdsh.com/newsletter/dsh-weekly-003","og_title":"DSH Weekly #003 — DeepSeek gets honest about security","og_description":"A candid safety note plus the v0.1.2-alpha line: subagent model selection, exact token usage, and a Windows Python SDK.","og_url":"https://ohdsh.com/newsletter/dsh-weekly-003","og_site_name":"Oh! dsh","og_type":"article","html_lang":"en","hreflang":{"en":"https://ohdsh.com/newsletter/dsh-weekly-003","zh-CN":"https://ohdsh.com/zh/newsletter/dsh-weekly-003","x-default":"https://ohdsh.com/newsletter/dsh-weekly-003"}}-->
+
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"DSH Weekly #003: DeepSeek gets honest about security","description":"DeepSeek's safety note admits Harness isn't security-audited, while the v0.1.2-alpha line ships subagent model selection, exact token usage, and a Windows Python SDK.","datePublished":"2026-08-31","dateModified":"2026-08-31","author":{"@type":"Organization","name":"Oh! dsh"},"publisher":{"@type":"Organization","name":"Oh! dsh","url":"https://ohdsh.com"},"mainEntityOfPage":"https://ohdsh.com/newsletter/dsh-weekly-003","inLanguage":"en","keywords":["DeepSeek Harness","security","v0.1.2","release","DSH"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://ohdsh.com/"},{"@type":"ListItem","position":2,"name":"DSH Weekly","item":"https://ohdsh.com/newsletter"},{"@type":"ListItem","position":3,"name":"#003","item":"https://ohdsh.com/newsletter/dsh-weekly-003"}]}</script>
+
+        <!-- Article header -->
+        <section class="pt-32 pb-12 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex items-center gap-3 text-sm">
+                    <a href="/newsletter" class="inline-flex items-center gap-1.5 text-gray-400 hover:text-gray-700 transition-colors">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        DSH Weekly
+                    </a>
+                    <span class="text-gray-300">/</span>
+                    <span class="font-mono font-semibold text-[var(--brand)]">#003</span>
+                    <span class="text-gray-300">·</span>
+                    <time datetime="2026-08-31" class="text-gray-400">2026-08-31</time>
+                </div>
+                <h1 class="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-[1.12]">DeepSeek gets honest about security</h1>
+                <p class="mt-5 text-lg text-gray-500 leading-relaxed">A candid safety note, two more releases in the 0.1.2-alpha line, and an ecosystem that keeps compounding.</p>
+                <div class="mt-6 flex items-center gap-3 text-sm text-gray-400">
+                    <span>By the Oh! dsh editorial team</span>
+                    <span class="text-gray-300">·</span>
+                    <span>5 min read</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article body -->
+        <article class="pb-20 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    Week three. After the RCE scare, a lot of projects would have gone quiet, or gone into damage-control. DeepSeek did something rarer: it wrote the honest sentence in its own safety notes, and then shipped two more releases in the same week.
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">The big story: a candid safety note</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    Buried in the v0.1.2-alpha.1 changelog is a line that deserves more attention than it got: the updated Safety Notice now states plainly that <strong>DeepSeek Harness has not been security-audited, and that sandboxing, approvals, and permissions do not guarantee isolation</strong>.
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    Coming right after a critical RCE disclosure, that reads like exactly the right move: name the limit instead of implying one. It doesn't make the product safer by itself, but it tells every team the one thing they most need to know — treat Harness as unaudited software, not a hardened boundary.
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">Two more releases: the 0.1.2-alpha line</h2>
+                <div class="mt-5 space-y-4">
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-27</div>
+                        <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">v0.1.2-alpha.1</span> — a big one: subagents can pick their own provider, model, and reasoning effort within configured authorization; exact token usage after each answer; the Python SDK ships Windows x64; ACP gains full session, model, MCP, and permission support; and public WebFetch turns on by default with SSRF protection.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">08-30</div>
+                        <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">v0.1.2-alpha.2</span> — connection failures now surface in the UI with auto-retry and reconnect, token usage and elapsed time show at the end of each answer, and a Node.js 24.0–24.11.1 startup bug gets fixed.</p>
+                    </div>
+                </div>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">The signals worth reading</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">ApiProxy is gone.</span> The legacy interface was removed in favor of the `@Remote` gateway — one more breaking change riding quietly in a "Chores" section, and a reminder to read the small print at this cadence.</p>
+                <p class="mt-4 text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">"Code Mode" is finally "PTC mode."</span> The rename that started in rc.7 is now complete, with existing conversation records still readable.</p>
+                <p class="mt-4 text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">WebFetch is on by default.</span> Public web access now skips per-request approval, backed by built-in SSRF protection — a convenience/surface tradeoff worth being aware of.</p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">The ecosystem this week</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">The community keeps maturing: a third-party desktop wrapper hit <strong>v4.0.0</strong> with a lightweight rewrite, media has started calling Harness <strong>"黑鲸" (Black Whale)</strong>, and write-ups are pairing it with Qwen3.8-Max as the case for "open source moving past the substitute narrative." The first-week retrospectives have settled into a consistent verdict: real momentum, still a production-risk question mark.</p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">Our take</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    The safety note is the week's most important development, because it's the first sign of a project learning to be an operating system rather than a demo. Shipping fast and being candid about limits aren't opposites — the best young infra does both. The 0.1.2-alpha line is the proof: subagent model selection and exact token reporting are the kind of features you build once people actually run your thing day-to-day.
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    The pattern to watch: features are now outpacing hardening, and DeepSeek knows it — it said so itself. For teams, the practical line stays the same as last week: play freely, hold production until the audit exists, and read every release note like it's a breaking-changes log.
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">Sources</h2>
+                <ul class="mt-4 space-y-1.5 text-sm text-gray-500 list-disc list-inside">
+                    <li><a href="https://github.com/deepseek-ai/deepseek-harness/releases" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">github.com/deepseek-ai/deepseek-harness/releases</a></li>
+                    <li><a href="https://github.com/Links2008/DeepSeek-Harness-Desktop/releases/tag/v4.0.0" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">DeepSeek-Harness-Desktop v4.0.0</a></li>
+                    <li><a href="https://blog.hubianluanma.com/posts/open-source-ai-delivery-competition/" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">开源 AI 越过「替代品」叙事：Qwen3.8-Max 与 DeepSeek Harness</a></li>
+                </ul>
+
+                <div class="mt-14 pt-8 border-t border-gray-200">
+                    <a href="/newsletter" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--brand)] hover:underline">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Back to all issues
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer><!-- footer placeholder --></footer>
+</body>
+</html>
