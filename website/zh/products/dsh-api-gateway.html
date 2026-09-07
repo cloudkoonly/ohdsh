@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dsh-api-gateway — 给运行中的 Harness 开一扇 REST + SSE 之门 | Oh! dsh</title>
+</head>
+<body>
+    <header><!-- header placeholder --></header>
+
+    <main>
+        <!--seo:{"title":"dsh-api-gateway — 给运行中的 Harness 开一扇 REST + SSE 之门 | Oh! dsh","description":"dsh-api-gateway 是一个开源 DeepSeek Harness 插件：把运行中的 Harness 变成 HTTP API——REST + SSE、密钥认证、会话接管、任意语言客户端。由 Oh! dsh 团队开发。","keywords":"dsh-api-gateway, DeepSeek Harness API, DSH 网关插件, DeepSeek Harness REST, DeepSeek Harness SSE","canonical":"https://ohdsh.com/zh/products/dsh-api-gateway","og_title":"dsh-api-gateway — 给运行中的 Harness 开一扇门","og_description":"开源 DSH 插件，给任何客户端一扇通往你运行中 Harness 的 REST + SSE 之门。","og_url":"https://ohdsh.com/zh/products/dsh-api-gateway","og_site_name":"Oh! dsh","og_type":"website","html_lang":"zh-CN","hreflang":{"en":"https://ohdsh.com/products/dsh-api-gateway","zh-CN":"https://ohdsh.com/zh/products/dsh-api-gateway","x-default":"https://ohdsh.com/products/dsh-api-gateway"}}-->
+
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"dsh-api-gateway","url":"https://ohdsh.com/zh/products/dsh-api-gateway","description":"开源 DeepSeek Harness 插件：在运行中的 Harness 之上提供 REST + SSE HTTP 接口，带密钥认证与会话接管。","applicationCategory":"DeveloperApplication","operatingSystem":"Windows, macOS, Linux","softwareVersion":"0.1.0","license":"https://opensource.org/licenses/MIT","author":{"@type":"Organization","name":"litestartup-com","url":"https://github.com/litestartup-com"}}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://ohdsh.com/zh"},{"@type":"ListItem","position":2,"name":"产品","item":"https://ohdsh.com/zh/products"},{"@type":"ListItem","position":3,"name":"dsh-api-gateway","item":"https://ohdsh.com/zh/products/dsh-api-gateway"}]}</script>
+
+        <!-- Hero -->
+        <section class="relative pt-32 pb-20 px-4 sm:px-6 overflow-hidden" style="background: var(--dark-bg);">
+            <div class="absolute inset-0 hero-grid pointer-events-none"></div>
+            <div class="absolute inset-0 hero-glow pointer-events-none"></div>
+            <div class="relative max-w-3xl mx-auto text-center">
+                <div class="inline-flex items-center gap-2 text-xs font-medium tracking-wide text-[var(--dark-muted)] bg-white/[.04] border border-white/[.06] rounded-full px-4 py-1.5 mb-8">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    开源 DSH 插件 · MIT · v0.1.0
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white">给运行中的 Harness 开一扇门</h1>
+                <p class="mt-5 text-base md:text-lg text-[var(--dark-muted)] max-w-xl mx-auto leading-relaxed">
+                    dsh-api-gateway 把运行中的 DeepSeek Harness 变成 HTTP API——REST + SSE、密钥认证、会话接管。任何客户端、任何语言。
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <code class="font-mono text-sm bg-white/[.06] border border-white/10 rounded-lg px-4 py-3 text-[var(--dark-text)]">dsh plugin --profile web add github:litestartup-com/dsh-api-gateway</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-white border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <span class="section-badge text-gray-400"><span class="dot"></span>为什么做</span>
+                <h2 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">Harness 的 UI 很好，但它缺一扇门</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    DeepSeek Harness 自带 Web 界面，但第三方系统——IM 桥接、脚本、别的服务——没法「点按钮」。官方 Python SDK 是<em>嵌入式</em>运行时，跑隔离任务用的，不是通往<em>你</em>正在运行的那套部署的门。我们要的是一层薄薄的 HTTP 面：一把钥匙，同一批 GUI 在驱动的会话，任何东西都能和我们的 agent 对话。
+                </p>
+            </div>
+        </section>
+
+        <!-- What -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-[#fafafa] border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <span class="section-badge text-gray-400"><span class="dot"></span>能做什么</span>
+                <h2 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">九个端点，一把钥匙</h2>
+                <div class="mt-6 grid sm:grid-cols-2 gap-4">
+                    <div class="card">
+                        <h3 class="font-semibold">REST + SSE</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">建会话、发消息、逐 token 流式回复、取消回合——服务器在每个回合结束时关闭流。</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">会话接管</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">发现任意会话并接管：实时「共驾」一个 GUI 会话，或带全量历史冷恢复一个离线会话。</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">推理分离</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">回复把可见答案和思考过程分开——绝不混成一个 blob。</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">可扩展</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">在 Cordis 事件总线上发布会话/消息/回合事件，其他插件可以审计、告警或转发。</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">工作区原生</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">API 会话落入真实工作区，在侧栏里和 GUI 会话一样分组展示。</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">任意语言</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">curl、Python、PowerShell、浏览器——只要会说 HTTP 都行。仓库自带参考客户端。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick start -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-white border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <span class="section-badge text-gray-400"><span class="dot"></span>快速开始</span>
+                <h2 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">五分钟发出第一个 API 调用</h2>
+                <pre class="mt-6 rounded-xl bg-[#0c0e14] text-[13px] leading-6 p-5 overflow-x-auto text-gray-200"><code>dsh plugin --profile web add github:litestartup-com/dsh-api-gateway   # 安装
+BASE=http://127.0.0.1:3080/api-gw/v1
+KEY=$(curl -s -X POST $BASE/key | jq -r .apiKey)                      # 一次性领取密钥
+SID=$(curl -s -X POST $BASE/sessions -H "Authorization: Bearer $KEY" | jq -r .sessionId)
+curl -s -X POST $BASE/sessions/$SID/messages -H "Authorization: Bearer $KEY" \
+  -H 'Content-Type: application/json' -d '{"content":"你好"}'          # 202 accepted</code></pre>
+            </div>
+        </section>
+
+        <!-- Relationship -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-[#fafafa] border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-2xl md:text-3xl font-bold tracking-tight">它也是 Oh! dsh 的地基</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    这扇门正是 <a href="/zh/products/ohdsh" class="text-[var(--brand)] hover:underline">Oh! dsh</a>——我们的 agent 管理器——用来中继聊天、派发工作、计量用量的底座。如果你要在 DSH 上搭自己的控制面，从这里开始。
+                </p>
+            </div>
+        </section>
+
+        <!-- Roadmap -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-white border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <span class="section-badge text-gray-400"><span class="dot"></span>未来</span>
+                <h2 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">路线图</h2>
+                <div class="mt-6 space-y-3">
+                    <div class="flex gap-4"><div class="shrink-0 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">v0.2.0</div><p class="text-gray-700 leading-relaxed">多租户安全：多密钥管理、按密钥限流、按密钥隔离工作区。</p></div>
+                    <div class="flex gap-4"><div class="shrink-0 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">v0.3.0</div><p class="text-gray-700 leading-relaxed">管理后台：密钥、限流、会话监控、用量审计。</p></div>
+                    <div class="flex gap-4"><div class="shrink-0 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">v0.4.0</div><p class="text-gray-700 leading-relaxed">双工流式：WebSocket 全双工，SSE 保留为轻量选项。</p></div>
+                    <div class="flex gap-4"><div class="shrink-0 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">v0.5.0</div><p class="text-gray-700 leading-relaxed">生态与运维：生成式瘦客户端、部署指南、指标导出。</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 text-center bg-[#fafafa] border-t border-black/[.04]">
+            <h2 class="text-2xl md:text-3xl font-bold tracking-tight">给你的 agent 开一扇门</h2>
+            <div class="mt-8 flex flex-wrap justify-center gap-3">
+                <a href="https://github.com/litestartup-com/dsh-api-gateway" target="_blank" rel="noopener" class="btn-primary">GitHub 仓库</a>
+                <a href="https://github.com/litestartup-com/dsh-api-gateway/blob/main/openapi.yaml" target="_blank" rel="noopener" class="btn-secondary">OpenAPI 规范</a>
+            </div>
+        </section>
+    </main>
+
+    <footer><!-- footer placeholder --></footer>
+</body>
+</html>

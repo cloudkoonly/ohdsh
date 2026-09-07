@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oh! dsh — a fleet for your agents | Oh! dsh</title>
+</head>
+<body>
+    <header><!-- header placeholder --></header>
+
+    <main>
+        <!--seo:{"title":"Oh! dsh — a fleet for your agents | Oh! dsh","description":"Oh! dsh is the open-source agent manager on DeepSeek Harness: brain dispatch, a multi-node fleet, scheduled tasks, peak/off-peak billing, and one-click backup. One command, five minutes to running.","keywords":"Oh! dsh, DeepSeek Harness agent manager, DSH middle platform, DSH multi-agent, DSH fleet manager","canonical":"https://ohdsh.com/products/ohdsh","og_title":"Oh! dsh — a fleet for your agents","og_description":"The open-source agent manager on DeepSeek Harness: dispatch, fleet, scheduling, billing, backup.","og_url":"https://ohdsh.com/products/ohdsh","og_site_name":"Oh! dsh","og_type":"website","html_lang":"en","hreflang":{"en":"https://ohdsh.com/products/ohdsh","zh-CN":"https://ohdsh.com/zh/products/ohdsh","x-default":"https://ohdsh.com/products/ohdsh"}}-->
+
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Oh! dsh","url":"https://ohdsh.com/products/ohdsh","description":"Open-source personal / small-team AI middle platform on DeepSeek Harness: brain dispatch, multi-node fleet, scheduled tasks, billing, backup and restore.","applicationCategory":"DeveloperApplication","operatingSystem":"Windows, Linux","softwareVersion":"1.0.1","license":"https://opensource.org/licenses/MIT","author":{"@type":"Organization","name":"litestartup-com","url":"https://github.com/litestartup-com"}}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://ohdsh.com/"},{"@type":"ListItem","position":2,"name":"Products","item":"https://ohdsh.com/products"},{"@type":"ListItem","position":3,"name":"Oh! dsh","item":"https://ohdsh.com/products/ohdsh"}]}</script>
+
+        <!-- Hero -->
+        <section class="relative pt-32 pb-20 px-4 sm:px-6 overflow-hidden" style="background: var(--dark-bg);">
+            <div class="absolute inset-0 hero-grid pointer-events-none"></div>
+            <div class="absolute inset-0 hero-glow pointer-events-none"></div>
+            <div class="relative max-w-3xl mx-auto text-center">
+                <div class="inline-flex items-center gap-2 text-xs font-medium tracking-wide text-[var(--dark-muted)] bg-white/[.04] border border-white/[.06] rounded-full px-4 py-1.5 mb-8">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Open source · MIT · v1.0.1 · Self-hosted
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white">A fleet for your agents</h1>
+                <p class="mt-5 text-base md:text-lg text-[var(--dark-muted)] max-w-xl mx-auto leading-relaxed">
+                    Oh! dsh turns the agents on your machine into a fleet — with dispatch, scheduling, billing, and backup. Built on DeepSeek Harness and dsh-api-gateway.
+                </p>
+                <div class="mt-8 flex flex-col sm:flex-row justify-center gap-3">
+                    <code class="font-mono text-xs sm:text-sm bg-white/[.06] border border-white/10 rounded-lg px-4 py-3 text-[var(--dark-text)]">curl -fsSL https://get.ohdsh.com/install.sh | bash</code>
+                    <code class="font-mono text-xs sm:text-sm bg-white/[.06] border border-white/10 rounded-lg px-4 py-3 text-[var(--dark-text)]">irm https://get.ohdsh.com/install.ps1 | iex</code>
+                </div>
+                <p class="mt-4 text-xs text-[var(--dark-muted)]">Linux (container) · Windows (bare metal) — one command, five minutes</p>
+            </div>
+        </section>
+
+        <!-- Why -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-white border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <span class="section-badge text-gray-400"><span class="dot"></span>Why we built it</span>
+                <h2 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">One agent is easy. A fleet is hard.</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    Run one DSH agent and you're fine. Run several — a brain, a few workers, each in its own workspace — and suddenly you need dispatch, scheduling, cost accounting, and backups, all of it safe enough to leave running overnight. DeepSeek Harness gives you the runtime; Oh! dsh adds the control plane. We built it because we needed it: a personal, self-hosted middle platform with no cloud lock-in.
+                </p>
+            </div>
+        </section>
+
+        <!-- What -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-[#fafafa] border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <span class="section-badge text-gray-400"><span class="dot"></span>What it does</span>
+                <h2 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">The control plane DSH doesn't ship</h2>
+                <div class="mt-6 grid sm:grid-cols-2 gap-4">
+                    <div class="card">
+                        <h3 class="font-semibold">Brain dispatch</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">A global coordinator plans and hands out work tickets; execution is always delegated to workspaces. Delegation frames link back to each assigned session.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">Multi-node fleet</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">Manage every DSH node from a UI — start, stop, restart, logs, add-node wizard — each node with its own DSH_HOME, port, and gateway key.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">Scheduled tasks</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">Cron automation with auto-disable after consecutive failures, and a daily budget circuit breaker on brain dispatch — humans are never blocked.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">Billing you can read</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">Peak/off-peak pricing with weekend off-peak, per-run cost, monthly summaries, and per-workspace attribution.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">Backup &amp; restore</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">Automatic 15-minute snapshots with a retention policy, encrypted archives, and one-click restore.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">Self-updating</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">Backup → pull → build → health check, with automatic rollback on failure. Runs as a service with auto-start.</p>
+                    </div>
+                </div>
+                <div class="mt-8 rounded-xl bg-[#0c0e14] p-5 text-[13px] leading-6 text-gray-200 overflow-x-auto">
+                    <code>server → node (one DSH process + its own DSH_HOME) → workspace (identity + git repo) → session → run</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Relationship -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-white border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Built on dsh-api-gateway</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    Every chat, dispatch, and meter reading flows through <a href="/products/dsh-api-gateway" class="text-[var(--brand)] hover:underline">dsh-api-gateway</a> — our open-source plugin that gives any client a REST + SSE door into a running Harness. Together they're the full stack: one door, one control plane, three open-source layers.
+                </p>
+            </div>
+        </section>
+
+        <!-- Future -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-[#fafafa] border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <span class="section-badge text-gray-400"><span class="dot"></span>Where it's going</span>
+                <h2 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">The direction</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    The single-machine edition is v1. What we're working toward, in order of conviction: tighter multi-user security, more node forms beyond bare metal and Docker, and cross-machine collaboration where one manager coordinates nodes across machines. We don't promise dates for unreleased features — but the direction is a fleet that grows with you.
+                </p>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 text-center bg-white border-t border-black/[.04]">
+            <h2 class="text-2xl md:text-3xl font-bold tracking-tight">One command, five minutes</h2>
+            <div class="mt-8 flex flex-wrap justify-center gap-3">
+                <a href="https://github.com/litestartup-com/dsh-agent-manager" target="_blank" rel="noopener" class="btn-primary">GitHub repository</a>
+                <a href="https://get.ohdsh.com/install.sh" target="_blank" rel="noopener" class="btn-secondary">Install script</a>
+            </div>
+        </section>
+    </main>
+
+    <footer><!-- footer placeholder --></footer>
+</body>
+</html>

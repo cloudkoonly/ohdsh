@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dsh-api-gateway — a REST + SSE door into your running Harness | Oh! dsh</title>
+</head>
+<body>
+    <header><!-- header placeholder --></header>
+
+    <main>
+        <!--seo:{"title":"dsh-api-gateway — a REST + SSE door into your running Harness | Oh! dsh","description":"dsh-api-gateway is an open-source DeepSeek Harness plugin that turns a running Harness into an HTTP API: REST + SSE, API-key auth, session adoption, and any-language clients. Built by the Oh! dsh team.","keywords":"dsh-api-gateway, DeepSeek Harness API, DSH gateway plugin, DeepSeek Harness REST, DeepSeek Harness SSE","canonical":"https://ohdsh.com/products/dsh-api-gateway","og_title":"dsh-api-gateway — a REST + SSE door into your Harness","og_description":"The open-source DSH plugin that gives any client a REST + SSE door into your running Harness.","og_url":"https://ohdsh.com/products/dsh-api-gateway","og_site_name":"Oh! dsh","og_type":"website","html_lang":"en","hreflang":{"en":"https://ohdsh.com/products/dsh-api-gateway","zh-CN":"https://ohdsh.com/zh/products/dsh-api-gateway","x-default":"https://ohdsh.com/products/dsh-api-gateway"}}-->
+
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"dsh-api-gateway","url":"https://ohdsh.com/products/dsh-api-gateway","description":"Open-source DeepSeek Harness plugin: REST + SSE HTTP surface over a running Harness, with API-key auth and session adoption.","applicationCategory":"DeveloperApplication","operatingSystem":"Windows, macOS, Linux","softwareVersion":"0.1.0","license":"https://opensource.org/licenses/MIT","author":{"@type":"Organization","name":"litestartup-com","url":"https://github.com/litestartup-com"}}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://ohdsh.com/"},{"@type":"ListItem","position":2,"name":"Products","item":"https://ohdsh.com/products"},{"@type":"ListItem","position":3,"name":"dsh-api-gateway","item":"https://ohdsh.com/products/dsh-api-gateway"}]}</script>
+
+        <!-- Hero -->
+        <section class="relative pt-32 pb-20 px-4 sm:px-6 overflow-hidden" style="background: var(--dark-bg);">
+            <div class="absolute inset-0 hero-grid pointer-events-none"></div>
+            <div class="absolute inset-0 hero-glow pointer-events-none"></div>
+            <div class="relative max-w-3xl mx-auto text-center">
+                <div class="inline-flex items-center gap-2 text-xs font-medium tracking-wide text-[var(--dark-muted)] bg-white/[.04] border border-white/[.06] rounded-full px-4 py-1.5 mb-8">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Open-source DSH plugin · MIT · v0.1.0
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white">A door into your running Harness</h1>
+                <p class="mt-5 text-base md:text-lg text-[var(--dark-muted)] max-w-xl mx-auto leading-relaxed">
+                    dsh-api-gateway turns a running DeepSeek Harness into an HTTP API — REST + SSE, API keys, session adoption. Any client, any language.
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <code class="font-mono text-sm bg-white/[.06] border border-white/10 rounded-lg px-4 py-3 text-[var(--dark-text)]">dsh plugin --profile web add github:litestartup-com/dsh-api-gateway</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-white border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <span class="section-badge text-gray-400"><span class="dot"></span>Why we built it</span>
+                <h2 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">Harness has a great UI. It needed a door.</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    DeepSeek Harness gives you a Web UI, but third-party systems — an IM bridge, a script, another service — can't click buttons. The official Python SDK is an <em>embedded</em> runtime for isolated tasks; it isn't a way into <em>your</em> running deployment. We wanted one thin HTTP surface with one key, over the same sessions the GUI drives, so anything can talk to our agents.
+                </p>
+            </div>
+        </section>
+
+        <!-- What -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-[#fafafa] border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <span class="section-badge text-gray-400"><span class="dot"></span>What it does</span>
+                <h2 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">Nine endpoints, one key</h2>
+                <div class="mt-6 grid sm:grid-cols-2 gap-4">
+                    <div class="card">
+                        <h3 class="font-semibold">REST + SSE</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">Create sessions, send messages, stream replies token-by-token, cancel turns — the server closes each stream at turn end.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">Session adoption</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">Discover any session and adopt it: live co-driving a GUI conversation, or cold-resuming one with full history.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">Reasoning split</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">Replies separate the visible answer from the thinking — never concatenated into one blob.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">Extensible</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">Publishes session/message/turn events on the Cordis bus, so other plugins can audit, alert, or forward.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">Workspace-native</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">API sessions land in real workspaces, grouped in the sidebar just like GUI sessions.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">Any language</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">curl, Python, PowerShell, a browser — anything that speaks HTTP. Reference clients ship in the repo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick start -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-white border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <span class="section-badge text-gray-400"><span class="dot"></span>Quick start</span>
+                <h2 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">Five minutes to your first API call</h2>
+                <pre class="mt-6 rounded-xl bg-[#0c0e14] text-[13px] leading-6 p-5 overflow-x-auto text-gray-200"><code>dsh plugin --profile web add github:litestartup-com/dsh-api-gateway   # install
+BASE=http://127.0.0.1:3080/api-gw/v1
+KEY=$(curl -s -X POST $BASE/key | jq -r .apiKey)                      # one-time key bootstrap
+SID=$(curl -s -X POST $BASE/sessions -H "Authorization: Bearer $KEY" | jq -r .sessionId)
+curl -s -X POST $BASE/sessions/$SID/messages -H "Authorization: Bearer $KEY" \
+  -H 'Content-Type: application/json' -d '{"content":"hello"}'        # 202 accepted</code></pre>
+            </div>
+        </section>
+
+        <!-- Relationship -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-[#fafafa] border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-2xl md:text-3xl font-bold tracking-tight">It's also the foundation of Oh! dsh</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    This gateway is the door that <a href="/products/ohdsh" class="text-[var(--brand)] hover:underline">Oh! dsh</a> — our agent manager — uses to relay chats, dispatch work, and meter usage. If you're assembling your own control plane on DSH, start here.
+                </p>
+            </div>
+        </section>
+
+        <!-- Roadmap -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-white border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <span class="section-badge text-gray-400"><span class="dot"></span>Where it's going</span>
+                <h2 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">Roadmap</h2>
+                <div class="mt-6 space-y-3">
+                    <div class="flex gap-4"><div class="shrink-0 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">v0.2.0</div><p class="text-gray-700 leading-relaxed">Multi-tenant security: multi-key management, per-key rate limits, per-key workspaces.</p></div>
+                    <div class="flex gap-4"><div class="shrink-0 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">v0.3.0</div><p class="text-gray-700 leading-relaxed">Admin UI: keys, limits, session monitor, usage audit.</p></div>
+                    <div class="flex gap-4"><div class="shrink-0 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">v0.4.0</div><p class="text-gray-700 leading-relaxed">Duplex streaming: WebSocket full-duplex, SSE stays as the lightweight option.</p></div>
+                    <div class="flex gap-4"><div class="shrink-0 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">v0.5.0</div><p class="text-gray-700 leading-relaxed">Ecosystem &amp; ops: generated thin clients, deployment guide, metrics export.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 text-center bg-[#fafafa] border-t border-black/[.04]">
+            <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Give your agents a door</h2>
+            <div class="mt-8 flex flex-wrap justify-center gap-3">
+                <a href="https://github.com/litestartup-com/dsh-api-gateway" target="_blank" rel="noopener" class="btn-primary">GitHub repository</a>
+                <a href="https://github.com/litestartup-com/dsh-api-gateway/blob/main/openapi.yaml" target="_blank" rel="noopener" class="btn-secondary">OpenAPI spec</a>
+            </div>
+        </section>
+    </main>
+
+    <footer><!-- footer placeholder --></footer>
+</body>
+</html>

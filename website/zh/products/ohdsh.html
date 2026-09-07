@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oh! dsh — 给你的 agent 一支车队 | Oh! dsh</title>
+</head>
+<body>
+    <header><!-- header placeholder --></header>
+
+    <main>
+        <!--seo:{"title":"Oh! dsh — 给你的 agent 一支车队 | Oh! dsh","description":"Oh! dsh 是建在 DeepSeek Harness 之上的开源 agent 管理器：主脑派工、多节点车队、定时任务、峰谷记账、一键备份恢复。一条命令，五分钟用起来。","keywords":"Oh! dsh, DeepSeek Harness agent 管理器, DSH 中台, DSH 多 agent, DSH 车队管理","canonical":"https://ohdsh.com/zh/products/ohdsh","og_title":"Oh! dsh — 给你的 agent 一支车队","og_description":"建在 DeepSeek Harness 之上的开源 agent 管理器：派工、车队、排班、记账、备份。","og_url":"https://ohdsh.com/zh/products/ohdsh","og_site_name":"Oh! dsh","og_type":"website","html_lang":"zh-CN","hreflang":{"en":"https://ohdsh.com/products/ohdsh","zh-CN":"https://ohdsh.com/zh/products/ohdsh","x-default":"https://ohdsh.com/products/ohdsh"}}-->
+
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Oh! dsh","url":"https://ohdsh.com/zh/products/ohdsh","description":"建在 DeepSeek Harness 之上的开源个人/小团队 AI 中台：主脑派工、多节点车队、定时任务、记账、备份恢复。","applicationCategory":"DeveloperApplication","operatingSystem":"Windows, Linux","softwareVersion":"1.0.1","license":"https://opensource.org/licenses/MIT","author":{"@type":"Organization","name":"litestartup-com","url":"https://github.com/litestartup-com"}}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://ohdsh.com/zh"},{"@type":"ListItem","position":2,"name":"产品","item":"https://ohdsh.com/zh/products"},{"@type":"ListItem","position":3,"name":"Oh! dsh","item":"https://ohdsh.com/zh/products/ohdsh"}]}</script>
+
+        <!-- Hero -->
+        <section class="relative pt-32 pb-20 px-4 sm:px-6 overflow-hidden" style="background: var(--dark-bg);">
+            <div class="absolute inset-0 hero-grid pointer-events-none"></div>
+            <div class="absolute inset-0 hero-glow pointer-events-none"></div>
+            <div class="relative max-w-3xl mx-auto text-center">
+                <div class="inline-flex items-center gap-2 text-xs font-medium tracking-wide text-[var(--dark-muted)] bg-white/[.04] border border-white/[.06] rounded-full px-4 py-1.5 mb-8">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    开源 · MIT · v1.0.1 · 自托管
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white">给你的 agent 一支车队</h1>
+                <p class="mt-5 text-base md:text-lg text-[var(--dark-muted)] max-w-xl mx-auto leading-relaxed">
+                    Oh! dsh 把本机上的 agent 变成一支车队——有派工、有排班、有记账、有备份。建在 DeepSeek Harness 与 dsh-api-gateway 之上。
+                </p>
+                <div class="mt-8 flex flex-col sm:flex-row justify-center gap-3">
+                    <code class="font-mono text-xs sm:text-sm bg-white/[.06] border border-white/10 rounded-lg px-4 py-3 text-[var(--dark-text)]">curl -fsSL https://get.ohdsh.com/install.sh | bash</code>
+                    <code class="font-mono text-xs sm:text-sm bg-white/[.06] border border-white/10 rounded-lg px-4 py-3 text-[var(--dark-text)]">irm https://get.ohdsh.com/install.ps1 | iex</code>
+                </div>
+                <p class="mt-4 text-xs text-[var(--dark-muted)]">Linux（容器）· Windows（裸机）—— 一条命令，五分钟用起来</p>
+            </div>
+        </section>
+
+        <!-- Why -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-white border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <span class="section-badge text-gray-400"><span class="dot"></span>为什么做</span>
+                <h2 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">一个 agent 简单，一支车队很难</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    跑一个 DSH agent，没问题。跑好几个——一个主脑、几个工蜂、各占一个工作区——你就突然需要派工、排班、成本记账、备份，还要安全到敢让它整夜自己跑。DeepSeek Harness 给你运行时；Oh! dsh 补上控制面。我们做它是因为自己要用：一个个人可自托管的中台，没有云锁定。
+                </p>
+            </div>
+        </section>
+
+        <!-- What -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-[#fafafa] border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <span class="section-badge text-gray-400"><span class="dot"></span>能做什么</span>
+                <h2 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">DSH 没有随箱附带的那个控制面</h2>
+                <div class="mt-6 grid sm:grid-cols-2 gap-4">
+                    <div class="card">
+                        <h3 class="font-semibold">主脑派工</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">全局协调入口做规划、开派工单；执行永远委托给工作区。派工轨迹可点击跳回被派的会话，同类任务自动续接。</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">多节点车队</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">一个页面管全部 DSH 节点——起/停/重启/日志/新增节点向导；每个节点独立 DSH_HOME、端口和网关密钥。</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">定时任务</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">cron 自动化，连续失败自动停用；主脑日预算熔断只拦派工、不拦人工。</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">看得懂的记账</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">峰谷计价（周六周日全天谷价）、每次运行的花费、月度汇总、按工作区分账。</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">备份恢复</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">15 分钟自动快照 + 保留策略 + 加密归档，一键恢复。</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-semibold">自更新</h3>
+                        <p class="mt-2 text-sm text-gray-500 leading-relaxed">备份 → 拉新 → 构建 → 探活，失败自动回滚；可注册开机自启服务。</p>
+                    </div>
+                </div>
+                <div class="mt-8 rounded-xl bg-[#0c0e14] p-5 text-[13px] leading-6 text-gray-200 overflow-x-auto">
+                    <code>服务器 → 节点（一个 DSH 进程 + 独立 DSH_HOME）→ 工作区（身份 + git 仓）→ 会话 → 运行</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Relationship -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-white border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-2xl md:text-3xl font-bold tracking-tight">建在 dsh-api-gateway 之上</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    每一次聊天、派工与计量，都流经 <a href="/zh/products/dsh-api-gateway" class="text-[var(--brand)] hover:underline">dsh-api-gateway</a>——我们那个给任何客户端开门的开源插件。两者合起来就是完整栈：一扇门、一个控制面、三层全开源。
+                </p>
+            </div>
+        </section>
+
+        <!-- Future -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 bg-[#fafafa] border-t border-black/[.04]">
+            <div class="max-w-3xl mx-auto">
+                <span class="section-badge text-gray-400"><span class="dot"></span>未来</span>
+                <h2 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight">方向</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    单机版已经是 v1。我们在往前推的方向，按确信度排序：更严格的多用户安全、更多节点形态（裸机与容器之外）、跨机器协作——一个 manager 协调分布在多台机器上的节点。未发布的功能我们不承诺日期——但方向很明确：一支能跟着你长大的车队。
+                </p>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-14 sm:py-20 px-4 sm:px-6 text-center bg-white border-t border-black/[.04]">
+            <h2 class="text-2xl md:text-3xl font-bold tracking-tight">一条命令，五分钟用起来</h2>
+            <div class="mt-8 flex flex-wrap justify-center gap-3">
+                <a href="https://github.com/litestartup-com/dsh-agent-manager" target="_blank" rel="noopener" class="btn-primary">GitHub 仓库</a>
+                <a href="https://get.ohdsh.com/install.sh" target="_blank" rel="noopener" class="btn-secondary">安装脚本</a>
+            </div>
+        </section>
+    </main>
+
+    <footer><!-- footer placeholder --></footer>
+</body>
+</html>
