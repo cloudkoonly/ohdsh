@@ -1,6 +1,17 @@
 {
   "issues": [
     {
+      "number": "004",
+      "slug": "dsh-weekly-004",
+      "date": "2026-09-07",
+      "title": "GPT-6 Astra lands, and Harness rebuilds its foundations",
+      "title_zh": "GPT-6 Astra 来了，Harness 也把地基重打了一遍",
+      "excerpt": "OpenAI ships GPT-6 Astra and declares the AGI era, while DeepSeek Harness rolls out v0.1.2-rc.1 and v0.1.3-alpha.1 with a v2 session format, a new SessionHandle API, and the SQLite backend removed.",
+      "excerpt_zh": "OpenAI 发布 GPT-6 Astra 并宣告 AGI 时代，DeepSeek Harness 则发布 v0.1.2-rc.1 与 v0.1.3-alpha.1——会话格式升级 v2、新 SessionHandle API、SQLite 后端移除。",
+      "tags": ["gpt-6", "openai", "harness", "release", "breaking-change"],
+      "tags_zh": ["gpt-6", "openai", "harness", "发布", "破坏性变更"]
+    },
+    {
       "number": "003",
       "slug": "dsh-weekly-003",
       "date": "2026-08-31",
@@ -34,5 +45,5 @@
       "tags_zh": ["harness", "定价", "开源"]
     }
   ],
-  "generated_at": "2026-08-31"
+  "generated_at": "2026-09-07"
 }

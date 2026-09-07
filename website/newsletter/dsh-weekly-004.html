@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSH Weekly #004 — GPT-6 Astra lands, Harness rebuilds its foundations | Oh! dsh</title>
+</head>
+<body>
+    <header><!-- header placeholder --></header>
+
+    <main>
+        <!--seo:{"title":"DSH Weekly #004 — GPT-6 Astra lands, Harness rebuilds its foundations | Oh! dsh","description":"DSH Weekly #004: OpenAI ships GPT-6 Astra and declares the AGI era, while DeepSeek Harness rolls out v0.1.2-rc.1 and v0.1.3-alpha.1 with a v2 session format, a new SessionHandle API, and the SQLite backend removed.","keywords":"GPT-6 Astra, OpenAI, DeepSeek Harness, v0.1.3, DSH Weekly, session format v2","canonical":"https://ohdsh.com/newsletter/dsh-weekly-004","og_title":"DSH Weekly #004 — GPT-6 Astra lands, Harness rebuilds its foundations","og_description":"OpenAI ships GPT-6 Astra; DeepSeek Harness ships v0.1.2-rc.1 and v0.1.3-alpha.1 with session format v2 and a removed SQLite backend.","og_url":"https://ohdsh.com/newsletter/dsh-weekly-004","og_site_name":"Oh! dsh","og_type":"article","html_lang":"en","hreflang":{"en":"https://ohdsh.com/newsletter/dsh-weekly-004","zh-CN":"https://ohdsh.com/zh/newsletter/dsh-weekly-004","x-default":"https://ohdsh.com/newsletter/dsh-weekly-004"}}-->
+
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"DSH Weekly #004: GPT-6 Astra lands, Harness rebuilds its foundations","description":"OpenAI ships GPT-6 Astra and declares the AGI era, while DeepSeek Harness rolls out v0.1.2-rc.1 and v0.1.3-alpha.1 with a v2 session format, a new SessionHandle API, and the SQLite backend removed.","datePublished":"2026-09-07","dateModified":"2026-09-07","author":{"@type":"Organization","name":"Oh! dsh"},"publisher":{"@type":"Organization","name":"Oh! dsh","url":"https://ohdsh.com"},"mainEntityOfPage":"https://ohdsh.com/newsletter/dsh-weekly-004","inLanguage":"en","keywords":["GPT-6 Astra","OpenAI","DeepSeek Harness","v0.1.3","DSH"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://ohdsh.com/"},{"@type":"ListItem","position":2,"name":"DSH Weekly","item":"https://ohdsh.com/newsletter"},{"@type":"ListItem","position":3,"name":"#004","item":"https://ohdsh.com/newsletter/dsh-weekly-004"}]}</script>
+
+        <!-- Article header -->
+        <section class="pt-32 pb-12 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex items-center gap-3 text-sm">
+                    <a href="/newsletter" class="inline-flex items-center gap-1.5 text-gray-400 hover:text-gray-700 transition-colors">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        DSH Weekly
+                    </a>
+                    <span class="text-gray-300">/</span>
+                    <span class="font-mono font-semibold text-[var(--brand)]">#004</span>
+                    <span class="text-gray-300">·</span>
+                    <time datetime="2026-09-07" class="text-gray-400">2026-09-07</time>
+                </div>
+                <h1 class="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-[1.12]">GPT-6 Astra lands, and Harness rebuilds its foundations</h1>
+                <p class="mt-5 text-lg text-gray-500 leading-relaxed">OpenAI declares the AGI era open; DeepSeek Harness ships its biggest internal rebuild since launch. A loud week on both fronts.</p>
+                <div class="mt-6 flex items-center gap-3 text-sm text-gray-400">
+                    <span>By the Oh! dsh editorial team</span>
+                    <span class="text-gray-300">·</span>
+                    <span>7 min read</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article body -->
+        <article class="pb-20 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    This week the news was loud on both fronts. OpenAI shipped <strong>GPT-6 Astra</strong> and its president declared the AGI era open — while DeepSeek Harness quietly did its biggest internal rebuild since launch, breaking its session format and storage on purpose. One story is about capability; the other is about foundations. Both matter more than the headlines suggest.
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">The big story: GPT-6 Astra, and the AGI declarations</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    OpenAI released <a href="http://www.news.cn/tech/20260904/52716c2faaa64d228cc311a10acc4a6a/c.html" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">GPT-6 Astra</a> — billed as "the model with the highest intelligence level yet," and the claims escalated fast: the OpenAI president said the <strong>AGI era has arrived</strong>, Jensen Huang declared "AGI has come," and a perfect Korean SAT score made the rounds as the proof point. Goldman Sachs called it the moment the AI bull market had been waiting for; others reached for "the iPhone moment."
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    The counterweight landed in the same week, from inside OpenAI itself: the chief scientist's warning that <strong>"we are building an alien brain that nobody understands — and nobody is ready."</strong> That's the split to watch: the marketing says arrival, the research leadership says we're still holding something we can't fully explain. Both can be true at once, and the tension between them is the actual story of this model cycle.
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">DSH this week: 0.1.2 goes RC, 0.1.3 begins</h2>
+                <div class="mt-5 space-y-4">
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">09-03</div>
+                        <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">v0.1.2-rc.1</span> — the first release candidate of the 0.1.2 line, rolling up weeks of alphas: an experimental <strong>Inspector</strong> tool, an experimental <strong>Web Preview</strong>, connection status with auto-retry, bidirectional <code>send_message</code> between parent and child agents, and subagent model selection. The release note also points to the oh-my-dsh community's <a href="https://github.com/oh-my-dsh/dsh-plugin-upgrade-skill" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">dsh-plugin-upgrade-skill</a> — a tool for plugin authors trying to keep up with this cadence.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">09-04</div>
+                        <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">v0.1.3-alpha.1</span> — arbitrary file uploads in Web (files and images share one preview area), full <code>HTTP_PROXY</code>/<code>NO_PROXY</code> support for outbound requests, a Python SDK macOS x64 wheel, and inline image rendering for <code>read_image</code> in Web tool cards.</p>
+                    </div>
+                </div>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">The part that actually matters: breaking changes</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">The features are nice. The <strong>breaking changes</strong> are the week's real DSH story — three of them:</p>
+                <ul class="mt-4 space-y-3 text-gray-700 leading-relaxed list-disc list-inside">
+                    <li><span class="font-semibold text-gray-900">Session format v2.</span> Old v0/v1 logs migrate through immutable adjacent generations — the right pattern for a format bump, and a reminder to back up before upgrading.</li>
+                    <li><span class="font-semibold text-gray-900">A new SessionHandle API.</span> <code>agentLoop.create()</code> is now async, and a session lock guarantees one process per session. Plugin and SDK authors will touch this.</li>
+                    <li><span class="font-semibold text-gray-900">The SQLite backend is gone.</span> The optional SQLite persistence backend was removed entirely — existing data isn't deleted, but you'll need an older version to export it. If you read our <a href="/blog/deepseek-harness-sqlite-storage-change">SQLite heads-up</a> a few weeks ago, this is the sequel.</li>
+                </ul>
+                <p class="mt-4 text-gray-700 leading-relaxed">The team also flagged a <strong>known performance regression</strong> in 0.1.3-alpha.1 affecting some session loads, promised fixed next release. Candid, again — which is becoming a pattern worth appreciating.</p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">Elsewhere in AI</h2>
+                <ul class="mt-5 space-y-3 text-gray-700 leading-relaxed list-disc list-inside">
+                    <li><span class="font-semibold text-gray-900">NVIDIA is reportedly buying Hugging Face</span> for $12.9B — the "GitHub of AI" landing in the GPU giant's orbit, and open-source AI's biggest consolidation yet.</li>
+                    <li><span class="font-semibold text-gray-900">Anthropic's IPO slides again</span>, now expected before the US midterm elections, with the prospectus due late September.</li>
+                    <li><span class="font-semibold text-gray-900">China approved its first AI-assisted innovative drug</span> — a quiet milestone for AI in drug discovery, not just chat.</li>
+                    <li><span class="font-semibold text-gray-900">Chinese LLMs keep leading the global usage charts</span> — nineteen straight weeks, with Tencent's Hy4preview taking the top spot this round.</li>
+                    <li><span class="font-semibold text-gray-900">"Model fatigue" is now a named thing.</span> The majors' rapid-fire updates have analysts writing about users tiring of constant model churn.</li>
+                </ul>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">Our take</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    GPT-6 Astra is a capability headline; Harness's week is a foundations headline, and foundations are where the durable lessons live. Breaking a session format and deleting a storage backend in an alpha is exactly how young infrastructure should move — early, loudly, with a migration path — and Harness keeps showing it can do that without pretending otherwise. The adjacent-generation migration and the "export with an older version" notice are the right kinds of honesty.
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    The OpenAI split is the week's real tension: "the AGI era has arrived" and "we're building a brain nobody understands" from the same company in the same week. Believe both, and calibrate accordingly — more capable models don't make the safety question smaller, they make it louder.
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    Practical line for the week: <strong>back up before you upgrade DSH</strong> (format v2 is a one-way door), and don't let GPT-6's fanfare distract you from the fundamentals — models churn, runtimes compound.
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">Sources</h2>
+                <ul class="mt-4 space-y-1.5 text-sm text-gray-500 list-disc list-inside">
+                    <li><a href="https://github.com/deepseek-ai/deepseek-harness/releases" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">github.com/deepseek-ai/deepseek-harness/releases</a></li>
+                    <li><a href="http://www.news.cn/tech/20260904/52716c2faaa64d228cc311a10acc4a6a/c.html" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">新华网 — OpenAI 发布 GPT-6 Astra</a> · <a href="https://www.thepaper.cn/newsDetail_forward_34010896" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">澎湃 — GPT-6 来了</a></li>
+                    <li><a href="https://www.digitaltoday.co.kr/cn/view/100564/big-ai-strikes-back-against-open-source-nvidia-targets-ai-development-leadership" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">NVIDIA 拟收购 Hugging Face</a></li>
+                    <li><a href="https://m.bbwc.cn/article/2026/09/07/100150072_1.html" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">AI 周报 0831-0906 — Anthropic IPO 推迟、AI 辅助创新药获批</a></li>
+                    <li><a href="https://finance.eastmoney.com/a/202609073866193670.html" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">OpenAI 首席科学家预警</a></li>
+                </ul>
+
+                <div class="mt-14 pt-8 border-t border-gray-200">
+                    <a href="/newsletter" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--brand)] hover:underline">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Back to all issues
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer><!-- footer placeholder --></footer>
+</body>
+</html>

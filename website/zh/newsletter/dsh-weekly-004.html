@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSH Weekly #004 — GPT-6 Astra 来了，Harness 重打地基 | Oh! dsh</title>
+</head>
+<body>
+    <header><!-- header placeholder --></header>
+
+    <main>
+        <!--seo:{"title":"DSH Weekly #004 — GPT-6 Astra 来了，Harness 重打地基 | Oh! dsh","description":"DSH Weekly #004：OpenAI 发布 GPT-6 Astra 并宣告 AGI 时代到来，DeepSeek Harness 发布 v0.1.2-rc.1 与 v0.1.3-alpha.1——会话格式升级 v2、新 SessionHandle API、SQLite 后端移除。","keywords":"GPT-6 Astra, OpenAI, DeepSeek Harness, v0.1.3, DSH Weekly, 会话格式 v2","canonical":"https://ohdsh.com/zh/newsletter/dsh-weekly-004","og_title":"DSH Weekly #004 — GPT-6 Astra 来了，Harness 重打地基","og_description":"OpenAI 发布 GPT-6 Astra；DeepSeek Harness 发布 v0.1.2-rc.1 与 v0.1.3-alpha.1，会话格式升 v2、SQLite 后端移除。","og_url":"https://ohdsh.com/zh/newsletter/dsh-weekly-004","og_site_name":"Oh! dsh","og_type":"article","html_lang":"zh-CN","hreflang":{"en":"https://ohdsh.com/newsletter/dsh-weekly-004","zh-CN":"https://ohdsh.com/zh/newsletter/dsh-weekly-004","x-default":"https://ohdsh.com/newsletter/dsh-weekly-004"}}-->
+
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"DSH Weekly #004：GPT-6 Astra 来了，Harness 重打地基","description":"OpenAI 发布 GPT-6 Astra 并宣告 AGI 时代到来，DeepSeek Harness 发布 v0.1.2-rc.1 与 v0.1.3-alpha.1——会话格式升级 v2、新 SessionHandle API、SQLite 后端移除。","datePublished":"2026-09-07","dateModified":"2026-09-07","author":{"@type":"Organization","name":"Oh! dsh"},"publisher":{"@type":"Organization","name":"Oh! dsh","url":"https://ohdsh.com"},"mainEntityOfPage":"https://ohdsh.com/zh/newsletter/dsh-weekly-004","inLanguage":"zh-CN","keywords":["GPT-6 Astra","OpenAI","DeepSeek Harness","v0.1.3","DSH"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://ohdsh.com/zh"},{"@type":"ListItem","position":2,"name":"DSH Weekly","item":"https://ohdsh.com/zh/newsletter"},{"@type":"ListItem","position":3,"name":"#004","item":"https://ohdsh.com/zh/newsletter/dsh-weekly-004"}]}</script>
+
+        <!-- Article header -->
+        <section class="pt-32 pb-12 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex items-center gap-3 text-sm">
+                    <a href="/zh/newsletter" class="inline-flex items-center gap-1.5 text-gray-400 hover:text-gray-700 transition-colors">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        DSH Weekly
+                    </a>
+                    <span class="text-gray-300">/</span>
+                    <span class="font-mono font-semibold text-[var(--brand)]">#004</span>
+                    <span class="text-gray-300">·</span>
+                    <time datetime="2026-09-07" class="text-gray-400">2026-09-07</time>
+                </div>
+                <h1 class="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-[1.15]">GPT-6 Astra 来了，Harness 也把地基重打了一遍</h1>
+                <p class="mt-5 text-lg text-gray-500 leading-relaxed">OpenAI 宣告 AGI 时代开启；DeepSeek Harness 做了开源以来最大的一次内部重构。两条线这周都很吵。</p>
+                <div class="mt-6 flex items-center gap-3 text-sm text-gray-400">
+                    <span>Oh! dsh 编辑团队</span>
+                    <span class="text-gray-300">·</span>
+                    <span>约 7 分钟读完</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article body -->
+        <article class="pb-20 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    这周两条线都很吵。OpenAI 发布了 <strong>GPT-6 Astra</strong>，总裁直接宣告 AGI 时代开启；另一边，DeepSeek Harness 悄悄做了开源以来最大的一次内部重构——故意把会话格式和存储都打破了重来。一个是能力的故事，一个是地基的故事。两者都比标题看起来更重要。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">头条：GPT-6 Astra，与那两句「AGI 宣言」</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    OpenAI 发布了 <a href="http://www.news.cn/tech/20260904/52716c2faaa64d228cc311a10acc4a6a/c.html" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">GPT-6 Astra</a>，号称「目前智能水平最高的模型」，声浪迅速升级：OpenAI 总裁说<strong>「AGI 时代已经到来」</strong>，黄仁勋也跟着喊「AGI 来了」，韩国高考满分的成绩成了流传最广的注脚。高盛说这就是 AI 牛市一直在等的那一下；还有人说这是「AI 的 iPhone 时刻」。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    同一个星期，反面声音来自 OpenAI 内部：首席科学家警告——<strong>「我们正在造出一个没人理解的外星大脑，而且谁都没准备好。」</strong>这就是这周最值得盯的分裂：市场部说「到了」，研究负责人说「我们手里还握着个解释不清的东西」。两句话可以同时为真，而它们之间的张力，才是这轮模型周期的真正故事。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">DSH 这周：0.1.2 收线，0.1.3 起头</h2>
+                <div class="mt-5 space-y-4">
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">09-03</div>
+                        <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">v0.1.2-rc.1</span> —— 0.1.2 系列的第一个候选版本，把数周的 alpha 收拢在一起：实验性的 <strong>Inspector</strong> 工具、实验性的 <strong>Web Preview</strong>、带自动重试的连接状态显示、父子 Agent 双向 <code>send_message</code>、子代理模型选择。发布说明还专门推荐了 oh-my-dsh 社区的 <a href="https://github.com/oh-my-dsh/dsh-plugin-upgrade-skill" target="_blank" rel="noopener" class="text-[var(--brand)] hover:underline">dsh-plugin-upgrade-skill</a>——帮插件作者跟上这个发版节奏的工具。</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">09-04</div>
+                        <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">v0.1.3-alpha.1</span> —— Web 支持上传任意类型文件（文件与图片共用预览区）、出站请求全面支持 <code>HTTP_PROXY</code>/<code>NO_PROXY</code>、Python SDK 新增 macOS x64 wheel，<code>read_image</code> 结果在 Web 工具卡里直接渲染图片。</p>
+                    </div>
+                </div>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">真正重要的部分：三条破坏性变更</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">新功能都挺好。但<strong>破坏性变更</strong>才是这周 DSH 的正片，一共三条：</p>
+                <ul class="mt-4 space-y-3 text-gray-700 leading-relaxed list-disc list-inside">
+                    <li><span class="font-semibold text-gray-900">会话格式升级 v2。</span> 旧的 v0/v1 日志通过不可变的相邻代际迁移到新格式——格式升级的正确姿势，也再次提醒：升级前先备份。</li>
+                    <li><span class="font-semibold text-gray-900">新的 SessionHandle API。</span> <code>agentLoop.create()</code> 改为异步，新增会话锁，同一个 session 至多被一个进程持有。插件和 SDK 作者都会碰到这条。</li>
+                    <li><span class="font-semibold text-gray-900">SQLite 后端没了。</span> 可选的 SQLite 持久化后端被整体移除——已有数据不会删除，但要导出得用旧版本。几周前我们写过 <a href="/blog/deepseek-harness-sqlite-storage-change">SQLite 存储格式不兼容的提醒</a>，这周就是那篇的下集。</li>
+                </ul>
+                <p class="mt-4 text-gray-700 leading-relaxed">官方还主动标注了 0.1.3-alpha.1 的<strong>已知性能回退</strong>（影响部分历史会话加载，下个版本修复）。又一句实话——这种坦诚正在成为这个项目的惯例，值得记一笔。</p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">AI 圈的其他事</h2>
+                <ul class="mt-5 space-y-3 text-gray-700 leading-relaxed list-disc list-inside">
+                    <li><span class="font-semibold text-gray-900">英伟达被曝拟以 129 亿美元收购 Hugging Face</span>——「AI 界的 GitHub」落入 GPU 巨头轨道，开源 AI 迄今最大的一笔整合。</li>
+                    <li><span class="font-semibold text-gray-900">Anthropic IPO 再次推迟</span>，预计挪到美国中期选举前，招股书 9 月底披露。</li>
+                    <li><span class="font-semibold text-gray-900">中国首款 AI 辅助创新药获批上市</span>——AI 在药物研发上的一次安静里程碑，不只是聊天。</li>
+                    <li><span class="font-semibold text-gray-900">国产大模型调用量连续 19 周领跑</span>，腾讯 Hy4preview 登顶。</li>
+                    <li><span class="font-semibold text-gray-900">「模型疲劳」正式成为一个词。</span> 大厂模型更新太密，分析师开始写用户对「换模型换到累」的厌倦。</li>
+                </ul>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">我们的看法</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    GPT-6 Astra 是能力头条；Harness 这周是地基头条，而耐久的教训都在地基里。在一个 alpha 里打破会话格式、删掉存储后端，正是年轻基础设施该有的动法——趁早、大声、留好迁移路径。Harness 一直在用「相邻代际迁移」「用旧版本导出」这种正确姿势的诚实，做到这一点。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    OpenAI 的分裂才是这周真正的张力：同一家公司、同一周，「AGI 时代已到」和「我们在造一个没人理解的大脑」都出自它自己。两句都信，然后校准——更强的模型不会让安全问题变小，只会让它更响。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    本周实操就一句话：<strong>升级 DSH 前先备份</strong>（格式 v2 是单向门）；别让 GPT-6 的锣鼓声盖过基本面——模型月月换，运行时在复利。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">来源</h2>
+                <ul class="mt-4 space-y-1.5 text-sm text-gray-500 list-disc list-inside">
+                    <li><a href="https://github.com/deepseek-ai/deepseek-harness/releases" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">github.com/deepseek-ai/deepseek-harness/releases</a></li>
+                    <li><a href="http://www.news.cn/tech/20260904/52716c2faaa64d228cc311a10acc4a6a/c.html" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">新华网 — OpenAI 发布 GPT-6 Astra</a> · <a href="https://www.thepaper.cn/newsDetail_forward_34010896" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">澎湃 — GPT-6 来了</a></li>
+                    <li><a href="https://www.digitaltoday.co.kr/cn/view/100564/big-ai-strikes-back-against-open-source-nvidia-targets-ai-development-leadership" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">NVIDIA 拟收购 Hugging Face</a></li>
+                    <li><a href="https://m.bbwc.cn/article/2026/09/07/100150072_1.html" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">AI 周报 0831-0906 — Anthropic IPO 推迟、AI 辅助创新药获批</a></li>
+                    <li><a href="https://finance.eastmoney.com/a/202609073866193670.html" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">OpenAI 首席科学家预警</a></li>
+                </ul>
+
+                <div class="mt-14 pt-8 border-t border-gray-200">
+                    <a href="/zh/newsletter" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--brand)] hover:underline">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        返回全部期数
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer><!-- footer placeholder --></footer>
+</body>
+</html>
