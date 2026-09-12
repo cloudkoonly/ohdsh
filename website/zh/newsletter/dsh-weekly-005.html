@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSH Weekly #005 — V4.1 Flash 改写价目表，Harness 换了会话格式 | Oh! dsh</title>
+</head>
+<body>
+    <header><!-- header placeholder --></header>
+
+    <main>
+        <!--seo:{"title":"DSH Weekly #005 — V4.1 Flash 改写价目表，Harness 换了会话格式 | Oh! dsh","description":"DSH Weekly #005：DeepSeek 发布 V4.1 Flash，同日把 Flash 价格下调最高 60%，并开始让 V4 Pro 退场；DeepSeek Harness 四天发出四个版本，包括会话格式 V3，以及把 V4.1 Flash 设为新会话默认模型。","keywords":"DeepSeek V4.1 Flash, DSH Weekly, DeepSeek Harness, 会话格式 V3, v0.1.5, DeepSeek 定价, 英伟达 Hugging Face","canonical":"https://ohdsh.com/zh/newsletter/dsh-weekly-005","og_title":"DSH Weekly #005 — V4.1 Flash 改写价目表，Harness 换了会话格式","og_description":"DeepSeek 新架构里最小的模型成了事实上的旗舰；DeepSeek Harness 四天四个版本，换来新的会话格式和新的默认模型。","og_url":"https://ohdsh.com/zh/newsletter/dsh-weekly-005","og_site_name":"Oh! dsh","og_type":"article","html_lang":"zh-CN","hreflang":{"en":"https://ohdsh.com/newsletter/dsh-weekly-005","zh-CN":"https://ohdsh.com/zh/newsletter/dsh-weekly-005","x-default":"https://ohdsh.com/newsletter/dsh-weekly-005"}}-->
+
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"DSH Weekly #005：V4.1 Flash 改写价目表，Harness 换了会话格式","description":"DeepSeek 发布 V4.1 Flash，同日把 Flash 价格下调最高 60%，并开始让 V4 Pro 退场；DeepSeek Harness 四天发出四个版本，包括会话格式 V3 与新的默认模型。","datePublished":"2026-09-10","dateModified":"2026-09-10","author":{"@type":"Organization","name":"Oh! dsh"},"publisher":{"@type":"Organization","name":"Oh! dsh","url":"https://ohdsh.com"},"mainEntityOfPage":"https://ohdsh.com/zh/newsletter/dsh-weekly-005","inLanguage":"zh-CN","keywords":["DeepSeek V4.1 Flash","DeepSeek Harness","v0.1.5","会话格式 V3","DeepSeek 定价"]}</script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://ohdsh.com/zh"},{"@type":"ListItem","position":2,"name":"DSH Weekly","item":"https://ohdsh.com/zh/newsletter"},{"@type":"ListItem","position":3,"name":"#005","item":"https://ohdsh.com/zh/newsletter/dsh-weekly-005"}]}</script>
+
+        <!-- Article header -->
+        <section class="pt-32 pb-12 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex items-center gap-3 text-sm">
+                    <a href="/zh/newsletter" class="inline-flex items-center gap-1.5 text-gray-400 hover:text-gray-700 transition-colors">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        DSH Weekly
+                    </a>
+                    <span class="text-gray-300">/</span>
+                    <span class="font-mono font-semibold text-[var(--brand)]">#005</span>
+                    <span class="text-gray-300">·</span>
+                    <time datetime="2026-09-10" class="text-gray-400">2026-09-10</time>
+                </div>
+                <h1 class="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-[1.15]">V4.1 Flash 改写价目表，Harness 换了会话格式</h1>
+                <p class="mt-5 text-lg text-gray-500 leading-relaxed">DeepSeek 新架构里最小的模型成了事实上的旗舰，而被它超过的那款旗舰正在退场；另一边，DeepSeek Harness 四天发了四个版本，其中一个是单行道。</p>
+                <div class="mt-6 flex items-center gap-3 text-sm text-gray-400">
+                    <span>Oh! dsh 编辑团队</span>
+                    <span class="text-gray-300">·</span>
+                    <span>约 9 分钟读完</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article body -->
+        <article class="pb-20 px-4 sm:px-6 bg-[#fafafa]">
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    这一周，模型这一层更便宜了，运行时这一层更不稳了。9 月 10 日，DeepSeek 发布 <strong>V4.1 Flash</strong>，同一天把 Flash 系列价格下调最高 60%，并开始让被它超过的那款旗舰退场。DeepSeek Harness 则在四天里连发四个版本，其中一个把会话格式升级成了不可回退的样子。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">DeepSeek：最小的模型，让最大的模型退场</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    V4.1 Flash 是 552B 参数的 MoE 模型，采用新的 Causal Encoder-Decoder 结构，处理输入时只激活 8B 参数、生成输出时激活 16B。它原生支持图像输入，上下文 1M token，<code>reasoning_effort</code> 可在 1 到 100 之间调节，权重以 MIT 协议开源在 Hugging Face，并附技术报告。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    更有意思的是商业动作。官方称 V4.1 Flash 在性能、费用、速度、总用时上全面超过 V4 Pro，并且按这个结论做事：北京时间 9 月 14 日 12:00 起，请求 <code>deepseek-v4-pro</code> 会全部路由到 V4.1 Flash、按 Flash 单价计费，直到 V4.1 Pro 出现。V4 Flash 与 V4 Flash Vision Exp 已经下线，旧模型名临时指向新模型。也就是说，有一段时间里 DeepSeek 货架上根本没有 Pro 档模型——它把旗舰流量导进便宜的那一档，并称之为升级。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    价格表同步换了。空闲时段缓存命中 0.02 元/百万 token、缓存未命中 1 元、输出 4 元，高峰时段翻倍，周末按空闲计价。折算下来缓存命中降 60%、未命中降 33%、输出降 11%——这个形状明显更照顾高复用的 agent 负载，而不是输出密集型任务。当天我们把账拆开写过一篇<a href="/blog/zh/deepseek-flash-price-cut" class="text-[var(--brand)] hover:underline">单独的稿子</a>。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    定价背后是架构。解码器不再为每层保留全局 KV，而是复用编码器的最终隐状态；FP4 KV 缓存把全局存储压到约 890 字节/token。官方称相比上一代，HBM 需求降到 1/4、SSD 存储降到 1/8，KV Cache 相比初代模型缩小 437 倍。长时运行的 agent 里，缓存命中费用占大头，压缩缓存就是压低账单最直接的路径。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    进步并不均匀，而且这些例外是官方自己写在同一张表里的：V4.1 Flash 在 SimpleQA-Verified（42.3% 对 55.2%）、LongBench-V2（45.2% 对 51.5%）、HLE 不带工具（36.8% 对 42.7%）上不如 V4 Pro；而 agent 类基准反向走高——Terminal-Bench 2.1 从 82.7% 升到 90.6%，DeepSWE v1.1 从 54.4% 升到 74.2%。更小、更便宜、更会用工具是真的，但这是一笔交换：如果你的负载偏知识型而非 agent 型，9 月 14 日的改路由就是降级。完整分析、第三方结果与框架敏感性的提醒，见<a href="/blog/zh/deepseek-v4-1-flash" class="text-[var(--brand)] hover:underline">这一篇</a>。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    还有一条值得放进上下文：本周有报道称 DeepSeek 已启动科创板上市筹备、中信证券已进场尽调，同时在进行新一轮大规模招聘。把降价、MIT 开源权重、大规模部署洽谈放在 IPO 时间表旁边看，含义会不一样——这是在买规模和生态位，不是在买利润率。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">DSH 本周：四个版本，其中一个是单行道</h2>
+                <div class="mt-5 space-y-4">
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">09-07</div>
+                        <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">v0.1.3-alpha.2</span> —— pi-ai 升级到 0.85.1 以支持新模型，Web 顶栏新增「在应用中打开」，可继续对话的子代理支持消息排队、编辑、删除、Steer 与停止，PTC 模式支持展开查看命令输出；修复了 Web 断线无法自动恢复、聊天不自动滚动到底部、Windows 上 Python SDK 启动崩溃，以及任务停止后后台进程残留的问题。</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">09-08</div>
+                        <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">v0.1.5-alpha.1</span> —— 这一版才是重点。<strong>会话格式升级到 V3</strong>：受支持的历史会话会被重写成新日志、原文件保留，系统提示词纳入消息历史，旧 PTC 事件自动迁移，自定义日志读取器需要适配，而且升级后的会话<strong>无法被旧版本读取</strong>。同版还有：模型显式声明支持时，动态修改系统提示词不再破坏 KV Cache；实验性右侧 Sidebar 支持多标签、分栏、全屏，原来的 Detail 面板被移除；子代理内置运行时升到 Codex 0.153.4 与 Claude Code 2.1.263；以及两处插件 API 移除（<code>ctx.agent</code> 被删，<code>Inbox</code> 变成纯类型接口）。</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">09-10</div>
+                        <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">v0.1.5-rc.1</span> —— 0.1.5 系列的首个候选版本，汇总了自 v0.1.2-rc.1 以来的全部变更。把本期两半连起来的就是这条：DeepSeek 模型适配器新增 <code>DeepSeek-V41-Flash</code>（<code>deepseek-flash</code>），支持文本、图片与会话中的系统提示词更新，并且<strong>新会话默认使用它</strong>。此外还有：Web 支持任意类型文件上传（含进度与取消）、模型可显式交付文件并在 Sidebar 预览 Markdown/代码/HTML/PDF/图片、模型探测支持自定义 provider 与 Anthropic 原生模型列表并回填上下文窗口、所有出站请求遵循 <code>HTTP_PROXY</code> 等代理变量、反馈可独立提交并新增 <code>/feedback</code> 命令、长会话性能与内存优化，以及一条与安全面相关的变化——<code>minimal</code> 配置默认只启用 shell，<code>str_replace_editor</code> 改为显式开启。</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="shrink-0 w-14 font-mono text-sm font-semibold text-[var(--brand)] pt-0.5">09-10</div>
+                        <p class="text-gray-700 leading-relaxed"><span class="font-semibold text-gray-900">v0.1.5-rc.2</span> —— 几小时后的跟进小版本：点赞点踩改为弹窗确认、提交失败保留已填内容，并整理了交付文件卡片与代码文件图标。</p>
+                    </div>
+                </div>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    退一步看版本线本身，它自己就是一个故事。<code>v0.1.2-rc.1</code> 发布于 9 月 3 日，29 小时后被 <code>v0.1.3-alpha.1</code> 取代；0.1.2 这个号永远不会有正式版，0.1.4 也没有公开出现过。再过四天，项目已经走到 0.1.5-rc.2，会话格式在一周内从 v2 变到 v3。博客园上有一篇社区分析把这点讲得很清楚：rc 承诺的是「我准备发这个版本」，而不是「这个版本一定会发」；仓库里唯一稳定的契约，是 README 上那句一直没动过的 developer preview 警告。版本号记录的是项目重新评估自己的时刻，不是可以进生产的信号。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">两条线的连接点：Harness 现在也是模型的一部分</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    V4.1 Flash 在 9 月 10 日上线，同一天 DSH 就把它设成了新会话的默认模型。这个速度本身就是重点：当同一家厂商同时提供模型、运行时和评测框架时，「官方基准」在悄悄变成「我们这套栈的成绩」。DeepSeek 的代码类成绩用的是自家极简 Harness 框架加 1M 上下文——这是合理的选择，但不是中立的设置。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    这个差距不是假设。本周一份工程评估报告称，同一个模型切到 DeepSeek Harness 后分数下降 16.77 分，功能正确性 78，而对比的 Qwen 3.8 Flash 为 82。框架选择不是可以外包给一张厂商图表的细节。如果你在生产里跑 agent，需要做版本管理的最小单位是「模型 + 框架」这一对，真正算数的评测是你自己那套。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">AI 圈其他事</h2>
+                <ul class="mt-5 space-y-3 text-gray-700 leading-relaxed list-disc list-inside">
+                    <li><span class="font-semibold text-gray-900">英伟达以超 129 亿美元收购 Hugging Face。</span>开源权重的中立集散地，落进了靠服务这些权重赚钱的 GPU 厂商手里。中立性还能守几年，目前没人给出答案。</li>
+                    <li><span class="font-semibold text-gray-900">OpenAI 推出 GPT-Image 2.5</span>，报道称延迟降低约 50%。同一次发布里有个小细节：上线时生成图片的元数据仍写着 2.0——这类发布的推进速度可见一斑。</li>
+                    <li><span class="font-semibold text-gray-900">OpenAI 与三星联合开发下一代芯片</span>，合作关系从存储（HBM）向晶圆代工延伸。算力供应链在继续往内部收。</li>
+                    <li><span class="font-semibold text-gray-900">Anthropic 的 Fable 5.1 / Mythos 5.1 把成本最多压低了 45%</span>，同时有报道称其企业销售的势头停滞。和 DeepSeek 同周、同方向：不是更聪明，而是每任务更便宜。</li>
+                    <li><span class="font-semibold text-gray-900">关于效率的说法继续出现</span>——一家初创公司称用约 1/50 的算力达到了 DeepSeek V4 Pro 的预训练效果，另有一个融合解码内核声称比 vLLM 快 1.58 倍。两条都还只是待复现的说法，但方向一致。</li>
+                    <li><span class="font-semibold text-gray-900">上周的 AGI 之争仍未了结。</span>GPT-6 Astra 的发布口径，撞上多家第三方评测显示其在若干套件上落后 Anthropic 与 Meta；「AGI 已至」和「AGI 只是营销词」两句话，现在都还站着。</li>
+                </ul>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">本周博文</h2>
+                <ul class="mt-5 space-y-3 text-gray-700 leading-relaxed list-disc list-inside">
+                    <li><a href="/blog/zh/gpt-6-astra" class="text-[var(--brand)] hover:underline">GPT-6 Astra：OpenAI 宣告「欢迎来到 AGI 时代」</a>——发布了什么，基准怎么说，以及这句宣言值多少。</li>
+                    <li><a href="/blog/zh/deepseek-flash-price-cut" class="text-[var(--brand)] hover:underline">DeepSeek 下调 Flash 系列价格，最高降 60%</a>——为什么真正的主角是缓存命中价。</li>
+                    <li><a href="/blog/zh/deepseek-v4-1-flash" class="text-[var(--brand)] hover:underline">DeepSeek V4.1 Flash 上线</a>——agent 类的进步，以及它仍落后 V4 Pro 的三项评测。</li>
+                </ul>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">我们的看法</h2>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    三点，按对行动的影响排序。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    第一，这周的竞争发生在「每个完成任务要花多少钱」，而不是能力头条。DeepSeek 把缓存价砍了 60%，Anthropic 降价最多 45%，OpenAI 压低了图像模型的延迟，两家初创公司声称拿到了数量级的效率优势。能力负责发布会的声量，经济性决定谁留在生产环境里。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    第二，在 V4.1 Pro 还不存在的时候就让 V4 Pro 退场，是这周最有意思的决定，因为它是一个带截止日期的声明。要么 Flash 真的够用、Pro 档过去更像营销；要么 DeepSeek 愿意接受几周的能力空窗，把存量用户整体搬到更便宜、缓存效率更高的模型上。等到 V4.1 Pro 出现时，看知识类评测怎么走，答案就在那里。
+                </p>
+                <p class="mt-4 text-gray-700 leading-relaxed">
+                    第三，也是最实际的：升级 DSH 前请锁定版本、做好备份。会话格式 V3 明确不可降级读取，插件 API 在同一版里被删，profile 默认工具也变了。一个四天里四次修正行为的项目是在认真干活，但按它自己的说法它仍是预发布版本——这一周，它在 changelog 里就是这么告诉你的。
+                </p>
+
+                <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">来源</h2>
+                <ul class="mt-4 space-y-1.5 text-sm text-gray-500 list-disc list-inside">
+                    <li><a href="https://api-docs.deepseek.com/zh-cn/news/news260910/" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">DeepSeek 官方公告 — V4.1 Flash 发布</a></li>
+                    <li><a href="https://github.com/deepseek-ai/deepseek-harness/releases" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">github.com/deepseek-ai/deepseek-harness/releases</a></li>
+                    <li><a href="https://m.ithome.com/html/999953.htm" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">IT之家 — Flash 系列新价格表</a></li>
+                    <li><a href="https://m.21jingji.com/article/20260909/herald/1ec9562bb5f28273b3b1176a6cd0bf73_zaker.html" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">21世纪经济报道 — DeepSeek 启动科创板上市筹备</a></li>
+                    <li><a href="https://www.cnblogs.com/laoluo2025/p/22855543" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">博客园 — 0.1.2 没有正式版：一个 rc 是怎么被放弃的</a></li>
+                    <li><a href="https://www.stcn.com/article/detail/4171675.html" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">证券时报 — 英伟达超 129 亿美元收购 Hugging Face</a></li>
+                    <li><a href="https://www.jiemian.com/article/15072867.html" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">界面新闻 — OpenAI 推出 GPT-Image 2.5</a></li>
+                    <li><a href="https://m.thepaper.cn/detail/33991810" target="_blank" rel="noopener" class="hover:text-[var(--brand)] hover:underline">澎湃新闻 — Anthropic 上新 Fable 5.1</a></li>
+                </ul>
+
+                <div class="mt-14 pt-8 border-t border-gray-200">
+                    <a href="/zh/newsletter" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--brand)] hover:underline">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11 3L6 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        返回全部期数
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer><!-- footer placeholder --></footer>
+</body>
+</html>

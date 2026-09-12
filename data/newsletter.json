@@ -1,6 +1,17 @@
 {
   "issues": [
     {
+      "number": "005",
+      "slug": "dsh-weekly-005",
+      "date": "2026-09-10",
+      "title": "V4.1 Flash rewrites the price list, and Harness changes its session format",
+      "title_zh": "V4.1 Flash 改写价目表，Harness 换了会话格式",
+      "excerpt": "DeepSeek ships V4.1 Flash, cuts Flash prices by up to 60% and starts retiring V4 Pro, while DeepSeek Harness lands four releases in four days — including session format V3 and V4.1 Flash as the default model for new sessions.",
+      "excerpt_zh": "DeepSeek 发布 V4.1 Flash，同日把 Flash 价格下调最高 60%，并开始让 V4 Pro 退场；DeepSeek Harness 四天发出四个版本，包括会话格式 V3，以及把 V4.1 Flash 设为新会话默认模型。",
+      "tags": ["deepseek", "v4.1", "harness", "release", "breaking-change", "pricing"],
+      "tags_zh": ["deepseek", "v4.1", "harness", "发布", "破坏性变更", "定价"]
+    },
+    {
       "number": "004",
       "slug": "dsh-weekly-004",
       "date": "2026-09-07",
@@ -45,5 +56,5 @@
       "tags_zh": ["harness", "定价", "开源"]
     }
   ],
-  "generated_at": "2026-09-07"
+  "generated_at": "2026-09-10"
 }
